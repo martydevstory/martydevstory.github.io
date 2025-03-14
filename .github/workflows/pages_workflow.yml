@@ -17,6 +17,7 @@ jobs:
       with:
        node-version: 18
 
+    - run: rm -rf node_modules package-lock.json
     - run: npm install
     - run: npm ci 
     - run: npm run build
