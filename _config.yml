@@ -120,9 +120,9 @@ comments:
   # Giscus options › https://giscus.app
   giscus:
     repo: martydevstory/martydevstory.github.io # <gh-username>/<repo>
-    repo_id: R_kgDOOH1b7Q
+    repo_id: R_kgDOOjxnYQ
     category: Announcements
-    category_id: DIC_kwDOOH1b7c4CoiWs
+    category_id: DIC_kwDOOjxnYc4Cp3ia
     mapping: pathname # optional, default to 'pathname'
     strict: 0 # optional, default to '0'
     input_position: bottom # optional, default to 'bottom'
