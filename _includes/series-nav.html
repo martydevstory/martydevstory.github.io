@@ -1,0 +1,13 @@
+<!-- Series -->
+{% if page.is_series %}
+  <hr/>
+  <h3>{{ page.series_title }}  포스팅 목록:</h3>
+  <ul>
+    {% assign series_posts = site.posts | where: "series_title", page.series_title | sort: "series_order" %}
+    {% for post in series_posts %}
+      {% if post.url != page.url %}
+        <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endif %}

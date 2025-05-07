@@ -2,13 +2,15 @@
 
 - type: github
   icon: "fab fa-github"
+  url: "https://github.com/martydevstory"
 
-- type: twitter
-  icon: "fa-brands fa-x-twitter"
+# - type: twitter
+#   icon: "fa-brands fa-x-twitter"
 
 - type: email
   icon: "fas fa-envelope"
   noblank: true # open link in current tab
+  url: "mailto:mateukigo@gmail.com"
 
 - type: rss
   icon: "fas fa-rss"
