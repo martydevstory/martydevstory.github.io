@@ -1,0 +1,49 @@
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://martydev.github.io/</id>
+  <title>마티개발스토리</title>
+  <subtitle>AI, Cloud 기반 블로그 작성.</subtitle>
+  <updated>2025-05-07T14:58:21+09:00</updated>
+  <author>
+    <name>마티(Marty)</name>
+    <uri>https://martydev.github.io/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="https://martydev.github.io/feed.xml"/>
+  <link rel="alternate" type="text/html" hreflang="ko-KR"
+    href="https://martydev.github.io/"/>
+  <generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator>
+  <rights> © 2025 마티(Marty) </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+  
+  <entry>
+    <title>LangGraph 소개 및 환경 구성</title>
+    <link href="https://martydev.github.io/posts/langgraph-introduce/" rel="alternate" type="text/html" title="LangGraph 소개 및 환경 구성" />
+    <published>2025-05-06T10:15:43+09:00</published>
+  
+    <updated>2025-05-06T10:15:43+09:00</updated>
+  
+    <id>https://martydev.github.io/posts/langgraph-introduce/</id>
+    <content type="text/html" src="https://martydev.github.io/posts/langgraph-introduce/" />
+    <author>
+      <name>마티(Marty)</name>
+    </author>
+
+  
+    
+    <category term="AI" />
+    
+    <category term="LangGraph" />
+    
+  
+
+  <summary>1. LangGraph는  LangGraph는 LangChain의 추론(Reasoning) 흐름을 제어할 수 있는 상태 머신 프레임워크로, 상태(State)를 기반으로 각 노드(Node)가 동작합니다. LangGraph는 다음과 같은 문제를 개선하기 위해서 만들어졌습니다.  1.  1.  LLM만으로는 제한적  언어 모델(Language Model)은 단독으로 사용하기에는 기능이 다소 제한적입니다. 외부 도구(Tool)와 외부 문서와 같은 콘텍스트(Context)에 접근할 수 없고 다단계 워크플로(Workflow)를 수행할 수가 없습니다.  1.  2.  제어 흐름의 신뢰성 문제  LLM 애플리케이션에서 LLM 호출 전후에 체인(Chain)이라고 부르는 고정된 단계의 제어 흐름을 통해 매우 신뢰할 수 ...</summary>
+
+  </entry>
+
+</feed>
+
+
