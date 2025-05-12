@@ -1,6 +1,6 @@
 ---
 title: LangGraph 핵심 구성과 그래프 생성
-date: 2025-05-07 11:15:43 +/-TTTT
+date: 2025-05-12 11:15:43 +/-TTTT
 categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
 math: true
@@ -11,7 +11,7 @@ image:
   alt: 
 is_series: true
 series_title: "LangGraph"
-series_order: 1
+series_order: 2
 ---
 
 > 학습할 리소스는 [LangChain Academy Github](https://github.com/langchain-ai/langchain-academy){: target="_blank"}를 사용합니다.
@@ -19,11 +19,11 @@ series_order: 1
 
 ## 1.   LangGraph 핵심 구성과 간단한 그래프 생성
 그래프를 생성할 때 `노드`, `상태`, `엣지` 핵심 요소들을 먼저 정의하고, 이를 `체인`, `라우터`, `에이전트` 등 상위 워크플로 요소와 결합하여 애플리케이션을 구축할 수 있습니다.
-![LangGraph 핵심 구성 요소와 워크플로·에이전트 요소](assets/drafts/2025-05-07-langgraph-component/20250429_121010_pic_M01_04_00.png)
+![LangGraph 핵심 구성 요소와 워크플로·에이전트 요소](assets/posts/2025-05-12-langgraph-component/20250429_121010_pic_M01_04_00.png)
 _LangGraph 핵심 구성 요소와 워크플로·에이전트 요소_
 
 설명할 그래프는 `노드`, `엣지`, `상태`를 기반으로 하기의 그림처럼 구성됩니다.
-![단순 그래프 생성](assets/drafts/2025-05-07-langgraph-component/20250429_121010_pic_M01_04_simplegraph.png)
+![단순 그래프 생성](assets/posts/2025-05-12-langgraph-component/20250429_121010_pic_M01_04_simplegraph.png)
 _단순 그래프 생성_
 
 먼저, langgraph를 설치합니다.
@@ -142,7 +142,7 @@ graph.invoke({"graph_state" : "Hi, this is Lance."})
 {'graph_state': 'Hi, this is Lance. I am sad!'}j
 ```
 
-> Runnable은 LLM과 같은 `구성 요소(Component)`가 입력을 받아 무언가를 실행하고 결과를 반환하는 일종의 표준 인터페이스입니다. 실행에는 invoke, batch, stream과 같은 기능을 수행할 수 있습니다.
+> Runnable은 LLM과 같은 `구성 요소(Component)`가 입력을 받아 무언가를 실행하고 결과를 반환하는 일종의 표준 인터페이스입니다. 실행에는 다양한 OpenAI 등 다양한 LLM에도 invoke, batch, stream과 같은 기능을 수행할 수 있습니다.
 {: .prompt-info }
 
 ## 2.   체인(Chain)
@@ -151,9 +151,9 @@ LangChain에서 [체인](https://api.python.langchain.com/en/latest/langchain/ch
 
 체인 인터페이스를 사용하면 메모리 사용해 처리 결과를 참조할 수 있는 `상태 저장(Stateful)`, 로깅과 같은 기능을 수행하여 콜백(Callback)을 통한 `관찰 가능(Observable)` 및 다른 체인 및 컴포넌트와 결합으로 `구성 가능(Composable)`한 애플리케이션을 쉽게 만들 수 있습니다.
 
-체인에서 핵심 개념인 `채팅 메시지(Messages)`, `채팅 모델(Chat Model)`, `도구 바인딩(Binding Tool)` 및 LangGraph 내에서 `도구 호출(Tool Calling)`에 대한 개념은 다음과 같습니다.
+체인에서 핵심 개념인 `채팅 메시지(Messages)`, `채팅 모델(Chat Model)`, `도구 바인딩(Binding Tool)` 및 LangGraph 내에서 `도구 호출(Tool Calling)`에 대한 개념을 살펴보겠습니다.
 
-langgraph와 openai를 패키지를 설치합니다.
+먼저 langgraph와 openai를 패키지를 설치합니다.
 
 ```python
 %%capture --no-stderr
@@ -268,7 +268,7 @@ type(result)
 
 모델은 자연어 입력을 통해 도구를 호출합니다. API를 도구로 바인딩할 때, 모델에 필요한 입력 스키마로 인식하고 도구 스키마를 준수하는 페이로드(Payload) 반환합니다.
 
-![도구 호출](assets/drafts/2025-05-07-langgraph-component/20250429_121010_pic_M01_04_01.png)
+![도구 호출](assets/posts/2025-05-12-langgraph-component/20250429_121010_pic_M01_04_01.png)
 _도구(Tool Calling)를 통해 외부 시스템 연결_
 
 다음은 도구 호출(Tool Calling)의 예입니다.
@@ -428,8 +428,6 @@ for m in messages['messages']:
 
 채팅 모델은 사용자의 입력에 따라 `직접 응답`을 하거나 `도구 호출(Tool Calling)`을 할 수 있게 라우팅합니다.
 
-이전에 `에이전트(Agent)`는 LLM이 자체적 판단하여 `제어 흐름(Control Flow)`을 선택할 수 있다고 설명해 드렸습니다.
-
 다음 예제는 `도구 호출`하는 `노드`를 추가하고 `LLM`이 자체 판단하여 `도구 호출`을 하거나 바로 `종료(END)`하는 `조건부 엣지(Conditional Edge)`를 추가합니다.
 
 ```python
@@ -543,7 +541,7 @@ for m in messages['messages']:
 * `Oberserve`: 도구 실행 결과를 모델에 다시 전달합니다.
 * `Reason`: 모델이 도구 결과를 바탕으로 다음 행동(다른 도구 호출 또는 사용자 응답)을 결정합니다.
 
-![ReACT(Reasoning and Acting) 에이전트 아키텍처](assets/drafts/2025-05-07-langgraph-component/20250501_154114_pic_M01_06_01.png)
+![ReACT(Reasoning and Acting) 에이전트 아키텍처](assets/posts/2025-05-12-langgraph-component/20250501_154114_pic_M01_06_01.png)
 _ReACT(Reasoning and Acting) 에이전트 아키텍처_
 
 ```python
@@ -791,12 +789,12 @@ react_graph_memory = builder.compile(checkpointer=memory)
 
 `스레드`는 체크포인트의 모음입니다. 즉 컴파일된 그래프 객체를 실제로 호출하여 발생하는 `모든 슈퍼스텝과 체크모인트`를 말합니다.
 
-![그래프, 슈퍼스텝, 체크포인트, 스레드](assets/drafts/2025-05-07-langgraph-component/20250501_134128_pic_M01_07_01.png)
+![그래프, 슈퍼스텝, 체크포인트, 스레드](assets/posts/2025-05-12-langgraph-component/20250501_134128_pic_M01_07_01.png)
 _그래프, 슈퍼스텝, 체크포인트, 스레드_
 
 아래 그림에서는 순차 노드, 병렬 노드에서는 3개의 슈퍼스텝이 존재합니다.
 
-![순차 노드와 병렬노드에서 슈퍼스텝](assets/drafts/2025-05-07-langgraph-component/20250501_135714_pic_M01_07_02.png)
+![순차 노드와 병렬노드에서 슈퍼스텝](assets/posts/2025-05-12-langgraph-component/20250501_135714_pic_M01_07_02.png)
 _순차 노드와 병렬노드에서 슈퍼스텝_
 
 `thread_id`를 전달하면 이전에 로깅된 상태 체크포인트부터 진행할 수 있습니다.
@@ -880,7 +878,18 @@ Tool Calls:
 The result of multiplying 7 by 2 is 14.
 ```
 
+## 정리
+LangGraph는 `상태`, `노드`, `엣지` 등의 핵심 구성 요소로 그래프를 생성하고 호출합니다.
+`상태`는 그래프와 노드에 대한 입력 스키마 역할을 하고 TypeDict 스키마를 사용합니다. 
+`노드`는 상태를 인수로 받아 처리 후 새 상태를 반환하는 Python 함수입니다.
+`엣지`는 순차 이동을 위한 일반 엣지와 분기 이동을 위한 조건부 엣지가 있습니다.
 
+`체인`, `라우터`, `에이전트` 등 워크플로와 에이전트 요소로 애플리케이션 구축이 가능합니다.
+`체인`은 LLM, 도구, 전처리 단계를 순서대로 연결한 워크플로로, HumanMessage·AIMessage 등 메시지 유형과 Chat Model을 지원하며, 도구 바인딩으로 외부 API를 호출할 수 있습니다. 메시지 누적은 리듀서로 제어합니다.
+`라우터`는 모델 출력을 분석해 도구 호출 노드로 이동할지 바로 종료 노드로 보낼지 결정하는 역할을 합니다.
+`에이전트`는 ReACT 패턴으로 도구 실행 결과를 다시 모델에 전달해 후속 행동을 결정합니다. 또한 MemorySaver 체크포인터를 사용하면 멀티-턴 대화 중에도 그래프 상태를 스레드별로 저장·복원해 연속성을 유지합니다.
+
+다음 글에서는 상태와 메모리에 대해서 더 자세히 알아보겠습니다.
 
 ## References
 
