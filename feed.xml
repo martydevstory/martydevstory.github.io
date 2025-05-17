@@ -4,7 +4,7 @@
   <id>https://martydev.github.io/</id>
   <title>마티데브스토리</title>
   <subtitle>AI, Cloud 기반 블로그 작성.</subtitle>
-  <updated>2025-05-12T12:14:10+09:00</updated>
+  <updated>2025-05-17T12:45:31+09:00</updated>
   <author>
     <name>마티(Marty)</name>
     <uri>https://martydev.github.io/</uri>
@@ -20,11 +20,37 @@
 
   
   <entry>
+    <title>LangGraph 상태와 메모리 (1)</title>
+    <link href="https://martydev.github.io/posts/langgraph-state-and-memory-1st/" rel="alternate" type="text/html" title="LangGraph 상태와 메모리 (1)" />
+    <published>2025-05-17T11:15:43+09:00</published>
+  
+    <updated>2025-05-17T11:15:43+09:00</updated>
+  
+    <id>https://martydev.github.io/posts/langgraph-state-and-memory-1st/</id>
+    <content type="text/html" src="https://martydev.github.io/posts/langgraph-state-and-memory-1st/" />
+    <author>
+      <name>마티(Marty)</name>
+    </author>
+
+  
+    
+    <category term="AI" />
+    
+    <category term="LangGraph" />
+    
+  
+
+  <summary>학습할 리소스는 LangChain Academy Github를 사용합니다.   이전 포스팅에서 LangGraph의 핵심 구성요소인 상태, 노드, 엣지를 이해했고, 워크플로와 에이전트 요소인 체인, 라우터, 에이전트, 에이전트 메모리에 대해서도 살펴보았습니다.  이번 포스팅에서 노드간의 통신을 위한 상태 스키마와 상태 업데이트의 수행 방식을 지정하는 리듀서에 대해서 살펴보겠습니다.  1. 상태 스키마 (State Schema)  1.  1.    스키마 (Schema)  LangGraph는 주요 그래프 클래스인 StateGraph를 정의할 때 상태 스키마를 사용합니다.  상태 스키마는 그래프에서 사용할 데이터 구조(Structure)와 타입을 나타냅니다.  모든 노드는 해당 상태 스키마와 통신을 합니다....</summary>
+
+  </entry>
+
+  
+  <entry>
     <title>LangGraph 핵심 구성과 그래프 생성</title>
     <link href="https://martydev.github.io/posts/langgraph-component/" rel="alternate" type="text/html" title="LangGraph 핵심 구성과 그래프 생성" />
     <published>2025-05-12T11:15:43+09:00</published>
   
-    <updated>2025-05-12T11:15:43+09:00</updated>
+    <updated>2025-05-17T12:44:53+09:00</updated>
   
     <id>https://martydev.github.io/posts/langgraph-component/</id>
     <content type="text/html" src="https://martydev.github.io/posts/langgraph-component/" />
@@ -50,7 +76,7 @@
     <link href="https://martydev.github.io/posts/langgraph-introduce/" rel="alternate" type="text/html" title="LangGraph 소개 및 환경 구성" />
     <published>2025-05-06T10:15:43+09:00</published>
   
-    <updated>2025-05-06T10:15:43+09:00</updated>
+    <updated>2025-05-17T12:44:53+09:00</updated>
   
     <id>https://martydev.github.io/posts/langgraph-introduce/</id>
     <content type="text/html" src="https://martydev.github.io/posts/langgraph-introduce/" />

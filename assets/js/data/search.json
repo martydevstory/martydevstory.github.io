@@ -1,5 +1,13 @@
 [
   {
+    "title": "LangGraph 상태와 메모리 (1)",
+    "url": "/posts/langgraph-state-and-memory-1st/",
+    "categories": "AI, LangGraph",
+    "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
+    "date": "2025-05-17 11:15:43 +0900",
+    "content": "학습할 리소스는 LangChain Academy Github를 사용합니다.   이전 포스팅에서 LangGraph의 핵심 구성요소인 상태, 노드, 엣지를 이해했고, 워크플로와 에이전트 요소인 체인, 라우터, 에이전트, 에이전트 메모리에 대해서도 살펴보았습니다.  이번 포스팅에서 노드간의 통신을 위한 상태 스키마와 상태 업데이트의 수행 방식을 지정하는 리..."
+  },
+  {
     "title": "LangGraph 핵심 구성과 그래프 생성",
     "url": "/posts/langgraph-component/",
     "categories": "AI, LangGraph",
