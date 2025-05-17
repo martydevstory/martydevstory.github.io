@@ -1,6 +1,6 @@
 ---
 title: LangGraph 상태와 메모리 (1)
-date: 2025-05-07 11:15:43 +/-TTTT
+date: 2025-05-17 11:15:43 +/-TTTT
 categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
 math: true
@@ -16,28 +16,32 @@ series_order: 3
 > 학습할 리소스는 [LangChain Academy Github](https://github.com/langchain-ai/langchain-academy){: target="_blank"}를 사용합니다.
 {: .prompt-info }
 
+이전 포스팅에서 LangGraph의 핵심 구성요소인 상태, 노드, 엣지를 이해했고, 워크플로와 에이전트 요소인 체인, 라우터, 에이전트, 에이전트 메모리에 대해서도 살펴보았습니다.
+
+이번 포스팅에서 노드간의 통신을 위한 `상태 스키마`와 상태 업데이트의 수행 방식을 지정하는 `리듀서`에 대해서 살펴보겠습니다.
+
 ## 1. 상태 스키마 (State Schema)
 
 ### 1.  1.    스키마 (Schema)
 
-LangGraph는 주요 그래프 클래스인 [StateGraph](https://langchain-ai.github.io/langgraph/concepts/low_level/#stategraph)를 정의할 때 [상태 스키마](https://langchain-ai.github.io/langgraph/concepts/low_level/#state)를 사용합니다.
+LangGraph는 주요 그래프 클래스인 [StateGraph](https://langchain-ai.github.io/langgraph/concepts/low_level/#stategraph){: target="_blank"}를 정의할 때 [상태 스키마](https://langchain-ai.github.io/langgraph/concepts/low_level/#state){: target="_blank"}를 사용합니다.
 
 상태 스키마는 그래프에서 사용할 데이터 구조(Structure)와 타입을 나타냅니다.
 
 모든 노드는 해당 상태 스키마와 통신을 합니다.
 
-LangGraph는 다양한 Python [타입](https://docs.python.org/3/library/stdtypes.html#type-objects) 및 유효성 검사 방식을 지원하여 상태 스키마를 정의하는 데 유연성을 제공합니다.
+LangGraph는 다양한 Python [타입](https://docs.python.org/3/library/stdtypes.html#type-objects){: target="_blank"} 및 유효성 검사 방식을 지원하여 상태 스키마를 정의하는 데 유연성을 제공합니다.
 
-![graph_state를 상태키로 상태 스키마 정의](assets/drafts/2025-05-08-langgraph-state-and-memory/20250508_state_01.png)
+![graph_state를 상태키로 상태 스키마 정의](assets/posts/2025-05-17-langgraph-state-and-memory-1st/20250508_state_01.png)
 _graph_state를 상태키로 상태 스키마 정의_
 
 ### 1.  2.    TypedDict
 
-Python에 [typing](https://docs.python.org/3/library/typing.html) 모듈에 있는 `TypedDict` 클래스를 사용할 수 있습니다.
+Python에 [typing](https://docs.python.org/3/library/typing.html){: target="_blank"} 모듈에 있는 `TypedDict` 클래스를 사용할 수 있습니다.
 
 이 클래스를 사용하면 키와 해당 값의 타입을 지정할 수 있습니다. 강제성은 없고 `타입 힌트`만 제공합니다.
 
-[mypy](https://github.com/python/mypy)와 같은 정적 타입 검사를 통해 IDE에서 코드 실행 전에 잠재적 타입 에러를 잡아낼 수 있습니다.
+[mypy](https://github.com/python/mypy){: target="_blank"}와 같은 정적 타입 검사를 통해 IDE에서 코드 실행 전에 잠재적 타입 에러를 잡아낼 수 있습니다.
 
 그러나 런타임에서는 적용되지 않습니다.
 
@@ -67,8 +71,9 @@ LangGraph에서 예로 정의된 상태 클래스 `TypedDictState`를 `StateGrap
 
 또한, 각 상태 키는 그래프의 `채널(Channel)`이라고 생각할 수 있습니다.
 
-> `채널`의 의미는 그래프 내부에서 흐르는 각각의 `상태 키(State Key)`를 지칭하는 개념적 이름입니다.<br/>
-> 상태 스키마 TypedDictState 정의하면 그 안에 여러 상태 키(예:foo, bar)가 있고, 각각의 상태 키는 그래프를 통과하면서 업데이트  되어 독립된 데이터 통로, 즉 채널이 됩니다.
+> `채널`의 의미는 그래프 내부에서 흐르는 각 `상태 키`의 역할(입·출력 등)과 경로를 드러내는 개념적 이름입니다.<br/>
+> 상태 스키마 TypedDictState 정의하면 그 안에 여러 키(예:foo, bar)가 있고, 각각 하나의 채널이 됩니다.<br/>
+> 각 채널은 그래프 시작부터 종료까지 노드 실행에 따라 업데이트 되며 독립적으로 데이터가 이동합니다.
 {: .prompt-info }
 
 각 노드에서 `지정된 키` 또는 `채널`의 값을 덮어씁니다.
@@ -131,7 +136,7 @@ graph.invoke({"name":"Lance"})
 
 ### 1.  3.    Dataclass
 
-Python의 [dataclass](https://docs.python.org/3/library/dataclasses.html)는 [구조화된 데이터를 정의하는 또 다른 방법](https://www.datacamp.com/tutorial/python-data-classes)을 제공합니다.
+Python의 [dataclass](https://docs.python.org/3/library/dataclasses.html){: target="_blank"}는 [구조화된 데이터를 정의하는 또 다른 방법](https://www.datacamp.com/tutorial/python-data-classes){: target="_blank"}을 제공합니다.
 
 `dataclass`는 주로 데이터 저장 용도의 클래스를 생성하기 위한 간결한 구문을 제공합니다.
 
@@ -182,7 +187,7 @@ display(Image(graph.get_graph().draw_mermaid_png()))
 graph.invoke(DataclassState(name="Lance",mood="sad"))
 ```
 
-```python
+```
 # 출력
 
 ---Node 1---
@@ -232,7 +237,7 @@ except ValidationError as e:
 
 ```
 
-```python
+```
 # 출력
 
 Validation Error: 1 validation error for PydanticState
@@ -268,7 +273,7 @@ display(Image(graph.get_graph().draw_mermaid_png()))
 graph.invoke(PydanticState(name="Lance",mood="sad"))
 ```
 
-```python
+```
 # 출력
 
 ---Node 1---
@@ -331,7 +336,7 @@ LangGraph는 상태 업데이트에 대한 방법을 지정하지 않으면 `기
 graph.invoke({"foo" : 1})
 ```
 
-```python
+```
 # 출력
 
 ---Node 1---
@@ -397,7 +402,7 @@ except InvalidUpdateError as e:
 
 ```
 
-```python
+```
 # 출력
 
 ---Node 1---
@@ -411,7 +416,7 @@ For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/er
 
 ### 2.  3.    리듀서 (Reducers)
 
-[리듀서](https://langchain-ai.github.io/langgraph/concepts/low_level/#reducers)는 위와 같은 문제를 해결하는 일반적인 방법을 제공합니다.
+[리듀서](https://langchain-ai.github.io/langgraph/concepts/low_level/#reducers){: target="_blank"}는 위와 같은 문제를 해결하는 일반적인 방법을 제공합니다.
 
 리듀서는 업데이트를 수행하는 방법을 지정합니다.
 
@@ -457,7 +462,7 @@ display(Image(graph.get_graph().draw_mermaid_png()))
 graph.invoke({"foo" : [1]})
 ```
 
-```python
+```
 # 출력
 
 ---Node 1---
@@ -509,7 +514,7 @@ display(Image(graph.get_graph().draw_mermaid_png()))
 graph.invoke({"foo" : [1]})
 ```
 
-```python
+```
 # 출력
 
 ---Node 1---
@@ -543,7 +548,7 @@ TypeError occurred: can only concatenate list (not "NoneType") to list
 
 ### 2.  4.    커스텀 리듀서 (Custom Reducers)
 
-위의 경우를 해결하기 위해 [커스텀 리듀서](https://langchain-ai.github.io/langgraph/how-tos/subgraph/#custom-reducer-functions-to-manage-state)를 정의할 수도 있습니다.
+위의 경우를 해결하기 위해 [커스텀 리듀서](https://langchain-ai.github.io/langgraph/how-tos/subgraph/#custom-reducer-functions-to-manage-state){: target="_blank"}를 정의할 수도 있습니다.
 
 예를 들어, 리스트를 결합하고 입력 중 하나 또는 둘 다 `None`일 수 있는 경우를 처리하는 커스텀 리듀서 로직을 정의해 보겠습니다.
 
@@ -601,7 +606,7 @@ except TypeError as e:
 
 출력에서 오류가 발생합니다.
 
-```python
+```
 # 출력
 
 TypeError occurred: can only concatenate list (not "NoneType") to list
@@ -630,7 +635,7 @@ except TypeError as e:
     print(f"TypeError occurred: {e}")
 ```
 
-```python
+```
 # 출력
 
 ---Node 1---
@@ -639,7 +644,7 @@ except TypeError as e:
 
 ### 2.  5.    메시지 (Messages)
 
-`MessagesState`를 사용하면 사전 정의된 `messages`키와 `add_messages` 리듀서를 해당 키에 자동으로 연결하여 [메시지 작업에 유용](https://langchain-ai.github.io/langgraph/concepts/low_level/#messagesstate)한 것을 [이전 포스팅](https://)에서 확인했습니다.
+`MessagesState`를 사용하면 사전 정의된 `messages`키와 `add_messages` 리듀서를 해당 키에 자동으로 연결하여 [메시지 작업에 유용](https://langchain-ai.github.io/langgraph/concepts/low_level/#messagesstate){: target="_blank"}한 것을 이전 포스팅에서 확인했습니다.
 
 아래 코드는 `TypedDict`와 `MessagesState`에서도 커스텀과 확장이 가능한 것을 보여줍니다.
 
@@ -688,7 +693,7 @@ add_messages(initial_messages , new_message)
 
 `add_messages`를 사용하면 상태에서 `messages` 키에 `메시지를 추가`할 수 있다는 것을 알 수 있습니다.
 
-```python
+```
 # 출력
 
 [AIMessage(content='Hello! How can I assist you?', additional_kwargs={}, response_metadata={}, name='Model', id='addc6f34-e0be-4ff3-9d6f-117a09008182'),
@@ -715,7 +720,7 @@ new_message = HumanMessage(content="I'm looking for information on whales, speci
 add_messages(initial_messages , new_message)
 ```
 
-```python
+```
 # 출력 - 기본 메시지를 덮어씀
 
 [AIMessage(content='Hello! How can I assist you?', additional_kwargs={}, response_metadata={}, name='Model', id='1'),

@@ -5,7 +5,7 @@ categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
 math: true
 toc: true
-pin: true
+pin: false
 image:
   path: assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png
   alt: 
