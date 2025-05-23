@@ -5,7 +5,7 @@ categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
 math: true
 toc: true
-pin: true
+pin: false
 image:
   path: assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png
   alt: 
@@ -13,12 +13,12 @@ is_series: true
 series_title: "LangGraph"
 series_order: 3
 ---
-> 학습할 리소스는 [LangChain Academy Github](https://github.com/langchain-ai/langchain-academy){: target="_blank"}를 사용합니다.
-{: .prompt-info }
-
-이전 포스팅에서 LangGraph의 핵심 구성요소인 상태, 노드, 엣지를 이해했고, 워크플로와 에이전트 요소인 체인, 라우터, 에이전트, 에이전트 메모리에 대해서도 살펴보았습니다.
+LangGraph의 핵심 구성요소인 상태, 노드, 엣지를 이해했고, 워크플로와 에이전트 요소인 체인, 라우터, 에이전트, 에이전트 메모리에 대해서도 살펴보았습니다.
 
 이번 포스팅에서 노드간의 통신을 위한 `상태 스키마`와 상태 업데이트의 수행 방식을 지정하는 `리듀서`에 대해서 살펴보겠습니다.
+
+> 학습할 리소스는 [LangChain Academy Github](https://github.com/langchain-ai/langchain-academy){: target="_blank"}를 사용합니다.
+{: .prompt-info }
 
 ## 1. 상태 스키마 (State Schema)
 
@@ -536,8 +536,9 @@ except TypeError as e:
     print(f"TypeError occurred: {e}")
 ```
 
-```python
+```
 # 출력
+
 TypeError occurred: can only concatenate list (not "NoneType") to list
 ```
 
@@ -749,7 +750,7 @@ print(delete_messages)
 
 `delete_messages`에서 메시지 id 1과 id 2는 리듀서에 의해 삭제가 됩니다.
 
-```python
+```
 # 출력 - 삭제할 메시지 목록
 
 [RemoveMessage(content='', additional_kwargs={}, response_metadata={}, id='1'), RemoveMessage(content='', additional_kwargs={}, response_metadata={}, id='2')]
@@ -759,7 +760,7 @@ print(delete_messages)
 add_messages(messages , delete_messages)
 ```
 
-```python
+```
 # 출력 - 메시지 id 1과 2가 삭제
 
 [AIMessage(content='So you said you were researching ocean mammals?', additional_kwargs={}, response_metadata={}, name='Bot', id='3'),

@@ -1,22 +1,26 @@
 ---
 title: LangGraph 상태와 메모리 (2)
-date: 2025-05-11 11:15:43 +/-TTTT
+date: 2025-05-23 11:15:43 +/-TTTT
 categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
 math: true
 toc: true
-pin: true
+pin: false
 image:
-path: assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png
-alt:
+    path: assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png
+    alt:
 is_series: true
 series_title: "LangGraph"
 series_order: 4
 ---
+
+노드 간 통신을 위한 상태 스키마와 리듀서에 대해서 이해했습니다.
+다음은 입·출력에서 상태 스키마를 위한 다중 스키마, 그리고 요약 기능과 외부메모리 기능을 가진 챗봇에 대해서 알아보겠습니다. 
+
 > 학습할 리소스는 [LangChain Academy Github](https://github.com/langchain-ai/langchain-academy){: target="_blank"}를 사용합니다.
 {: .prompt-info }
 
-## 1.   다중 스키마 (Multiple Schemas)
+## 3.   다중 스키마 (Multiple Schemas)
 
 일반적으로 모든 그래프 노드는 단일 스키마(Single Schema)로 통신합니다.
 
@@ -30,7 +34,7 @@ series_order: 4
 %pip install --quiet -U langgraph
 ```
 
-### 1.  1.  개인 상태 (Private State)
+### 3.  1.  개인 상태 (Private State)
 
 먼저 노드 간에 [개인 상태](https://langchain-ai.github.io/langgraph/how-tos/pass_private_state/){: target="_blank"}를 전달하는 경우를 살펴보겠습니다.
 
@@ -92,7 +96,7 @@ graph.invoke({"foo" : 1})
 
 ```
 
-### 1.  2.  입/출력 스키마
+### 3.  2.  입/출력 스키마
 
 기본적으로 `StateGraph`는 단일 스키마를 받으며 모든 노드는 해당 스키마와 통신해야 합니다.
 
@@ -187,7 +191,7 @@ graph.invoke({"question":"hi"})
 {'answer': 'bye Lance'}
 ```
 
-## 2.   메시지 필터링 및 트리밍
+## 4.   메시지 필터링 및 트리밍
 
 그래프 상태에서 `메시지를 처리하는 방법`에 대해서 좀 더 고급 기능인 `메시지 필터링 및 트리밍`을 살펴보겠습니다.
 
@@ -314,7 +318,7 @@ In addition to whales, there are several other ocean mammals you might find inte
 Understanding these diverse marine mammals involves exploring their habitats, behaviors, and the roles they play in their ecosystems, as well as the challenges they face due to human activities and climate change.
 ```
 
-### 2.  2.  리듀서 (Reducer)
+### 4.  2.  리듀서 (Reducer)
 
 메시지 작업에서 장시간 실행되는 대화를 관리하는 것은 어렵습니다.
 
@@ -387,7 +391,7 @@ Exploring these diverse marine mammals will give you a broader understanding of 
 
 ```
 
-### 2.  3.  필터링 메시지 (Filtering messages)
+### 4.  3.  필터링 메시지 (Filtering messages)
 
 이제 `필터링 메시지`를 살펴보겠습니다.
 
@@ -507,9 +511,10 @@ Narwhals, often referred to as the `unicorns of the sea,` are a unique species o
 
 상태에는 모든 메시지가 있지만 [LangSmith](https://smith.langchain.com){: target="_blank"} 추적을 살펴보면 모델 호출이 마지막 메시지만 사용한다는 것을 알 수 있습니다.
 
-![](assets/20250514_130359_langsmith01.png)
+![LangSmith 추적](assets/posts/2025-05-23-langgraph-state-and-memory-2nd/langsmith01.png)
+_LangSmith Tracing_
 
-### 2.  4.  메시지 트리밍 (Trim Messages)
+### 4.  4.  메시지 트리밍 (Trim Messages)
 
 또 다른 방법은 설정된 토큰 수를 기준으로 [메시지 자르는](https://python.langchain.com/v0.2/docs/how_to/trim_messages/#getting-the-last-max_tokens-tokens){: target="_blank"} 것입니다.
 
@@ -575,7 +580,7 @@ messages_out_trim = graph.invoke({'messages': messages})
 
 LangSmith 추적을 살펴보면 모델 호출을 확인할 수 있습니다.
 
-## 3.   메시지 요약 챗봇
+## 5.   메시지 요약 챗봇
 
 메시지를 자르거나 필터링으로 대화를 제거하는 방법도 있지만
 
@@ -691,7 +696,7 @@ def should_continue(state: State):
     return END
 ```
 
-### 3.  1.  메모리 추가
+### 5.  1.  메모리 추가
 
 `상태(State)`는 단일 그래프 실행하는 동안에만 [일시적으로 유지](https://github.com/langchain-ai/langgraph/discussions/352#discussioncomment-9291220){: target="_blank"}되기 때문에 다중-턴(Multi-Turn) 대화를 수행하기 어렵습니다.
 
@@ -724,7 +729,7 @@ graph = workflow.compile(checkpointer=memory)
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-### 3.  2.  스레드
+### 5.  2.  스레드
 
 `체크포인터`는 매 단계의 상태를 체크포인트로 저장합니다.
 
@@ -809,7 +814,7 @@ graph.get_state(config).values.get("summary","")
 'Lance introduced himself and mentioned that he is a fan of the San Francisco 49ers, specifically highlighting his admiration for Nick Bosa. The conversation noted that Nick Bosa became the highest-paid defensive player in NFL history as of September 2023, with a five-year, $170 million contract extension with the 49ers.'
 ```
 
-## 4.   메시지 요약 및 외부 메모리 DB 기능 적용 챗봇
+## 6.   메시지 요약 및 외부 메모리 DB 기능 적용 챗봇
 
 챗봇이 영구적으로 메모리를 유지해야 한다면 어떻게 해야 할까요?
 
@@ -834,7 +839,7 @@ def _set_env(var: str):
 _set_env("OPENAI_API_KEY")
 ```
 
-### 4.  1.  Sqlite
+### 6.  1.  Sqlite
 
 [SqliteSaver 체크포인터](https://langchain-ai.github.io/langgraph/concepts/low_level/#checkpointer){: target="_blank"}로 구성합니다.
 
@@ -1012,7 +1017,7 @@ graph_state
 StateSnapshot(values={'messages': [HumanMessage(content="hi! I'm Lance", additional_kwargs={}, response_metadata={}, id='f5900607-033c-4e0a-b1ee-273c10106af9'), AIMessage(content="Hello again, Lance! It's great to hear from you. If there's anything specific you'd like to discuss or any questions you have, feel free to let me know!", additional_kwargs={'refusal': None}, response_metadata={'token_usage': {'completion_tokens': 34, 'prompt_tokens': 337, 'total_tokens': 371, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_d8864f8b6b', 'id': 'chatcmpl-BOyhuchtEnm1L16Q1MSX9Zu1u8yZI', 'finish_reason': 'stop', 'logprobs': None}, id='run-0036777c-5fc1-4555-b89f-2400e587ae43-0', usage_metadata={'input_tokens': 337, 'output_tokens': 34, 'total_tokens': 371, 'input_token_details': {'audio': 0, 'cache_read': 0}, 'output_token_details': {'audio': 0, 'reasoning': 0}}), HumanMessage(content="what's my name?", additional_kwargs={}, response_metadata={}, id='a4c2cec9-2106-4004-8b7f-307c48366f68'), AIMessage(content="Your name is Lance! If there's anything else you'd like to talk about or explore, just let me know.", additional_kwargs={'refusal': None}, response_metadata={'token_usage': {'completion_tokens': 23, 'prompt_tokens': 204, 'total_tokens': 227, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'id': 'chatcmpl-BOyhxIBPwTFMbnuVqbdROKwGKrWMk', 'finish_reason': 'stop', 'logprobs': None}, id='run-4355d2c6-a11f-44cd-b7e8-6747492428bc-0', usage_metadata={'input_tokens': 204, 'output_tokens': 23, 'total_tokens': 227, 'input_token_details': {'audio': 0, 'cache_read': 0}, 'output_token_details': {'audio': 0, 'reasoning': 0}}), HumanMessage(content='i like the 49ers!', additional_kwargs={}, response_metadata={}, id='f3f2840e-b114-499d-918d-dfa35c80771a'), AIMessage(content="That's awesome! The San Francisco 49ers have a rich history and a passionate fan base. Is there anything specific about the 49ers you'd like to discuss, like their current season, players, or memorable moments?", additional_kwargs={'refusal': None}, response_metadata={'token_usage': {'completion_tokens': 45, 'prompt_tokens': 241, 'total_tokens': 286, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'id': 'chatcmpl-BOyhyzfIeyAKB96bbC5mW11hQE30d', 'finish_reason': 'stop', 'logprobs': None}, id='run-09a257a5-0161-4815-893d-00ceccee6989-0', usage_metadata={'input_tokens': 241, 'output_tokens': 45, 'total_tokens': 286, 'input_token_details': {'audio': 0, 'cache_read': 0}, 'output_token_details': {'audio': 0, 'reasoning': 0}})], 'summary': "Lance introduced himself multiple times throughout the conversation, consistently expressing his fondness for the San Francisco 49ers football team. The AI assistant acknowledged Lance's name each time and demonstrated a willingness to engage in a discussion about the 49ers, offering to explore various aspects of the team, such as their history, current roster, memorable games, and more. Despite the AI's attempts to delve deeper into the topic, the conversation remained brief and somewhat repetitive, with Lance reintroducing himself at the end without directly engaging with the AI's questions or prompts about the 49ers. The interaction was friendly, but it did not progress beyond initial introductions and expressions of interest in the football team."}, next=(), config={'configurable': {'thread_id': '1', 'checkpoint_ns': '', 'checkpoint_id': '1f01f2ad-9ba1-6b06-801b-bed4edd043b6'}}, metadata={'source': 'loop', 'writes': {'conversation': {'messages': AIMessage(content="That's awesome! The San Francisco 49ers have a rich history and a passionate fan base. Is there anything specific about the 49ers you'd like to discuss, like their current season, players, or memorable moments?", additional_kwargs={'refusal': None}, response_metadata={'token_usage': {'completion_tokens': 45, 'prompt_tokens': 241, 'total_tokens': 286, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'id': 'chatcmpl-BOyhyzfIeyAKB96bbC5mW11hQE30d', 'finish_reason': 'stop', 'logprobs': None}, id='run-09a257a5-0161-4815-893d-00ceccee6989-0', usage_metadata={'input_tokens': 241, 'output_tokens': 45, 'total_tokens': 286, 'input_token_details': {'audio': 0, 'cache_read': 0}, 'output_token_details': {'audio': 0, 'reasoning': 0}})}}, 'step': 27, 'parents': {}, 'thread_id': '1'}, created_at='2025-04-22T03:35:35.042509+00:00', parent_config={'configurable': {'thread_id': '1', 'checkpoint_ns': '', 'checkpoint_id': '1f01f2ad-8fbc-6a5c-801a-bea5395c98ef'}}, tasks=())
 ```
 
-### 4.  2.  상태 유지 (Persisting state)
+### 6.  2.  상태 유지 (Persisting state)
 
 노트북 커널(Kernel)을 `다시 시작`하여 로컬의 `Sqlite DB`에서 로드가 되어 상태 유지되는 것이 확인됩니다.
 

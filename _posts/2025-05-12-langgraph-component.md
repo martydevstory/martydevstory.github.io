@@ -13,6 +13,7 @@ is_series: true
 series_title: "LangGraph"
 series_order: 2
 ---
+LangGraph 핵심 구성과 워크플로 요소 및 에이전트 요소에 대해서 알아보겠습니다.
 
 > 학습할 리소스는 [LangChain Academy Github](https://github.com/langchain-ai/langchain-academy){: target="_blank"}를 사용합니다.
 {: .prompt-info }
@@ -137,8 +138,9 @@ def decide_mood(state) -> Literal["node_2", "node_3"]:
 graph.invoke({"graph_state" : "Hi, this is Lance."})
 ```
 
-```python
+```
 # 출력
+
 {'graph_state': 'Hi, this is Lance. I am sad!'}j
 ```
 
@@ -214,12 +216,17 @@ type(result)
 ```python
 # langchain_core.messages.ai.AIMessage 출력
 result
-
-# AIMessage(content='One of the best places to see orcas in the United States is the Pacific Northwest, particularly around the San Juan Islands in Washington State. Here are some details:\n\n1. **San Juan Islands, Washington**: These islands are a renowned spot for whale watching, with orcas frequently spotted between late spring and early fall. The waters around the San Juan Islands are home to both resident and transient orca pods, making it an excellent location for sightings.\n\n2. **Puget Sound, Washington**: This area, including places like Seattle and the surrounding waters, offers additional opportunities to see orcas, particularly the Southern Resident killer whale population.\n\n3. **Olympic National Park, Washington**: The coastal areas of the park provide a stunning backdrop for spotting orcas, especially during their migration periods.\n\nWhen planning a trip for whale watching, consider peak seasons for orca activity and book tours with reputable operators who adhere to responsible wildlife viewing practices. Additionally, land-based spots like Lime Kiln Point State Park, also known as “Whale Watch Park,” on San Juan Island, offer great opportunities for orca watching from shore.', additional_kwargs={'refusal': None}, response_metadata={'token_usage': {'completion_tokens': 228, 'prompt_tokens': 67, 'total_tokens': 295, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_50cad350e4', 'finish_reason': 'stop', 'logprobs': None}, id='run-57ed2891-c426-4452-b44b-15d0a5c3f225-0', usage_metadata={'input_tokens': 67, 'output_tokens': 228, 'total_tokens': 295, 'input_token_details': {'audio': 0, 'cache_read': 0}, 'output_token_details': {'audio': 0, 'reasoning': 0}})
 ```
 
-```python
+```
 # 출력
+
+AIMessage(content='One of the best places to see orcas in the United States is the Pacific Northwest, particularly around the San Juan Islands in Washington State. Here are some details:\n\n1. **San Juan Islands, Washington**: These islands are a renowned spot for whale watching, with orcas frequently spotted between late spring and early fall. The waters around the San Juan Islands are home to both resident and transient orca pods, making it an excellent location for sightings.\n\n2. **Puget Sound, Washington**: This area, including places like Seattle and the surrounding waters, offers additional opportunities to see orcas, particularly the Southern Resident killer whale population.\n\n3. **Olympic National Park, Washington**: The coastal areas of the park provide a stunning backdrop for spotting orcas, especially during their migration periods.\n\nWhen planning a trip for whale watching, consider peak seasons for orca activity and book tours with reputable operators who adhere to responsible wildlife viewing practices. Additionally, land-based spots like Lime Kiln Point State Park, also known as “Whale Watch Park,” on San Juan Island, offer great opportunities for orca watching from shore.', additional_kwargs={'refusal': None}, response_metadata={'token_usage': {'completion_tokens': 228, 'prompt_tokens': 67, 'total_tokens': 295, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_50cad350e4', 'finish_reason': 'stop', 'logprobs': None}, id='run-57ed2891-c426-4452-b44b-15d0a5c3f225-0', usage_metadata={'input_tokens': 67, 'output_tokens': 228, 'total_tokens': 295, 'input_token_details': {'audio': 0, 'cache_read': 0}, 'output_token_details': {'audio': 0, 'reasoning': 0}})
+```
+
+```
+# 출력
+
 {'token_usage': {'completion_tokens': 228,
   'prompt_tokens': 67,
   'total_tokens': 295,
@@ -294,7 +301,7 @@ tool_call = llm_with_tools.invoke([HumanMessage(content=f"What is 2 multiplied b
 tool_call.tool_calls
 ```
 
-```python
+```
 # 출력
 # 페이로드에는 호출할 함수의 이름과 입력 스키마와 일치하는 인수가 존재합니다
 [{'name': 'multiply',
@@ -399,9 +406,12 @@ display(Image(graph.get_graph().draw_mermaid_png()))
 messages = graph.invoke({"messages": HumanMessage(content="Hello!")})
 for m in messages['messages']:
     m.pretty_print()
+```
 
+```
 # 출력
-# Hi there! How can I assist you today?
+
+Hi there! How can I assist you today?
 ```
 
 다음 예는 `LLM`이 도구 사용을 결정하면 출력에서 `Tool Calls` 로그를 확인할 수 있습니다.
@@ -410,8 +420,12 @@ for m in messages['messages']:
 messages = graph.invoke({"messages": HumanMessage(content="Multiply 2 and 3")})
 for m in messages['messages']:
     m.pretty_print()
+    b: 3
+```
 
+```
 # 출력
+
 ================================ Human Message =================================
 
  Multiply 2 and 3
@@ -507,22 +521,25 @@ messages = [HumanMessage(content="Hello, what is 2 multiplied by 2?")]
 messages = graph.invoke({"messages": messages})
 for m in messages['messages']:
     m.pretty_print()
+```
 
+```
 # 출력
-# ================================ Human Message =================================
-# 
-# Hello, what is 2 multiplied by 2?
-# ================================== Ai Message ==================================
-# Tool Calls:
-#   multiply (call_7XJ4HVW9nSLob3KnaVPZVKrl)
-#  Call ID: call_7XJ4HVW9nSLob3KnaVPZVKrl
-#   Args:
-#     a: 2
-#     b: 2
-# ================================= Tool Message =================================
-# Name: multiply
-#
-# 4
+
+================================ Human Message =================================
+ 
+Hello, what is 2 multiplied by 2?
+================================== Ai Message ==================================
+ Tool Calls:
+   multiply (call_7XJ4HVW9nSLob3KnaVPZVKrl)
+  Call ID: call_7XJ4HVW9nSLob3KnaVPZVKrl
+   Args:
+     a: 2
+     b: 2
+================================= Tool Message =================================
+Name: multiply
+
+4
 
 
 ```
@@ -670,8 +687,9 @@ for m in messages['messages']:
     m.pretty_print()
 ```
 
-```python
+```
 # 출력 
+
 ================================ Human Message =================================
 
 Add 3 and 4. Multiply the output by 2. Divide the output by 5
@@ -719,8 +737,9 @@ for m in messages['messages']:
     m.pretty_print()
 ```
 
-```python
+```
 # 출력
+
 ================================ Human Message =================================
 
 Add 3 and 4.
@@ -751,8 +770,9 @@ for m in messages['messages']:
     m.pretty_print()
 ```
 
-```python
+```
 # 출력
+
 ================================ Human Message =================================
 
 Multiply that by 2.
@@ -812,8 +832,9 @@ for m in messages['messages']:
     m.pretty_print()
 ```
 
-```python
+```
 # 출력
+
 ================================ Human Message =================================
 
 Add 3 and 4.
@@ -844,8 +865,9 @@ for m in messages['messages']:
     m.pretty_print()
 ```
 
-```python
+```
 # 출력
+
 ================================ Human Message =================================
 
 Add 3 and 4.
