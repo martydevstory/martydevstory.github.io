@@ -32,8 +32,8 @@
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="LangGraph 상태와 메모리 (1)" />
 <meta property="og:locale" content="ko_KR" />
-<meta name="description" content="학습할 리소스는 LangChain Academy Github를 사용합니다." />
-<meta property="og:description" content="학습할 리소스는 LangChain Academy Github를 사용합니다." />
+<meta name="description" content="LangGraph의 핵심 구성요소인 상태, 노드, 엣지를 이해했고, 워크플로와 에이전트 요소인 체인, 라우터, 에이전트, 에이전트 메모리에 대해서도 살펴보았습니다." />
+<meta property="og:description" content="LangGraph의 핵심 구성요소인 상태, 노드, 엣지를 이해했고, 워크플로와 에이전트 요소인 체인, 라우터, 에이전트, 에이전트 메모리에 대해서도 살펴보았습니다." />
 <link rel="canonical" href="https://martydev.github.io/posts/langgraph-state-and-memory-1st/" />
 <meta property="og:url" content="https://martydev.github.io/posts/langgraph-state-and-memory-1st/" />
 <meta property="og:site_name" content="마티데브스토리" />
@@ -44,7 +44,7 @@
 <meta property="twitter:image" content="https://martydev.github.io/assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png" />
 <meta property="twitter:title" content="LangGraph 상태와 메모리 (1)" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-05-17T11:15:43+09:00","datePublished":"2025-05-17T11:15:43+09:00","description":"학습할 리소스는 LangChain Academy Github를 사용합니다.","headline":"LangGraph 상태와 메모리 (1)","image":{"alt":null,"url":"https://martydev.github.io/assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://martydev.github.io/posts/langgraph-state-and-memory-1st/"},"url":"https://martydev.github.io/posts/langgraph-state-and-memory-1st/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-05-23T11:37:18+09:00","datePublished":"2025-05-17T11:15:43+09:00","description":"LangGraph의 핵심 구성요소인 상태, 노드, 엣지를 이해했고, 워크플로와 에이전트 요소인 체인, 라우터, 에이전트, 에이전트 메모리에 대해서도 살펴보았습니다.","headline":"LangGraph 상태와 메모리 (1)","image":{"alt":null,"url":"https://martydev.github.io/assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://martydev.github.io/posts/langgraph-state-and-memory-1st/"},"url":"https://martydev.github.io/posts/langgraph-state-and-memory-1st/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -913,6 +913,29 @@
 
       <!-- lastmod date -->
       
+        <span>
+          업데이트
+          <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1747967838"
+  data-df="YYYY/MM/DD"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  2025/05/23
+</time>
+
+        </span>
+      
 
       
         
@@ -964,7 +987,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="4828 단어"
+  title="4822 단어"
 >
   <em>26 분</em>읽는 시간</span>
 
@@ -1013,16 +1036,20 @@
     
       
     
+      
+        <li><a href="/posts/langgraph-state-and-memory-2nd/">LangGraph 상태와 메모리 (2)</a></li>
+      
+    
   </ul>
 
   <div class="content">
-    <blockquote class="prompt-info">
-  <p>학습할 리소스는 <a href="https://github.com/langchain-ai/langchain-academy" target="_blank">LangChain Academy Github</a>를 사용합니다.</p>
-</blockquote>
-
-<p>이전 포스팅에서 LangGraph의 핵심 구성요소인 상태, 노드, 엣지를 이해했고, 워크플로와 에이전트 요소인 체인, 라우터, 에이전트, 에이전트 메모리에 대해서도 살펴보았습니다.</p>
+    <p>LangGraph의 핵심 구성요소인 상태, 노드, 엣지를 이해했고, 워크플로와 에이전트 요소인 체인, 라우터, 에이전트, 에이전트 메모리에 대해서도 살펴보았습니다.</p>
 
 <p>이번 포스팅에서 노드간의 통신을 위한 <code class="language-plaintext highlighter-rouge">상태 스키마</code>와 상태 업데이트의 수행 방식을 지정하는 <code class="language-plaintext highlighter-rouge">리듀서</code>에 대해서 살펴보겠습니다.</p>
+
+<blockquote class="prompt-info">
+  <p>학습할 리소스는 <a href="https://github.com/langchain-ai/langchain-academy" target="_blank">LangChain Academy Github</a>를 사용합니다.</p>
+</blockquote>
 
 <h2 id="1-상태-스키마-state-schema"><span class="me-2">1. 상태 스키마 (State Schema)</span><a href="#1-상태-스키마-state-schema" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
@@ -1875,12 +1902,14 @@ For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/er
     <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">TypeError occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
 </pre></td></tr></tbody></table></code></div></div>
 
-<div class="language-python highlighter-rouge"><div class="code-header">
-        <span data-label-text="Python"><i class="fas fa-code fa-fw small"></i></span>
+<div class="language-plaintext highlighter-rouge"><div class="code-header">
+        <span data-label-text="Plaintext"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="복사되었습니다!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-</pre></td><td class="rouge-code"><pre><span class="c1"># 출력
-</span><span class="nb">TypeError</span> <span class="n">occurred</span><span class="p">:</span> <span class="n">can</span> <span class="n">only</span> <span class="n">concatenate</span> <span class="nf">list </span><span class="p">(</span><span class="ow">not</span> <span class="sh">"</span><span class="s">NoneType</span><span class="sh">"</span><span class="p">)</span> <span class="n">to</span> <span class="nb">list</span>
+3
+</pre></td><td class="rouge-code"><pre># 출력
+
+TypeError occurred: can only concatenate list (not "NoneType") to list
 </pre></td></tr></tbody></table></code></div></div>
 
 <blockquote class="prompt-info">
@@ -2233,14 +2262,14 @@ TypeError occurred: can only concatenate list (not "NoneType") to list
 
 <p><code class="language-plaintext highlighter-rouge">delete_messages</code>에서 메시지 id 1과 id 2는 리듀서에 의해 삭제가 됩니다.</p>
 
-<div class="language-python highlighter-rouge"><div class="code-header">
-        <span data-label-text="Python"><i class="fas fa-code fa-fw small"></i></span>
+<div class="language-plaintext highlighter-rouge"><div class="code-header">
+        <span data-label-text="Plaintext"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="복사되었습니다!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
-</pre></td><td class="rouge-code"><pre><span class="c1"># 출력 - 삭제할 메시지 목록
-</span>
-<span class="p">[</span><span class="nc">RemoveMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="sh">''</span><span class="p">,</span> <span class="n">additional_kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="n">response_metadata</span><span class="o">=</span><span class="p">{},</span> <span class="nb">id</span><span class="o">=</span><span class="sh">'</span><span class="s">1</span><span class="sh">'</span><span class="p">),</span> <span class="nc">RemoveMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="sh">''</span><span class="p">,</span> <span class="n">additional_kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="n">response_metadata</span><span class="o">=</span><span class="p">{},</span> <span class="nb">id</span><span class="o">=</span><span class="sh">'</span><span class="s">2</span><span class="sh">'</span><span class="p">)]</span>
+</pre></td><td class="rouge-code"><pre># 출력 - 삭제할 메시지 목록
+
+[RemoveMessage(content='', additional_kwargs={}, response_metadata={}, id='1'), RemoveMessage(content='', additional_kwargs={}, response_metadata={}, id='2')]
 </pre></td></tr></tbody></table></code></div></div>
 
 <div class="language-python highlighter-rouge"><div class="code-header">
@@ -2249,16 +2278,16 @@ TypeError occurred: can only concatenate list (not "NoneType") to list
 </pre></td><td class="rouge-code"><pre><span class="nf">add_messages</span><span class="p">(</span><span class="n">messages</span> <span class="p">,</span> <span class="n">delete_messages</span><span class="p">)</span>
 </pre></td></tr></tbody></table></code></div></div>
 
-<div class="language-python highlighter-rouge"><div class="code-header">
-        <span data-label-text="Python"><i class="fas fa-code fa-fw small"></i></span>
+<div class="language-plaintext highlighter-rouge"><div class="code-header">
+        <span data-label-text="Plaintext"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="복사되었습니다!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
-</pre></td><td class="rouge-code"><pre><span class="c1"># 출력 - 메시지 id 1과 2가 삭제
-</span>
-<span class="p">[</span><span class="nc">AIMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="sh">'</span><span class="s">So you said you were researching ocean mammals?</span><span class="sh">'</span><span class="p">,</span> <span class="n">additional_kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="n">response_metadata</span><span class="o">=</span><span class="p">{},</span> <span class="n">name</span><span class="o">=</span><span class="sh">'</span><span class="s">Bot</span><span class="sh">'</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="sh">'</span><span class="s">3</span><span class="sh">'</span><span class="p">),</span>
- <span class="nc">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="sh">'</span><span class="s">Yes, I know about whales. But what others should I learn about?</span><span class="sh">'</span><span class="p">,</span> <span class="n">additional_kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="n">response_metadata</span><span class="o">=</span><span class="p">{},</span> <span class="n">name</span><span class="o">=</span><span class="sh">'</span><span class="s">Lance</span><span class="sh">'</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="sh">'</span><span class="s">4</span><span class="sh">'</span><span class="p">)]</span>
+</pre></td><td class="rouge-code"><pre># 출력 - 메시지 id 1과 2가 삭제
+
+[AIMessage(content='So you said you were researching ocean mammals?', additional_kwargs={}, response_metadata={}, name='Bot', id='3'),
+ HumanMessage(content='Yes, I know about whales. But what others should I learn about?', additional_kwargs={}, response_metadata={}, name='Lance', id='4')]
 </pre></td></tr></tbody></table></code></div></div>
 
 <h2 id="정리"><span class="me-2">정리</span><a href="#정리" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
@@ -2294,6 +2323,10 @@ TypeError occurred: can only concatenate list (not "NoneType") to list
         <li><a href="/posts/langgraph-component/">LangGraph 핵심 구성과 그래프 생성</a></li>
       
     
+      
+    
+      
+        <li><a href="/posts/langgraph-state-and-memory-2nd/">LangGraph 상태와 메모리 (2)</a></li>
       
     
   </ul>
@@ -2447,13 +2480,6 @@ TypeError occurred: can only concatenate list (not "NoneType") to list
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/langgraph-introduce/">LangGraph 소개 및 환경 구성</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
           <a href="/posts/langgraph-component/">LangGraph 핵심 구성과 그래프 생성</a>
         </li>
       
@@ -2462,6 +2488,20 @@ TypeError occurred: can only concatenate list (not "NoneType") to list
         
         <li class="text-truncate lh-lg">
           <a href="/posts/langgraph-state-and-memory-1st/">LangGraph 상태와 메모리 (1)</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/langgraph-state-and-memory-2nd/">LangGraph 상태와 메모리 (2)</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/langgraph-introduce/">LangGraph 소개 및 환경 구성</a>
         </li>
       
     </ul>
@@ -2751,6 +2791,18 @@ TypeError occurred: can only concatenate list (not "NoneType") to list
 
   
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
 
@@ -2764,6 +2816,34 @@ TypeError occurred: can only concatenate list (not "NoneType") to list
   <aside id="related-posts" aria-labelledby="related-label">
     <h3 class="mb-4" id="related-label">관련된 글</h3>
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
+      
+        <article class="col">
+          <a href="/posts/langgraph-state-and-memory-2nd/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1747966543"
+  data-df="YYYY/MM/DD"
+  
+>
+  2025/05/23
+</time>
+
+              <h4 class="pt-0 my-2">LangGraph 상태와 메모리 (2)</h4>
+              <div class="text-muted">
+                <p>노드 간 통신을 위한 상태 스키마와 리듀서에 대해서 이해했습니다. 다음은 입·출력에서 상태 스키마를 위한 다중 스키마, 그리고 요약 기능과 외부메모리 기능을 가진 챗봇에 대해서 알아보겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   3.   다중 스키마 (Multiple Schemas)  일반적으로 모든 ...</p>
+              </div>
+            </div>
+          </a>
+        </article>
       
         <article class="col">
           <a href="/posts/langgraph-component/" class="post-preview card h-100">
@@ -2787,7 +2867,7 @@ TypeError occurred: can only concatenate list (not "NoneType") to list
 
               <h4 class="pt-0 my-2">LangGraph 핵심 구성과 그래프 생성</h4>
               <div class="text-muted">
-                <p>학습할 리소스는 LangChain Academy Github를 사용합니다.   1.   LangGraph 핵심 구성과 간단한 그래프 생성 그래프를 생성할 때 노드, 상태, 엣지 핵심 요소들을 먼저 정의하고, 이를 체인, 라우터, 에이전트 등 상위 워크플로 요소와 결합하여 애플리케이션을 구축할 수 있습니다.  LangGraph 핵심 구성 요소와 워크플로...</p>
+                <p>LangGraph 핵심 구성과 워크플로 요소 및 에이전트 요소에 대해서 알아보겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   1.   LangGraph 핵심 구성과 간단한 그래프 생성 그래프를 생성할 때 노드, 상태, 엣지 핵심 요소들을 먼저 정의하고, 이를 체인, 라우터, 에이전트 등 상위 워크플로 요...</p>
               </div>
             </div>
           </a>
@@ -2845,9 +2925,13 @@ TypeError occurred: can only concatenate list (not "NoneType") to list
   
 
   
-    <div class="btn btn-outline-primary disabled" aria-label="다음 글">
-      <p>-</p>
-    </div>
+    <a
+      href="/posts/langgraph-state-and-memory-2nd/"
+      class="btn btn-outline-primary"
+      aria-label="다음 글"
+    >
+      <p>LangGraph 상태와 메모리 (2)</p>
+    </a>
   
 </nav>
 
