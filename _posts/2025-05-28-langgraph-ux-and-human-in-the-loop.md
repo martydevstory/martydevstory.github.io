@@ -1,6 +1,6 @@
 ---
 title: LangGraph 사용자 경험(UX)과 휴먼-인-더-루프
-date: 2025-05-19 12:15:43 +/-TTTT
+date: 2025-05-28 12:15:43 +/-TTTT
 categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
 math: true
@@ -147,16 +147,16 @@ display(Image(graph.get_graph().draw_mermaid_png()))
 
 ### 1.  1.  전체 상태 스트리밍 (Streaming full state)
 
-이제 [그래프 상태를 스트리밍하는 방법](https://langchain-ai.github.io/langgraph/concepts/low_level/#streaming)에 대해 알아보겠습니다.
+이제 [그래프 상태를 스트리밍하는 방법](https://langchain-ai.github.io/langgraph/concepts/low_level/#streaming){: target="_blank"}에 대해 알아보겠습니다.
 
 `.stream`과 `.astream`은 각각 동기(sync) 및 비동기(async) 방식으로 결과를 스트리밍하는 메서드입니다.
 
-LangGraph는 [그래프 상태](https://langchain-ai.github.io/langgraph/how-tos/stream-values/)에 대해 몇 가지 [다양한 스트리밍 모드](https://langchain-ai.github.io/langgraph/how-tos/stream-values/)를 지원합니다.
+LangGraph는 [그래프 상태](https://langchain-ai.github.io/langgraph/how-tos/stream-values/){: target="_blank"}에 대해 몇 가지 [다양한 스트리밍 모드](https://langchain-ai.github.io/langgraph/how-tos/stream-values/){: target="_blank"}를 지원합니다.
 
 * `values`: 각 노드가 실행된 후 그래프의 `전체 상태`를 스트리밍합니다.
 * `updates`: 각 노드가 실행된 후 그래프 상태에 `변경이 생긴 부분만` 스트리밍합니다.
 
-![그래프 상태를 스트리밍하는 방법](assets/drafts/2025-05-17-langgraph-ux-and-human-in-the-loop/streaming_01.png)
+![그래프 상태를 스트리밍하는 방법](assets/posts/2025-05-28-langgraph-ux-and-human-in-the-loop/streaming_01.png)
 _그래프 상태를 스트리밍하는 방법_
 
 먼저 `stream_mode="updates"`에 대해 살펴보겠습니다.
@@ -361,7 +361,7 @@ async for event in graph.astream_events({"messages": [input_message]}, config, v
 
 LangGraph는 다양한 `휴먼-인-더-루프` 워크플로를 지원하기 위해 에이전트의 상태를 조회하거나 업데이트할 수 있는 여러 방법을 제공합니다.
 
-먼저, [브레이크포인트](https://langchain-ai.github.io/langgraph/how-tos/human_in_the_loop/breakpoints/#simple-usage)는 그래프 실행 도중 특정 단계에서 일시 정지를 가능하게 하는 간단한 방법입니다.
+먼저, [브레이크포인트](https://langchain-ai.github.io/langgraph/how-tos/human_in_the_loop/breakpoints/#simple-usage){: target="_blank"}는 그래프 실행 도중 특정 단계에서 일시 정지를 가능하게 하는 간단한 방법입니다.
 
 이를 통해 사용자의 `승인`이 어떻게 구현되는지 살펴보겠습니다.
 
@@ -512,7 +512,7 @@ state.next
 
 `Graph.get_state()`에서 최근의 그래프 상태를 가져오고 `Graph.get_state_history()`에서 전체 실행 과정에서 저장된 모든 상태(Snapshot)들을 배열로 반환합니다. 그리고 `Graph.stream(None,{thread_id})`는 브레이크포인트 이후, 그래프를 `None`으로 호출(invoke)하면, 마지막 상태 체크포인트(StateSnapshot)에서 바로 이어서 실행됩니다.
 
-![상태 체크포인트](assets/drafts/2025-05-17-langgraph-ux-and-human-in-the-loop/state_checkpoint01.png)
+![상태 체크포인트](assets/posts/2025-05-28-langgraph-ux-and-human-in-the-loop/state_checkpoint01.png)
 _상태 체크포인트 흐름_
 
 명확하게 보여주기 위해, LangGraph는 `도구 호출`이 포함된 `AIMessage`가 있는 현재 상태를 다시 출력합니다.
@@ -601,7 +601,7 @@ Name: multiply
 The product of 2 and 3 is 6.
 ```
 
-![사용자 입력을 위한 승인 단계](assets/drafts/2025-05-17-langgraph-ux-and-human-in-the-loop/breakpoints_01.png)
+![사용자 입력을 위한 승인 단계](assets/posts/2025-05-28-langgraph-ux-and-human-in-the-loop/breakpoints_01.png)
 _사용자 입력을 위한 승인 단계_
 
 ## 2.   그래프 상태 수정
@@ -630,7 +630,7 @@ _set_env("OPENAI_API_KEY")
 
 `브레이크포인트`를 사용해 그래프 실행을 중단시키고, 다음 노드를 실행하기 전에 `사용자 승인`을 기다렸습니다.
 
-하지만 `브레이크포인트`는 [그래프 상태를 수정할 기회](https://langchain-ai.github.io/langgraph/how-tos/human_in_the_loop/edit-graph-state/)이기도 합니다.
+하지만 `브레이크포인트`는 [그래프 상태를 수정할 기회](https://langchain-ai.github.io/langgraph/how-tos/human_in_the_loop/edit-graph-state/){: target="_blank"}이기도 합니다.
 
 이제 `assistant` 노드 앞에 `브레이크포인트`를 설정해 보겠습니다.
 
@@ -842,7 +842,7 @@ The result of multiplying 3 and 3 is 9.
 
 하지만, 그래프가 실행 중에 동적으로 `스스로 중단(interrupt)`하는 것도 도움이 될 수 있습니다.
 
-이것을 `내부 브레이크포인트(internal breakpoint)`라고 하며, [`NodeInterrupt`](https://langchain-ai.github.io/langgraph/how-tos/human_in_the_loop/dynamic_breakpoints/#run-the-graph-with-dynamic-interrupt)를 사용해서 구현할 수 있습니다.
+이것을 `내부 브레이크포인트(internal breakpoint)`라고 하며, [`NodeInterrupt`](https://langchain-ai.github.io/langgraph/how-tos/human_in_the_loop/dynamic_breakpoints/#run-the-graph-with-dynamic-interrupt){: target="_blank"}를 사용해서 구현할 수 있습니다.
 
 이 방식의 구체적인 장점은 다음과 같습니다.
 
@@ -1008,7 +1008,7 @@ for event in graph.stream(None, thread_config, stream_mode="values"):
 
 ## 4.   타임 트래블 (Time travel)
 
-LangGraph가 [디버깅을 지원](https://langchain-ai.github.io/langgraph/how-tos/human_in_the_loop/time-travel/)하는 방법을 살펴보겠습니다.
+LangGraph가 [디버깅을 지원](https://langchain-ai.github.io/langgraph/how-tos/human_in_the_loop/time-travel/){: target="_blank"}하는 방법을 살펴보겠습니다.
 
 과거 상태를 조회하고, 다시 실행하거나, 심지어 이전 상태에서 분기(forking)하는 것도 가능합니다.
 
@@ -1288,7 +1288,7 @@ The result of multiplying 2 and 3 is 6.
 
 이것을 가능하게 하는 것이 `분기`입니다.
 
-![분기 흐름](assets/drafts/2025-05-17-langgraph-ux-and-human-in-the-loop/forking_01.png)
+![분기 흐름](assets/posts/2025-05-28-langgraph-ux-and-human-in-the-loop/forking_01.png)
 _분기 흐름_
 
 ```python

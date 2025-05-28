@@ -1,5 +1,5 @@
 ---
-title: LangGraph 어시스턴트 구축하기
+title: LangGraph 어시스턴트 구축하기 (1)
 date: 2025-05-20 12:15:43 +/-TTTT
 categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
@@ -15,16 +15,15 @@ series_order: 6
 ---
 이전 포스팅에서 다뤘던 `메모리` 개념과, `휴먼-인-더-루프` 기반으로 `멀티 에이전트(multi-agent)` 워크플로를 살펴보겠습니다.
 
-그리고 살펴봤던 내용들 기반으로 `멀티 에이전트 리서치 어시스턴트`를 구축할 것입니다.
 
 > 학습할 리소스는 [LangChain Academy Github](https://github.com/langchain-ai/langchain-academy){: target="_blank"}를 사용합니다.
-> {: .prompt-info }
+{: .prompt-info }
 
 ## 1.   병렬 노드 실행 (Parallel node execution)
 
 `멀티 에이전트 리서치 어시스턴트`를 구축하기 위해 먼저 LangGraph의 `제어 가능성(controllability)`에 대해서 살펴보겠습니다.
 
-### 팬아웃(Fan out)과 팬인(fan in)
+### 1.  1.  팬아웃(Fan out)과 팬인(fan in)
 
 각 단계마다 상태를 덮어쓰는 간단한 `선형 그래프`를 생성합니다.
 
@@ -204,8 +203,9 @@ Adding I'm D to ["I'm A", "I'm B", "I'm C"]
 `b`와 `c`에서 병렬로 업데이트된 내용이 state에 `추가`가 되었습니다.
 
 > 여기서는 `b`와 `c`가 팬인 할때 순서가 보장되지 않습니다.
+{: .prompt-info }
 
-### 노드가 모두 끝날 때까지 대기
+### 1.  2.  노드가 모두 끝날 때까지 대기
 
 이번에는 병렬 경로 중 하나가 다른 경로보다 `더 많은 단계`를 가지는 경우를 살펴보겠습니다.
 
@@ -232,7 +232,7 @@ display(Image(graph.get_graph().draw_mermaid_png()))
 
 ```
 
-![b경로 단계가 많은 경우 흐름](assets/drafts/2025-05-21-langgraph-building-assistant/fanout-fanin_01.png)
+![b경로 단계가 많은 경우 흐름](assets/drafts/2025-05-21-langgraph-building-assistant-1st/fanout-fanin_01.png)
 _b경로 단계가 많은 경우 흐름_
 
 이 경우, `b`, `b2`, 그리고 `c`가 모두 `동일한 단계`에 속하게 됩니다.
@@ -244,7 +244,7 @@ graph.invoke({"state": []})
 ```
 
 ```
-# 출력
+# 출력 - 순서가 보장되지 않음
 
 Adding I'm A to []
 Adding I'm B to ["I'm A"]
@@ -256,7 +256,7 @@ Adding I'm D to ["I'm A", "I'm B", "I'm C", "I'm B2"]
 
 ```
 
-### 상태 업데이트 순서 지정하기
+### 1.  3.  상태 업데이트 순서 지정하기
 
 이전 팬인 예제에서 보듯이 각 단계에서 상태 업데이트의 순서를 제어할 수는 없습니다.
 
@@ -323,15 +323,15 @@ Adding I'm D to ["I'm A", "I'm B", "I'm B2", "I'm C"]
 
 `리듀서`가 업데이트된 상태 값들을 정렬했습니다.
 
-`soring_reducer` 예제는 모든 값을 전역적으로 정렬하고 다음 기능도 가능합니다.
+`sorting_reducer` 예제는 모든 값을 전역적으로 정렬하고 다음 기능도 가능합니다.
 
 1. 병렬 단계에서 각 결과를 합치지 않고 state의 `별도 필드에 저장`이 가능합니다.
 2. 병렬 단계 이후에 `sink 노드`를 사용해 `별도 필드에 저장된 이 결과들을 합치고 정렬`이 가능합니다.
 3. 병합 후 `임시 필드는 정리`, 즉 state에서 지웁니다.
 
-더 자세한 내용은 [공식 문서](https://langchain-ai.github.io/langgraph/how-tos/branching/#stable-sorting)를 참고하실수 있습니다.
+더 자세한 내용은 [공식 문서](https://langchain-ai.github.io/langgraph/how-tos/branching/#stable-sorting){: target="_blank"}를 참고하실수 있습니다.
 
-### LLM과 함께 사용하기 (실습)
+### 1.  4.  LLM과 함께 사용하기 (실습)
 
 두 개의 외부 소스(`위키피디아`와 `웹 검색`)에서 컨텍스트를 수집한 다음, LLM이 질문에 답변하도록 구성합니다.
 
@@ -347,7 +347,7 @@ class State(TypedDict):
     context: Annotated[list, operator.add]
 ```
 
-다양한 웹 검색 도구 중 [Tavily](https://tavily.com/)를 사용합니다.
+다양한 웹 검색 도구 중 [Tavily](https://tavily.com/){: target="_blank"}를 사용합니다.
 
 추가로 `TAVILY_API_KEY`가 설정되어 있어야 합니다.
 
@@ -461,11 +461,11 @@ result['answer'].content
 
 마지막으로 이 프롬프트를 LLM에게 전달해 답변을 생성하고 state의 `answer`필드에 저장합니다.
 
-## 서브 그래프 (Sub-graphs)
+## 2.   서브 그래프 (Sub-graphs)
 
 `서브 그래프`를 사용하면, 그래프의 서로 다른 부분에서 `각기 다른 상태를 생성하고 관리`할 수 있습니다.
 
-### 상태 (State)
+### 2.  1.  상태 (State)
 
 각기 독립적인 상태를 소유한 다수의 에이전트 팀에서는 `멀티 에이전트 시스템`이 특히 유용합니다.
 
@@ -475,11 +475,12 @@ result['answer'].content
 
 아래 그림처럼 서브 그래프는 부모 그래프의 `docs`를 받아올 수 있고
 
-부모 그래프는 서브 그래프의 `summary`와 `failur_report`를 가져올 수 있습니다.
+부모 그래프는 서브 그래프의 `summary_report`와 `failur_report`를 가져올 수 있습니다.
 
-[이미지]
+![부모와 서브 그래프 흐름](assets/drafts/2025-05-21-langgraph-building-assistant-1st/subgraph_01.png)
+_부모와 서브 그래프 흐름_
 
-## 입력 (Input)
+### 2.  2.  입력 (Input)
 
 그래프에 입력될 로그를 위한 스키마를 정의합니다.
 
@@ -518,7 +519,7 @@ class Log(TypedDict):
     feedback: Optional[str]
 ```
 
-### 서브 그래프(Sub graphs) 생성
+### 2.  3.  서브 그래프(Sub graphs) 생성
 
 다음은 `FailureAnalysisState`를 사용하는 `장애 분석 서브 그래프`입니다.
 
@@ -601,7 +602,7 @@ display(Image(graph.get_graph().draw_mermaid_png()))
 
 ```
 
-### 서브 그래프를 부모 그래프에 추가
+### 2.  4.  서브 그래프를 부모 그래프에 추가
 
 서브 그래프를 하나로 합치기 위해 `EntryGraphState`로 부모 그래프를 생성합니다.
 
@@ -632,9 +633,10 @@ cleaned_logs: Annotated[List[Log], add] # 이 값은 두 서브그래프에서 �
 
 이때 서로 다른 서브 그래프들이 `동일한 키를 반환`하면 충돌이 발생할 수 있기 때문에, 값을 병합하기 위한 `operator.add`와 같은 리듀서가 필요합니다.
 
-또는 각 서브 그래프마다 `출력 상태 스키마`를 따로 정의하고, 각 서브 그래프가 `서로 다른 키만을 출력`하도록 하면 됩니다. 그래서 모든 서브 그래프가 `cleaned_logs`를 출력할 필요는 없습니다.
+다른 방법은 각 서브 그래프마다 `출력 상태 스키마`를 따로 정의하고, 각 서브 그래프가 `서로 다른 키만을 출력`하도록 하면 됩니다. 그래서 모든 서브 그래프가 `cleaned_logs`를 출력할 필요는 없습니다.
 
 > 코드에서는 `cleand_logs`를 출력하진 않지만 개념 이해를 위해 `리듀서`를 적용
+{: .prompt-info }
 
 ```python
 # 부모 그래프
@@ -720,11 +722,14 @@ graph.invoke({"raw_logs": raw_logs})
   'summary-on-log-2']}
 ```
 
-## 맵리듀스 (Map-Reduce)
+## 3.   맵리듀스 (Map-Reduce) 개념 및 실습
 
-[맵리듀스](https://langchain-ai.github.io/langgraph/how-tos/graph-api/#map-reduce-and-the-send-api)에 대해서 자세히 알아보겠습니다.
+맵리듀스는 작업을 효율적으로 `분해하고 병렬 처리`하는 데 필수적인 개념입니다.
+
+[맵리듀스](https://langchain-ai.github.io/langgraph/how-tos/graph-api/#map-reduce-and-the-send-api){: target="_blank"}에 대해서 예제를 통해 자세히 알아보겠습니다.
 
 > 대규모 데이터 저장과 처리를 하는 Hadoop의 `맵리듀스`와 개념만 비슷하고 LangGraph만의 목적과 방식으로 구성됩니다.
+{: .prompt-info }
 
 ```python
 # 환경 구성
@@ -739,23 +744,26 @@ os.environ["LANGSMITH_TRACING"] = "true"
 os.environ["LANGSMITH_PROJECT"] = "langchain-academy"
 ```
 
-### 맵리듀스 예제 문제 정의
+### 3.  1.  작업 목표
 
-맵리듀스는 작업을 효율적으로 `분해하고 병렬 처리`하는 데 필수적인 개념입니다.
+`맵리듀스` 작업 개념은 다음과 같습니다.
 
-다음은 맵리듀스를 위한 `작업 구성`과 `시스템 설계`를 진행합니다.
+`맵`을 통해 하나의 작업을 더 작은 하위 작업들로 나누고 `병렬로 처리`합니다.
 
-작업은 두 단계로 `구성`:
+`리듀스`로 병렬로 처리된 하위 작업들을 하나로 모아 `집계`합니다.
 
-1. `Map` – 하나의 작업을 더 작은 하위 작업들로 나누고, 각각을 `병렬로 처리`
-2. `Reduce` – 병렬로 처리된 모든 하위 작업들의 결과를 하나로 `집계(aggregate)`
+그리고 `베스트 조크 선택`을 위한 그래프 흐름은 다음과 같습니다.
 
-두 가지 작업을 수행하는 `시스템을 설계`:
+1. `진입점(entry point)을 정의`합니다.
+2. 사용자로부터 `주제를 입력 ("topic": "animals")`받습니다.
+3. 해당 주제로부터 조크를 위한 `하위 주제를 생성 (generate_topics)`합니다.
+4. `맵` 단계인 각 하위 주제를 `조크 생성 (generate_joke)` 노드에 전달합니다.
+5. `리듀스` 단계에서 생성된 조크들 중 가장 재미있는 `베스트 조크 (best_joke)`를 선택합니다.
 
-1. `Map` – 특정 주제에 대한 조크(joke)들을 다수 생성
-2. `Reduce` – 생성된 조크들 중에서 가장 재미있는 것을 선택
+조크의 생성과 선택 작업은 gpt-4o LLM을 사용합니다.
 
-이 모든 작업은 LLM을 사용해 생성 및 선택합니다.
+![맵리듀스 그래프 흐름](assets/drafts/2025-05-21-langgraph-building-assistant-1st/map-reduce_01.png)
+_맵리듀스 그래프 흐름_
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -769,19 +777,13 @@ best_joke_prompt = """Below are a bunch of jokes about {topic}. Select the best 
 model = ChatOpenAI(model="gpt-4o", temperature=0) 
 ```
 
-### 상태 (여기부터)
+### 3.  2.  상태 및 노드 설정하기
 
-#### 조크 생성 병렬화
-
-먼저 그래프의 `진입점(entry point)을 정의`하고 다음을 수행합니다.
-
-* 사용자로부터 `주제를 입력`받습니다.
-* 해당 주제로부터 조크를 위한 `하위 주제를 생성`합니다.
-* 각 하위 주제를 `조크 생성 노드에 전달`합니다.
-
-상태에는 `jokes`라는 키가 있고 이 키에 병렬로 생성된 조크들이 누적됩니다.
+`OverallState`상태에는 `jokes`라는 키가 있고 이 키에 병렬로 생성된 조크들이 누적됩니다.
 
 ```python
+# 상태 정의
+
 import operator
 from typing import Annotated
 from typing_extensions import TypedDict
@@ -800,49 +802,44 @@ class OverallState(TypedDict):
     best_selected_joke: str
 ```
 
-조크들을 위한 주제들을 생성합니다.
+`generate_topics` 노드에서 조크들을 위한 주제들을 생성합니다.
 
 ```python
+# 주제(Topic)를 생성할 노드
+
 def generate_topics(state: OverallState):
     prompt = subjects_prompt.format(topic=state["topic"])
     response = model.with_structured_output(Subjects).invoke(prompt)
     return {"subjects": response.subjects}
 ```
 
-여기서 핵심은 `Send` 객체를 사용한다는 점입니다.
+여기에서 핵심인 [`Send`](https://langchain-ai.github.io/langgraph/concepts/low_level/#send){: target="_blank"}를 통해 각 주제마다 조크를 하나씩 생성하고 갯수에 상관없이 `자동으로 병렬 실행`합니다.
 
-[`Send`](https://langchain-ai.github.io/langgraph/concepts/low_level/#send)를 통해
+Send에서 `generate_joke`는 그래프 내의 노드이고 `{"subject": s}`는 해당 노드에 전달할 `상태`입니다.
 
-각 subject마다 하나씩 농담을 생성하도록 설정할 수 있습니다.
+여기서 `generate_joke`는 전체 상태가 아닌 `topic 키`만 사용하는 `JokeState` 내부 상태를 입력으로 받습니다.
 
-이 방식은 매우 유용합니다!
-
-어떤 개수의 subject가 있든 상관없이 자동으로 병렬 실행됩니다.
-
-* `generate_joke`: 그래프 내의 노드 이름입니다
-* `{"subject": s}`: 해당 노드에 전달할 상태입니다
-
-`Send`를 사용하면 전달하는 상태가 반드시 `OverallState`와 일치할 필요는 없습니다.
-
-이 예시에서는 `generate_joke`가 자체 내부 상태를 사용하고,
-
-우리는 이를 `Send`를 통해 원하는 값으로 채워줄 수 있습니다.
+그래서 `Send`를 통해 전달하는 값은 `JokeState`에 자동으로 매핑되기 때문에,`OverallState` 상태와 동일하지 않아도 됩니다.
 
 ```python
+# 조건부 엣지 설정을 위한 함수 정의 - 기존 생성된 주제에 맞게 조크들을 생성
+
 from langgraph.constants import Send
 def continue_to_jokes(state: OverallState):
     return [Send("generate_joke", {"subject": s}) for s in state["subjects"]]
 ```
 
-### 조크 생성 (Map)
+### 3.  3.  조크 생성을 위한 맵 구성하기
 
-이제 실제로 농담을 생성하는 노드인 `generate_joke`를 정의합니다!
+맵 구성을 위해 `조크들을 생성하고 병렬 처리`를 하는 `generate_joke` 노드를 생성합니다.
 
-이 노드는 생성된 농담들을 `OverallState`의 `jokes` 키에 기록합니다.
+이 노드는 생성된 조크들을 `OverallState`의 `jokes` 키에 기록합니다.
 
-`jokes` 키에는 **리듀서(reducer)**가 설정되어 있어, 병렬로 생성된 농담 리스트들을 자동으로 결합해 줍니다.
+`jokes` 키에는 `리듀서`가 설정되어 있어, 병렬로 생성된 조크 목록을 `자동으로 결합`합니다.
 
 ```python
+# 각 주제에 대해 하나의 조크를 생성하는 노드
+
 class JokeState(TypedDict):
     subject: str
 
@@ -853,13 +850,14 @@ def generate_joke(state: JokeState):
     prompt = joke_prompt.format(subject=state["subject"])
     response = model.with_structured_output(Joke).invoke(prompt)
     return {"jokes": [response.joke]}
+### 베스트 조크 선택을 위한 리듀스 구성하기
 ```
 
-### 최고의 조크 선택 (Reduce)
-
-이제 생성된 농담들 중에서 **가장 재미있는 농담을 선택하는 로직** 을 추가합니다.
+`리듀스`를 작업을 위한 `베스트 조크 선택` 노드를 구성합니다.
 
 ```python
+# 모든 조크들 중 하나의 베스트 조크를 선택
+
 def best_joke(state: OverallState):
     jokes = "\n\n".join(state["jokes"])
     prompt = best_joke_prompt.format(topic=state["topic"], jokes=jokes)
@@ -867,9 +865,13 @@ def best_joke(state: OverallState):
     return {"best_selected_joke": state["jokes"][response.id]}
 ```
 
-### 컴파일
+### 3.  4.  그래프 실행
+
+마지막으로 그래프 구성하고 실행합니다.
 
 ```python
+# 그래프 구성 및 실행
+
 from IPython.display import Image
 from langgraph.graph import END, StateGraph, START
 
@@ -889,7 +891,7 @@ Image(app.get_graph().draw_mermaid_png())
 ```
 
 ```python
-# 그래프 실행: 주어진 주제에 대해 농담 목록을 생성
+# 그래프 실행: 주어진 주제에 대해 조크 목록을 생성
 for s in app.stream({"topic": "animals"}):
     print(s)
 ```
@@ -904,11 +906,19 @@ for s in app.stream({"topic": "animals"}):
 {'best_joke': {'best_selected_joke': 'Why did the parrot bring a ladder to the comedy club?\n\nBecause it wanted to reach the "punchline" in its jokes!'}}
 ```
 
-d
-
 ## 정리
 
-ㅇ
+이번 포스팅에서는 LangGraph의 제어가능성(Controllability)을 중심으로 주요 개념을 실습과 함께 살펴보았습니다.
+
+먼저, `병렬 노드 실행(Fan-out)`을 통해 여러 작업을 동시에 수행하고, 완료 후 `팬인(Fan-in)` 구조로 결과를 집계하는 방식을 확인했습니다. 이 과정에서 `sorting_reducer`를 사용하면 병렬 결과의 순서를 보장할 수 있습니다.
+
+실습에서는 `search_web`과 `search_wikipedia` 노드를 병렬로 실행한 뒤, `generate_answer` 노드에서 이들을 통합해 응답을 생성했습니다.
+
+또한, 멀티에이전트 시스템에 적합한 구조로서 `서브 그래프`를 부모 그래프와 별도로 구성하고, 실행 결과를 부모 그래프로 반환하는 방식을 다뤘습니다. 이는 분석이나 요약 등 역할 분담이 필요한 구조에서 유용합니다.
+
+마지막으로, `맵리듀스` 패턴을 활용해 '조크 생성' 예제를 구현했습니다. 이 예제에서는 주제를 여러 개로 분할(map)하고 병렬 처리한 후, 가장 우수한 결과를 선택하는 방식으로 집계(reduce)하였습니다.
+
+다음 포스팅에서는 다뤘던 내용기반으로 `멀티 에이전트 리서치 어시스턴트`를 구축할 것입니다.
 
 ## References
 

@@ -207,11 +207,11 @@ graph.invoke(DataclassState(name="Lance",mood="sad"))
 dataclass_instance = DataclassState(name="Lance", mood="mad")
 ```
 
-이 문제를 해결할 수 있는 것이 [Pydantic](https://docs.pydantic.dev/latest/api/base_model/)입니다.
+이 문제를 해결할 수 있는 것이 [Pydantic](https://docs.pydantic.dev/latest/api/base_model/){: target="_blank"}입니다.
 
 `Pydantic`은 Python 타입 어노테이션을 사용하는 데이터 검증 및 설정 관리 라이브러리입니다.
 
-검증 기능을 갖추고 있어 [LangGraph에서 상태 스키마를 정의](https://langchain-ai.github.io/langgraph/how-tos/state-model/)하는 데 특히 적합합니다.
+검증 기능을 갖추고 있어 [LangGraph에서 상태 스키마를 정의](https://langchain-ai.github.io/langgraph/how-tos/state-model/){: target="_blank"}하는 데 특히 적합합니다.
 
 그리고 런타임 시 지정된 타입 및 제약 조건을 준수하는지 검증할 수 있습니다.
 
@@ -730,9 +730,9 @@ add_messages(initial_messages , new_message)
 
 ### 2.  7.    메시지 삭제 (Removal)
 
-`add_messages`는 [메시지 삭제](https://langchain-ai.github.io/langgraph/how-tos/memory/delete-messages/)도 할 수 있습니다.
+`add_messages`는 [메시지 삭제](https://langchain-ai.github.io/langgraph/how-tos/memory/delete-messages/){: target="_blank"}도 할 수 있습니다.
 
-이를 위해 `langchain_core`의 [RemoveMessage](https://api.python.langchain.com/en/latest/messages/langchain_core.messages.modifier.RemoveMessage.html)를 사용합니다.
+이를 위해 `langchain_core`의 [RemoveMessage](https://api.python.langchain.com/en/latest/messages/langchain_core.messages.modifier.RemoveMessage.html){: target="_blank"}를 사용합니다.
 
 ```python
 from langchain_core.messages import RemoveMessage
