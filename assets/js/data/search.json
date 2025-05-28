@@ -1,5 +1,13 @@
 [
   {
+    "title": "LangGraph 사용자 경험(UX)과 휴먼-인-더-루프",
+    "url": "/posts/langgraph-ux-and-human-in-the-loop/",
+    "categories": "AI, LangGraph",
+    "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
+    "date": "2025-05-28 12:15:43 +0900",
+    "content": "그래프 상태와 메모리를 커스터마이징하는 방법과 장시간 대화를 유지할 수 있는 외부 메모리 기반 챗봇을 만들었습니다.  이번 포스팅에서는 스트리밍, 브레이크포인트, 타임트래블 등 다양한 방식으로 직접 상호작용을 할 수 있는 사용자 경험과  휴먼-인-더-루프를 살펴보겠습니다.  먼저, 그래프 실행 과정에서 모델 응답 또는 상태 변화를 실시간으로 출력하는 ..."
+  },
+  {
     "title": "LangGraph 상태와 메모리 (2)",
     "url": "/posts/langgraph-state-and-memory-2nd/",
     "categories": "AI, LangGraph",

@@ -4,7 +4,7 @@
   <id>https://martydev.github.io/</id>
   <title>마티데브스토리</title>
   <subtitle>AI, Cloud 기반 블로그 작성.</subtitle>
-  <updated>2025-05-23T11:39:19+09:00</updated>
+  <updated>2025-05-28T12:36:08+09:00</updated>
   <author>
     <name>마티(Marty)</name>
     <uri>https://martydev.github.io/</uri>
@@ -17,6 +17,32 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>LangGraph 사용자 경험(UX)과 휴먼-인-더-루프</title>
+    <link href="https://martydev.github.io/posts/langgraph-ux-and-human-in-the-loop/" rel="alternate" type="text/html" title="LangGraph 사용자 경험(UX)과 휴먼-인-더-루프" />
+    <published>2025-05-28T12:15:43+09:00</published>
+  
+    <updated>2025-05-28T12:15:43+09:00</updated>
+  
+    <id>https://martydev.github.io/posts/langgraph-ux-and-human-in-the-loop/</id>
+    <content type="text/html" src="https://martydev.github.io/posts/langgraph-ux-and-human-in-the-loop/" />
+    <author>
+      <name>마티(Marty)</name>
+    </author>
+
+  
+    
+    <category term="AI" />
+    
+    <category term="LangGraph" />
+    
+  
+
+  <summary>그래프 상태와 메모리를 커스터마이징하는 방법과 장시간 대화를 유지할 수 있는 외부 메모리 기반 챗봇을 만들었습니다.  이번 포스팅에서는 스트리밍, 브레이크포인트, 타임트래블 등 다양한 방식으로 직접 상호작용을 할 수 있는 사용자 경험과  휴먼-인-더-루프를 살펴보겠습니다.  먼저, 그래프 실행 과정에서 모델 응답 또는 상태 변화를 실시간으로 출력하는 스트리밍을 살펴보겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   # 환경 구성 %%capture --no-stderr %pip install --quiet -U langgraph langchain_openai langgraph_sdk   1.   스트리밍 (Streaming)  LangGraph는 스트리밍 기...</summary>
+
+  </entry>
 
   
   <entry>
@@ -50,7 +76,7 @@
     <link href="https://martydev.github.io/posts/langgraph-state-and-memory-1st/" rel="alternate" type="text/html" title="LangGraph 상태와 메모리 (1)" />
     <published>2025-05-17T11:15:43+09:00</published>
   
-    <updated>2025-05-23T11:37:18+09:00</updated>
+    <updated>2025-05-28T12:35:33+09:00</updated>
   
     <id>https://martydev.github.io/posts/langgraph-state-and-memory-1st/</id>
     <content type="text/html" src="https://martydev.github.io/posts/langgraph-state-and-memory-1st/" />
