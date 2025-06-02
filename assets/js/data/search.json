@@ -1,5 +1,13 @@
 [
   {
+    "title": "LangGraph 어시스턴트 구축하기 (1)",
+    "url": "/posts/langgraph-building-assistant-1st/",
+    "categories": "AI, LangGraph",
+    "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
+    "date": "2025-06-02 11:15:43 +0900",
+    "content": "이전 포스팅에서 다뤘던 메모리 개념과 휴먼-인-더-루프 기반으로 멀티 에이전트(multi-agent) 워크플로를 살펴보겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   1.   병렬 노드 실행 (Parallel node execution)  멀티 에이전트 리서치 어시스턴트를 구축하기 위해 먼저 LangGr..."
+  },
+  {
     "title": "LangGraph 사용자 경험(UX)과 휴먼-인-더-루프",
     "url": "/posts/langgraph-ux-and-human-in-the-loop/",
     "categories": "AI, LangGraph",

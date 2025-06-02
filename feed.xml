@@ -4,7 +4,7 @@
   <id>https://martydev.github.io/</id>
   <title>마티데브스토리</title>
   <subtitle>AI, Cloud 기반 블로그 작성.</subtitle>
-  <updated>2025-05-28T12:36:08+09:00</updated>
+  <updated>2025-06-02T12:01:45+09:00</updated>
   <author>
     <name>마티(Marty)</name>
     <uri>https://martydev.github.io/</uri>
@@ -17,6 +17,32 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>LangGraph 어시스턴트 구축하기 (1)</title>
+    <link href="https://martydev.github.io/posts/langgraph-building-assistant-1st/" rel="alternate" type="text/html" title="LangGraph 어시스턴트 구축하기 (1)" />
+    <published>2025-06-02T11:15:43+09:00</published>
+  
+    <updated>2025-06-02T11:15:43+09:00</updated>
+  
+    <id>https://martydev.github.io/posts/langgraph-building-assistant-1st/</id>
+    <content type="text/html" src="https://martydev.github.io/posts/langgraph-building-assistant-1st/" />
+    <author>
+      <name>마티(Marty)</name>
+    </author>
+
+  
+    
+    <category term="AI" />
+    
+    <category term="LangGraph" />
+    
+  
+
+  <summary>이전 포스팅에서 다뤘던 메모리 개념과 휴먼-인-더-루프 기반으로 멀티 에이전트(multi-agent) 워크플로를 살펴보겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   1.   병렬 노드 실행 (Parallel node execution)  멀티 에이전트 리서치 어시스턴트를 구축하기 위해 먼저 LangGraph의 제어 가능성(controllability)에 대해서 살펴보겠습니다.  1.  1.  팬아웃(Fan out)과 팬인(fan in)  각 단계마다 상태를 덮어쓰는 간단한 선형 그래프를 생성합니다.  # 환경 구성 %%capture --no-stderr %pip install -U  langgraph tavily-python wikipedia langc...</summary>
+
+  </entry>
 
   
   <entry>
@@ -119,32 +145,6 @@
   
 
   <summary>LangGraph 핵심 구성과 워크플로 요소 및 에이전트 요소에 대해서 알아보겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   1.   LangGraph 핵심 구성과 간단한 그래프 생성 그래프를 생성할 때 노드, 상태, 엣지 핵심 요소들을 먼저 정의하고, 이를 체인, 라우터, 에이전트 등 상위 워크플로 요소와 결합하여 애플리케이션을 구축할 수 있습니다.  LangGraph 핵심 구성 요소와 워크플로·에이전트 요소  설명할 그래프는 노드, 엣지, 상태를 기반으로 하기의 그림처럼 구성됩니다.  단순 그래프 생성  먼저, langgraph를 설치합니다.  %%capture --no-stderr %pip install --quiet -U langgraph   1....</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>LangGraph 소개 및 환경 구성</title>
-    <link href="https://martydev.github.io/posts/langgraph-introduce/" rel="alternate" type="text/html" title="LangGraph 소개 및 환경 구성" />
-    <published>2025-05-06T10:15:43+09:00</published>
-  
-    <updated>2025-05-17T12:44:53+09:00</updated>
-  
-    <id>https://martydev.github.io/posts/langgraph-introduce/</id>
-    <content type="text/html" src="https://martydev.github.io/posts/langgraph-introduce/" />
-    <author>
-      <name>마티(Marty)</name>
-    </author>
-
-  
-    
-    <category term="AI" />
-    
-    <category term="LangGraph" />
-    
-  
-
-  <summary>1. LangGraph는  LangGraph는 LangChain의 추론(Reasoning) 흐름을 제어할 수 있는 상태 머신 프레임워크로, 상태(State)를 기반으로 각 노드(Node)가 동작합니다. LangGraph는 다음과 같은 문제를 개선하기 위해서 만들어졌습니다.  1.  1.  LLM만으로는 제한적  언어 모델(Language Model)은 단독으로 사용하기에는 기능이 다소 제한적입니다. 외부 도구(Tool)와 외부 문서와 같은 콘텍스트(Context)에 접근할 수 없고 다단계 워크플로(Workflow)를 수행할 수가 없습니다.  1.  2.  제어 흐름의 신뢰성 문제  LLM 애플리케이션에서 LLM 호출 전후에 체인(Chain)이라고 부르는 고정된 단계의 제어 흐름을 통해 매우 신뢰할 수 ...</summary>
 
   </entry>
 
