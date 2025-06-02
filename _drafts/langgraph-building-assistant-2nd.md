@@ -15,7 +15,10 @@ series_order: 7
 ---
 LangGraph에서 `메모리`, `휴먼-인-더-루프`, `제어 가능성`에 대해서 살펴보았습니다.
 
-이 개념들 바탕으로 챗 모델 기반 경량 멀티 에이전트 시스템 구성하고 [리서치 및 보고서 생성 자동화 워크플로](https://jxnl.co/writing/2024/06/05/predictions-for-the-future-of-rag/#reports-over-rag)를 구축하겠습니다.
+이 개념들을 바탕으로 챗 모델 기반 경량 멀티 에이전트 시스템 구성하고 [리서치 및 보고서 생성 자동화 워크플로](https://jxnl.co/writing/2024/06/05/predictions-for-the-future-of-rag/#reports-over-rag)를 구축하겠습니다.
+
+> 학습할 리소스는 [LangChain Academy Github](https://github.com/langchain-ai/langchain-academy){: target="_blank"}를 사용합니다.
+{: .prompt-info }
 
 ## 4.   리서치 어시스턴트 구축 (실습)
 
@@ -23,7 +26,7 @@ LangGraph에서 `메모리`, `휴먼-인-더-루프`, `제어 가능성`에 대�
 
 - `소스 선택` : 사용자가 리서치에 사용할 입력 소스를 선택
 - `기획` : 사용자는 리서치 주제를 입력하고 시스템은 하위 주제별 AI 분석가 팀을 구성, 하위 주제는 휴먼-인-더-루프로 검토 및 수정
-- `LLM 사용` : 각 분석가는 하위 주제별 AI 분석가와 심층 인터뷰 진행, [STORM 논문](https://github.com/langchain-ai/langgraph/blob/main/examples/storm/storm.ipynb)의 방식과 유사하게 입력 소스 바탕으로 다회차 대화, 인터뷰는 각각 `서브그래프(sub-graph)` 내에서 상태를 가지며 수행
+- `LLM 사용` : 각 분석가는 하위 주제별 AI 분석가와 심층 인터뷰 진행, [STORM 논문](https://github.com/langchain-ai/langgraph/blob/main/examples/storm/storm.ipynb)의 방식과 유사하게 입력 소스 바탕으로 다 회차 대화, 인터뷰는 각각 `서브 그래프(sub-graph)` 내에서 상태를 가지며 수행
 - `리서치 수행` : 전문가들을 병렬로 질문에 대한 정보 수집, 전체 인터뷰는 맵리듀스로 동시 진행
 - `출력 타입` : 인터뷰에서 수집된 정보는 최종 보고서로 통합, 보고서는 맞춤형 프롬프트를 통해 다양한 출력 타입으로 생성
 
@@ -61,7 +64,7 @@ os.environ["LANGSMITH_PROJECT"] = "langchain-academy"
 
 ### 4.  2.  분석가 생성 및 휴먼-인-더-루프
 
-분석가를 생성하고 휴먼-인-더-루프를 통해 검토를 합니다.
+분석가를 생성하고 휴먼-인-더-루프를 통해 검토합니다.
 
 ```python
 from typing import List
@@ -354,9 +357,9 @@ Description: Michael is a technology strategist at a large enterprise, responsib
 
 ### 4.  3.  인터뷰 진행
 
-분석가가 전문가에게 질문을 합니다.
+분석가가 전문가에게 질문합니다.
 코드를 보시면 페르소나를 가진 `분석가`와 달리 `전문가`는 별도 `페르소나 없이 답변`만 합니다.
-나중에 해당 부분은 성능을 염두하여 확장은 가능합니다.
+나중에 해당 부분은 성능을 염두에 두어 확장은 가능합니다.
 
 ```python
 import operator
@@ -729,7 +732,7 @@ In summary, LangGraph offers a scalable and practical solution for startups look
 
 `Send()` API를 사용해 인터뷰를 병렬화하며, 이는 맵 단계에 해당합니다.
 
-리듀스 단계에서는 이 인터뷰들을 결합하여 보고서 본문을 만듭니다.
+리듀스 단계에서는 이 인터뷰들 결합하여 보고서 본문을 만듭니다.
 
 ### 4.  6.  마무리(Finalize)
 
@@ -919,6 +922,9 @@ display(Image(graph.get_graph(xray=1).draw_mermaid_png()))
 _그래프 시각화_
 
 LangGraph에 개방형 질문을 합니다.
+
+> 아래 출력된 [기존 분석가 목록](#4--2--분석가-생성-및-휴먼-인-더-루프)과 다른 이유는 LLM에 의해 새로 생성되었습니다.
+{: .prompt-info } 
 
 ```python
 # 입력값 설정
@@ -1126,14 +1132,14 @@ LangGraph emerges as a transformative framework in the AI landscape, offering un
 
 먼저 `create_analysts` 노드를 통해 `Role`이 다른 여러 분석가를 생성 후, `human_feedback` 노드를 통해 또 다른 관점의 분석가도 추가했습니다.
 
-그리고 `conduct_interview` 서브 그래프를 `Send API` 호출로 답변을 생성하기 위해 `병렬 실행`하고 웹과 위키피디아에서 검색 결과를 수집했습니다.
+그리고 `conduct_interview` 서브 그래프를 `Send API` 호출로 답변을 생성하기 위해 `병렬 실행`하고 웹과 위키피디아에서 검색 결과를 수집했습니다.
 
 또한 각 인터뷰는 `write_node`에서 통합하여 요약하고, `generate_introduction`, `generate_conclusion` 노드에서 서론과 결말을 생성했습니다.
 
 마지막으로 `finalize_report` 노드에서 서론, 본론, 결말의 모든 내용을 합쳐 단일 보고서로 `리듀스` 작업을 수행했습니다.
 
 
-다음 포스팅에서는 대화 정보를 장기 저장하고 재사용 가능한 `장기 기억 메모리`에 대해서 알아보겠습니다.
+다음 포스팅에서는 대화 정보를 장기 저장하고 재사용할 수 있는 `장기 기억 메모리`에 대해서 알아보겠습니다.
 
 
 ## References

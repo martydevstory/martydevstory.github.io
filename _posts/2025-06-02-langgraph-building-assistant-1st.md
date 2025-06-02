@@ -1,6 +1,6 @@
 ---
 title: LangGraph 어시스턴트 구축하기 (1)
-date: 2025-05-20 12:15:43 +/-TTTT
+date: 2025-06-02 11:15:43 +/-TTTT
 categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
 math: true
@@ -13,7 +13,7 @@ is_series: true
 series_title: "LangGraph"
 series_order: 6
 ---
-이전 포스팅에서 다뤘던 `메모리` 개념과, `휴먼-인-더-루프` 기반으로 `멀티 에이전트(multi-agent)` 워크플로를 살펴보겠습니다.
+이전 포스팅에서 다뤘던 `메모리` 개념과 `휴먼-인-더-루프` 기반으로 `멀티 에이전트(multi-agent)` 워크플로를 살펴보겠습니다.
 
 
 > 학습할 리소스는 [LangChain Academy Github](https://github.com/langchain-ai/langchain-academy){: target="_blank"}를 사용합니다.
@@ -148,7 +148,7 @@ An error occurred: At key 'state': Can receive only one value per step. Use an A
 For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/INVALID_CONCURRENT_GRAPH_UPDATE
 ```
 
-팬아웃을 사용할 때 여러 단계에서 동일한 채널/키에 값을 쓸 경우, 반드시 `리듀서`를 사용해야 합니다.
+팬아웃을 사용할 때 여러 단계에서 동일한 채널/키에 값을 쓸 경우, 반드시 `리듀서(reducer)`를 사용해야 합니다.
 
 이전 포스팅에서 설명했듯이 `operator.add`는 파이썬 내장 모듈인 operator의 함수입니다.
 
@@ -202,7 +202,7 @@ Adding I'm D to ["I'm A", "I'm B", "I'm C"]
 
 `b`와 `c`에서 병렬로 업데이트된 내용이 state에 `추가`가 되었습니다.
 
-> 여기서는 `b`와 `c`가 팬인 할때 순서가 보장되지 않습니다.
+> 여기서는 `b`와 `c`가 팬인 할 때 순서가 보장되지 않습니다.
 {: .prompt-info }
 
 ### 1.  2.  노드가 모두 끝날 때까지 대기
@@ -232,7 +232,7 @@ display(Image(graph.get_graph().draw_mermaid_png()))
 
 ```
 
-![b경로 단계가 많은 경우 흐름](assets/drafts/2025-05-21-langgraph-building-assistant-1st/fanout-fanin_01.png)
+![b경로 단계가 많은 경우 흐름](assets/posts/2025-06-02-langgraph-building-assistant-1st/fanout-fanin_01.png)
 _b경로 단계가 많은 경우 흐름_
 
 이 경우, `b`, `b2`, 그리고 `c`가 모두 `동일한 단계`에 속하게 됩니다.
@@ -325,11 +325,11 @@ Adding I'm D to ["I'm A", "I'm B", "I'm B2", "I'm C"]
 
 `sorting_reducer` 예제는 모든 값을 전역적으로 정렬하고 다음 기능도 가능합니다.
 
-1. 병렬 단계에서 각 결과를 합치지 않고 state의 `별도 필드에 저장`이 가능합니다.
-2. 병렬 단계 이후에 `sink 노드`를 사용해 `별도 필드에 저장된 이 결과들을 합치고 정렬`이 가능합니다.
+1. 병렬 단계에서 각 결과를 합치지 않고 state의 `별도 필드에 저장`할 수 있습니다.
+2. 병렬 단계 이후에 `sink 노드`를 사용해 `별도 필드에 저장된 이 결과들을 합치고 정렬`할 수 있습니다.
 3. 병합 후 `임시 필드는 정리`, 즉 state에서 지웁니다.
 
-더 자세한 내용은 [공식 문서](https://langchain-ai.github.io/langgraph/how-tos/branching/#stable-sorting){: target="_blank"}를 참고하실수 있습니다.
+더 자세한 내용은 [공식 문서](https://langchain-ai.github.io/langgraph/how-tos/branching/#stable-sorting){: target="_blank"}를 참고하실 수 있습니다.
 
 ### 1.  4.  LLM과 함께 사용하기 (실습)
 
@@ -451,15 +451,15 @@ result['answer'].content
 "Nvidia's Q2 2024 earnings were exceptionally strong. The company reported fiscal second-quarter revenue of $30.04 billion, more than doubling from the same period a year ago, with net income at $16.6 billion, also more than doubling from the year-ago period. The data center segment was a significant driver of this growth, with revenue reaching a record high of $26.3 billion, up 16% from Q1 and 154% from last year’s Q2. Other segments like Gaming and AI PC, Professional Visualization, and Automotive and Robotics also saw year-over-year growth. Despite the increase in operating expenses, Nvidia's financial performance exceeded analysts' estimates, driven by surging demand for artificial intelligence."
 ```
 
-위 그래프 흐름은 `병렬로 두 개의 노드가 실행`이 됩니다.
+위 그래프 흐름은 `병렬로 두 개의 노드가 실행`됩니다.
 
-`search_web 노드`에서 `Tavily API`를 이용해 입력된 질문에 대한 웹 문서를 3개까지 검색 후 포맷팅해서 문자열로 만든 후 결과를 state의 `context` 필드에 리스트 타입으로 저장합니다.
+`search_web 노드`에서 `Tavily API`를 이용해 입력된 질문에 대한 웹 문서를 3개까지 검색 후 포매팅해서 문자열로 만든 후 결과를 state의 `context` 필드에 리스트 타입으로 저장합니다.
 
-`search_wikipedia 노드`에서 위키피디아에서 입력된 질문에 대한 문서를 2개까지 검색 후 포맷팅해서 문자열로 만든 후 결과를 마찬가지로 state의 `context` 필드에 리스트 타입으로 저장합니다.
+`search_wikipedia 노드`에서 위키피디아에서 입력된 질문에 대한 문서를 2개까지 검색 후 포매팅해서 문자열로 만든 후 결과를 마찬가지로 state의 `context` 필드에 리스트 타입으로 저장합니다.
 
 이후 `generate_answer 노드`에서 입력된 질문과 state의 `context`를 읽고 템플릿을 통해 프롬프트를 생성합니다.
 
-마지막으로 이 프롬프트를 LLM에게 전달해 답변을 생성하고 state의 `answer`필드에 저장합니다.
+마지막으로, 이 프롬프트를 LLM에 전달해 답변을 생성하고 state의 `answer` 필드에 저장합니다.
 
 ## 2.   서브 그래프 (Sub-graphs)
 
@@ -469,15 +469,15 @@ result['answer'].content
 
 각기 독립적인 상태를 소유한 다수의 에이전트 팀에서는 `멀티 에이전트 시스템`이 특히 유용합니다.
 
-예를 들어 로그시스템이 있고 이 로그시스템은 두 개의 하위 작업인 `로그 요약`과 `장애 원인 찾기`를 별도의 서브 그래프에서 수행을 합니다.
+예를 들어 로그 시스템이 있고 이 로그 시스템은 두 개의 하위 작업인 `로그 요약`과 `장애 원인 찾기`를 별도의 서브 그래프에서 수행을 합니다.
 
-중요한 점이 그래프 간의 통식 방식입니다. 중복되는 키(예: docs)를 통해 통신이 이루어집니다.
+중요한 점이 그래프 간의 통신 방식입니다. 중복되는 키(예: docs)를 통해 통신이 이루어집니다.
 
 아래 그림처럼 서브 그래프는 부모 그래프의 `docs`를 받아올 수 있고
 
 부모 그래프는 서브 그래프의 `summary_report`와 `failur_report`를 가져올 수 있습니다.
 
-![부모와 서브 그래프 흐름](assets/drafts/2025-05-21-langgraph-building-assistant-1st/subgraph_01.png)
+![부모와 서브 그래프 흐름](assets/posts/2025-06-02-langgraph-building-assistant-1st/subgraph_01.png)
 _부모와 서브 그래프 흐름_
 
 ### 2.  2.  입력 (Input)
@@ -623,19 +623,19 @@ class EntryGraphState(TypedDict):
     processed_logs:  Annotated[List[int], add] # 두 개의 서브 그래프에서 모두 생성
 ```
 
-그런데 `cleaned_logs`는 수정되지 않고 각 서브그래프의 공통 `입력값`으로만 사용되는데 왜 리듀서가 필요할까요?
+그런데 `cleaned_logs`는 수정되지 않고 각 서브 그래프의 공통 `입력값`으로만 사용되는데 왜 리듀서가 필요할까요?
 
 ```python
 cleaned_logs: Annotated[List[Log], add] # 이 값은 두 서브그래프에서 모두 사용
 ```
 
-이유는 병렬로 수행되는 서브 그래프는 `cleand_logs` 키를 포함해서 입력 상태의 `모든 키`를, 출력할 때에도 `기본적으로 포함`시킵니다.
+이유는 병렬로 수행되는 서브 그래프는 `cleand_logs` 키를 포함해서 입력 상태의 `모든 키`를, 출력할 때도 `기본적으로 포함`합니다.
 
 이때 서로 다른 서브 그래프들이 `동일한 키를 반환`하면 충돌이 발생할 수 있기 때문에, 값을 병합하기 위한 `operator.add`와 같은 리듀서가 필요합니다.
 
 다른 방법은 각 서브 그래프마다 `출력 상태 스키마`를 따로 정의하고, 각 서브 그래프가 `서로 다른 키만을 출력`하도록 하면 됩니다. 그래서 모든 서브 그래프가 `cleaned_logs`를 출력할 필요는 없습니다.
 
-> 코드에서는 `cleand_logs`를 출력하진 않지만 개념 이해를 위해 `리듀서`를 적용
+> 코드에서는 `cleand_logs`를 출력하진 않지만, 개념 이해를 위해 `리듀서`를 적용
 {: .prompt-info }
 
 ```python
@@ -748,9 +748,9 @@ os.environ["LANGSMITH_PROJECT"] = "langchain-academy"
 
 `맵리듀스` 작업 개념은 다음과 같습니다.
 
-`맵`을 통해 하나의 작업을 더 작은 하위 작업들로 나누고 `병렬로 처리`합니다.
+`맵`을 통해 하나의 작업을 더 작은 하위 작업으로 나누고 `병렬로 처리`합니다.
 
-`리듀스`로 병렬로 처리된 하위 작업들을 하나로 모아 `집계`합니다.
+`리듀스`로 병렬로 처리된 하위 작업을 하나로 모아 `집계`합니다.
 
 그리고 `베스트 조크 선택`을 위한 그래프 흐름은 다음과 같습니다.
 
@@ -762,7 +762,7 @@ os.environ["LANGSMITH_PROJECT"] = "langchain-academy"
 
 조크의 생성과 선택 작업은 gpt-4o LLM을 사용합니다.
 
-![맵리듀스 그래프 흐름](assets/drafts/2025-05-21-langgraph-building-assistant-1st/map-reduce_01.png)
+![맵리듀스 그래프 흐름](assets/posts/2025-06-02-langgraph-building-assistant-1st/map-reduce_01.png)
 _맵리듀스 그래프 흐름_
 
 ```python
@@ -813,7 +813,7 @@ def generate_topics(state: OverallState):
     return {"subjects": response.subjects}
 ```
 
-여기에서 핵심인 [`Send`](https://langchain-ai.github.io/langgraph/concepts/low_level/#send){: target="_blank"}를 통해 각 주제마다 조크를 하나씩 생성하고 갯수에 상관없이 `자동으로 병렬 실행`합니다.
+여기에서 핵심인 [`Send`](https://langchain-ai.github.io/langgraph/concepts/low_level/#send){: target="_blank"}를 통해 주제마다 조크를 하나씩 생성하고 개수에 상관없이 `자동으로 병렬 실행`합니다.
 
 Send에서 `generate_joke`는 그래프 내의 노드이고 `{"subject": s}`는 해당 노드에 전달할 `상태`입니다.
 
@@ -908,7 +908,7 @@ for s in app.stream({"topic": "animals"}):
 
 ## 정리
 
-이번 포스팅에서는 LangGraph의 제어가능성(Controllability)을 중심으로 주요 개념을 실습과 함께 살펴보았습니다.
+이번 포스팅에서는 LangGraph의 제어 가능성(Controllability)을 중심으로 주요 개념을 실습과 함께 살펴보았습니다.
 
 먼저, `병렬 노드 실행(Fan-out)`을 통해 여러 작업을 동시에 수행하고, 완료 후 `팬인(Fan-in)` 구조로 결과를 집계하는 방식을 확인했습니다. 이 과정에서 `sorting_reducer`를 사용하면 병렬 결과의 순서를 보장할 수 있습니다.
 
@@ -918,7 +918,7 @@ for s in app.stream({"topic": "animals"}):
 
 마지막으로, `맵리듀스` 패턴을 활용해 '조크 생성' 예제를 구현했습니다. 이 예제에서는 주제를 여러 개로 분할(map)하고 병렬 처리한 후, 가장 우수한 결과를 선택하는 방식으로 집계(reduce)하였습니다.
 
-다음 포스팅에서는 다뤘던 내용기반으로 `멀티 에이전트 리서치 어시스턴트`를 구축할 것입니다.
+다음 포스팅에서는 다뤘던 내용 기반으로 `멀티 에이전트 리서치 어시스턴트`를 구축할 것입니다.
 
 ## References
 
