@@ -1,6 +1,6 @@
 ---
 title: LangGraph 어시스턴트 구축하기 (2)
-date: 2025-05-25 12:15:43 +/-TTTT
+date: 2025-06-07 12:15:43 +/-TTTT
 categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
 math: true
@@ -15,7 +15,7 @@ series_order: 7
 ---
 LangGraph에서 `메모리`, `휴먼-인-더-루프`, `제어 가능성`에 대해서 살펴보았습니다.
 
-이 개념들을 바탕으로 챗 모델 기반 경량 멀티 에이전트 시스템 구성하고 [리서치 및 보고서 생성 자동화 워크플로](https://jxnl.co/writing/2024/06/05/predictions-for-the-future-of-rag/#reports-over-rag)를 구축하겠습니다.
+이 개념들을 바탕으로 챗 모델 기반 경량 멀티 에이전트 시스템 구성하고 [리서치 및 보고서 생성 자동화 워크플로](https://jxnl.co/writing/2024/06/05/predictions-for-the-future-of-rag/#reports-over-rag){: target="_blank"}를 구축하겠습니다.
 
 > 학습할 리소스는 [LangChain Academy Github](https://github.com/langchain-ai/langchain-academy){: target="_blank"}를 사용합니다.
 {: .prompt-info }
@@ -26,11 +26,11 @@ LangGraph에서 `메모리`, `휴먼-인-더-루프`, `제어 가능성`에 대�
 
 - `소스 선택` : 사용자가 리서치에 사용할 입력 소스를 선택
 - `기획` : 사용자는 리서치 주제를 입력하고 시스템은 하위 주제별 AI 분석가 팀을 구성, 하위 주제는 휴먼-인-더-루프로 검토 및 수정
-- `LLM 사용` : 각 분석가는 하위 주제별 AI 분석가와 심층 인터뷰 진행, [STORM 논문](https://github.com/langchain-ai/langgraph/blob/main/examples/storm/storm.ipynb)의 방식과 유사하게 입력 소스 바탕으로 다 회차 대화, 인터뷰는 각각 `서브 그래프(sub-graph)` 내에서 상태를 가지며 수행
+- `LLM 사용` : 각 분석가는 하위 주제별 AI 분석가와 심층 인터뷰 진행, [STORM 논문](https://github.com/langchain-ai/langgraph/blob/main/examples/storm/storm.ipynb){: target="_blank"}의 방식과 유사하게 입력 소스 바탕으로 다 회차 대화, 인터뷰는 각각 `서브 그래프(sub-graph)` 내에서 상태를 가지며 수행
 - `리서치 수행` : 전문가들을 병렬로 질문에 대한 정보 수집, 전체 인터뷰는 맵리듀스로 동시 진행
 - `출력 타입` : 인터뷰에서 수집된 정보는 최종 보고서로 통합, 보고서는 맞춤형 프롬프트를 통해 다양한 출력 타입으로 생성
 
-![리서치 어시스턴트 흐름](assets/drafts/2025-05-21-langgraph-building-assistant-2nd/research_assistant_01.png)
+![리서치 어시스턴트 흐름](assets/posts/2025-06-07-langgraph-building-assistant-2nd/research_assistant_01.png)
 _리서치 어시스턴트 흐름_
 
 ### 4.  1.  설정
@@ -415,12 +415,12 @@ def generate_question(state: InterviewState):
 
 전문가는 다음과 같은 다양한 출처에서 정보를 병렬로 수집하여 답변합니다.
 
-- 특정 웹사이트 (예: [WebBaseLoader](https://python.langchain.com/v0.2/docs/integrations/document_loaders/web_base/))
-- 색인된 문서 (예: [RAG](https://python.langchain.com/v0.2/docs/tutorials/rag/))
+- 특정 웹사이트 (예: [WebBaseLoader](https://python.langchain.com/v0.2/docs/integrations/document_loaders/web_base/){: target="_blank"})
+- 색인된 문서 (예: [RAG](https://python.langchain.com/v0.2/docs/tutorials/rag/){: target="_blank"})
 - 웹 검색
 - 위키백과 검색
 
-[Tavily](https://tavily.com/)와 같은 웹 검색 도구를 사용하여 웹과 위키백과를 `검색하는 노드`를 생성합니다.
+[Tavily](https://tavily.com/){: target="_blank"}와 같은 웹 검색 도구를 사용하여 웹과 위키백과를 `검색하는 노드`를 생성합니다.
 
 그리고 분석가의 `질문에 답변`하는 노드도 생성합니다.
 
@@ -918,7 +918,7 @@ graph = builder.compile(interrupt_before=['human_feedback'], checkpointer=memory
 display(Image(graph.get_graph(xray=1).draw_mermaid_png()))
 ```
 
-![그래프 시각화](assets/drafts/2025-05-21-langgraph-building-assistant-2nd/research_assistant_02.png)
+![그래프 시각화](assets/posts/2025-06-07-langgraph-building-assistant-2nd/research_assistant_02.png)
 _그래프 시각화_
 
 LangGraph에 개방형 질문을 합니다.
