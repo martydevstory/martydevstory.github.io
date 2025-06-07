@@ -4,7 +4,7 @@
   <id>https://martydev.github.io/</id>
   <title>마티데브스토리</title>
   <subtitle>AI, Cloud 기반 블로그 작성.</subtitle>
-  <updated>2025-06-02T12:01:45+09:00</updated>
+  <updated>2025-06-07T13:38:27+09:00</updated>
   <author>
     <name>마티(Marty)</name>
     <uri>https://martydev.github.io/</uri>
@@ -17,6 +17,32 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>LangGraph 어시스턴트 구축하기 (2)</title>
+    <link href="https://martydev.github.io/posts/langgraph-building-assistant-2nd/" rel="alternate" type="text/html" title="LangGraph 어시스턴트 구축하기 (2)" />
+    <published>2025-06-07T12:15:43+09:00</published>
+  
+    <updated>2025-06-07T12:15:43+09:00</updated>
+  
+    <id>https://martydev.github.io/posts/langgraph-building-assistant-2nd/</id>
+    <content type="text/html" src="https://martydev.github.io/posts/langgraph-building-assistant-2nd/" />
+    <author>
+      <name>마티(Marty)</name>
+    </author>
+
+  
+    
+    <category term="AI" />
+    
+    <category term="LangGraph" />
+    
+  
+
+  <summary>LangGraph에서 메모리, 휴먼-인-더-루프, 제어 가능성에 대해서 살펴보았습니다.  이 개념들을 바탕으로 챗 모델 기반 경량 멀티 에이전트 시스템 구성하고 리서치 및 보고서 생성 자동화 워크플로를 구축하겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   4.   리서치 어시스턴트 구축 (실습)  리서치 어시스턴트 구축을 위해 아래 단계로 구성을 진행합니다.     소스 선택 : 사용자가 리서치에 사용할 입력 소스를 선택   기획 : 사용자는 리서치 주제를 입력하고 시스템은 하위 주제별 AI 분석가 팀을 구성, 하위 주제는 휴먼-인-더-루프로 검토 및 수정   LLM 사용 : 각 분석가는 하위 주제별 AI 분석가와 심층 인터뷰 진행, STORM 논문의 방...</summary>
+
+  </entry>
 
   
   <entry>
@@ -119,32 +145,6 @@
   
 
   <summary>LangGraph의 핵심 구성요소인 상태, 노드, 엣지를 이해했고, 워크플로와 에이전트 요소인 체인, 라우터, 에이전트, 에이전트 메모리에 대해서도 살펴보았습니다.  이번 포스팅에서 노드간의 통신을 위한 상태 스키마와 상태 업데이트의 수행 방식을 지정하는 리듀서에 대해서 살펴보겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   1. 상태 스키마 (State Schema)  1.  1.    스키마 (Schema)  LangGraph는 주요 그래프 클래스인 StateGraph를 정의할 때 상태 스키마를 사용합니다.  상태 스키마는 그래프에서 사용할 데이터 구조(Structure)와 타입을 나타냅니다.  모든 노드는 해당 상태 스키마와 통신을 합니다.  Lang...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>LangGraph 핵심 구성과 그래프 생성</title>
-    <link href="https://martydev.github.io/posts/langgraph-component/" rel="alternate" type="text/html" title="LangGraph 핵심 구성과 그래프 생성" />
-    <published>2025-05-12T11:15:43+09:00</published>
-  
-    <updated>2025-05-23T11:37:18+09:00</updated>
-  
-    <id>https://martydev.github.io/posts/langgraph-component/</id>
-    <content type="text/html" src="https://martydev.github.io/posts/langgraph-component/" />
-    <author>
-      <name>마티(Marty)</name>
-    </author>
-
-  
-    
-    <category term="AI" />
-    
-    <category term="LangGraph" />
-    
-  
-
-  <summary>LangGraph 핵심 구성과 워크플로 요소 및 에이전트 요소에 대해서 알아보겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   1.   LangGraph 핵심 구성과 간단한 그래프 생성 그래프를 생성할 때 노드, 상태, 엣지 핵심 요소들을 먼저 정의하고, 이를 체인, 라우터, 에이전트 등 상위 워크플로 요소와 결합하여 애플리케이션을 구축할 수 있습니다.  LangGraph 핵심 구성 요소와 워크플로·에이전트 요소  설명할 그래프는 노드, 엣지, 상태를 기반으로 하기의 그림처럼 구성됩니다.  단순 그래프 생성  먼저, langgraph를 설치합니다.  %%capture --no-stderr %pip install --quiet -U langgraph   1....</summary>
 
   </entry>
 

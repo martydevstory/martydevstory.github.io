@@ -1,5 +1,13 @@
 [
   {
+    "title": "LangGraph 어시스턴트 구축하기 (2)",
+    "url": "/posts/langgraph-building-assistant-2nd/",
+    "categories": "AI, LangGraph",
+    "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
+    "date": "2025-06-07 12:15:43 +0900",
+    "content": "LangGraph에서 메모리, 휴먼-인-더-루프, 제어 가능성에 대해서 살펴보았습니다.  이 개념들을 바탕으로 챗 모델 기반 경량 멀티 에이전트 시스템 구성하고 리서치 및 보고서 생성 자동화 워크플로를 구축하겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   4.   리서치 어시스턴트 구축 (실습)  리서치..."
+  },
+  {
     "title": "LangGraph 어시스턴트 구축하기 (1)",
     "url": "/posts/langgraph-building-assistant-1st/",
     "categories": "AI, LangGraph",
