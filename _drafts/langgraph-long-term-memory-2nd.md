@@ -13,38 +13,20 @@ is_series: true
 series_title: "LangGraph"
 series_order: 9
 ---
+챗봇의 기능을 확장해서 문자열 저장에서 메모리가 구조를 가질 수 있게 `시맨틱 메모리`를 단일 [사용자 프로필](https://langchain-ai.github.io/langgraph/concepts/memory/#profile){: target="_blank"}에 저장하도록 만들었습니다.
+
+또한 해당 스키마를 새로운 정보로 업데이트하기 위해 [Trustcall](https://github.com/hinthornw/trustcall){: target="_blank"} 라이브러리를 살펴보았습니다.
+
+이번 포스팅에서는 `컬렉션(Collection)`에 대해서 더 자세히 알아보고 `시맨틱 메모리 기반 에이전트`을 구축해 보겠습니다.
 
 > 학습할 리소스는 [LangChain Academy Github](https://github.com/langchain-ai/langchain-academy){: target="_blank"}를 사용합니다.
-> {: .prompt-info }
-
-## 4.   메모리 에이전트 (Memory Agent) 구축 (w/ Semantic Memory)
-
-`시맨틱 메모리`는 `프로필(Profile)`과 `컬렉션(Collection)`의 두 가지 방식으로 관리됩니다.
-
-AI 에이전트에서는 사용자에 대한 정보, 예를 들어 이름, 직책, 선호도 등을 기억하는 데 사용됩니다.
-
-이는 에이전트가 사용자와의 상호작용을 통해 얻은 정보를 기반으로 응답을 개선하고 개인화하는 데 도움을 줍니다.
-
-> 여기서 `시맨틱` 개념은 `시맨틱 검색(Semantic Search)`과 다릅니다. 시맨틱 검색은 `의미(meaning, 일반적으로 임베딩)`를 사용하여 유사한 콘텐츠를 찾는 기법입니다.
-{: .prompt-warning }
-
-> [컬렉션](https://langchain-ai.github.io/langgraph/concepts/memory/#collection){: target="_blank"}은 하나의 JSON 문서(프로필) 대신에 여러 개의 ‘작은’ 메모리 항목을 개별 문서로 저장해 나중에 하나의 컬렉션으로 관리하는 방식입니다. `컬렉션`은 추후 더 자세히 살펴보겠습니다.
 {: .prompt-info }
 
-장기 메모리 기반 에이전트를 구축하고 `프로필`과 `컬렉션`의 두 스키마를 업데이트하는 방법으로 `Trustcall`을 살펴보겠습니다.
+## 3.   컬렉션 스키마 기반 챗봇 구축
 
-먼저 환경 구성을 합니다.
+때때로 메모리를 `단일 프로필` 대신 [컬렉션](https://docs.google.com/presentation/d/181mvjlgsnxudQI6S3ritg9sooNyu4AcLLFH1UK0kIuk/edit#slide=id.g30eb3c8cf10_0_200){: target="_blank"}에 저장하는 것이 더 적합할 때가 있습니다.
 
-우리의 에이전트인 task_mAIstro는 ToDo 목록을 관리하는 데 도움을 줄 것입니다!
-
-기존에 만든 챗봇은 항상 대화를 반영하고 메모리를 저장했지만,
-task_mAIstro는 언제 메모리(ToDo 항목)를 저장할지 스스로 결정합니다.
-
-기존 챗봇은 한 종류의 메모리(프로필 또는 컬렉션)만 저장했지만,
-task_mAIstro는 사용자 프로필 또는 ToDo 항목 컬렉션 중 어느 쪽에 저장할지도 결정할 수 있습니다.
-
-시맨틱 메모리 외에도, task_mAIstro는 절차적 메모리도 관리합니다.
-이를 통해 사용자는 ToDo 항목 생성에 대한 선호도를 업데이트할 수 있습니다.
+챗봇이 [컬렉션에 메모리를 저장](https://langchain-ai.github.io/langgraph/concepts/memory/#collection){: target="_blank"}하도록 업데이트하고 [Trustcall](https://github.com/hinthornw/trustcall){: target="_blank"}을 사용하여 `컬렉션`을 업데이트하는 방법도 살펴보겠습니다.
 
 ```python
 # 환경 구성
@@ -56,13 +38,551 @@ task_mAIstro는 사용자 프로필 또는 ToDo 항목 컬렉션 중 어느 쪽�
 import os, getpass
 
 def _set_env(var: str):
-    # Check if the variable is set in the OS environment
+    # OS 환경 변수에 해당 값이 설정되어 있는지 확인
     env_value = os.environ.get(var)
     if not env_value:
-        # If not set, prompt the user for input
+        # 값이 없으면 사용자에게 입력을 요청
         env_value = getpass.getpass(f"{var}: ")
   
-    # Set the environment variable for the current process
+    # 현재 프로세스의 환경 변수로 설정
+    os.environ[var] = env_value
+
+_set_env("LANGSMITH_API_KEY")
+os.environ["LANGSMITH_TRACING"] = "true"
+os.environ["LANGSMITH_PROJECT"] = "langchain-academy"
+```
+
+### 3.  1.  컬렉션 스키마 정의하기
+
+사용자 정보를 고정된 `프로필` 구조로 저장하는 대신, 사용자 상호작용에 대한 메모리로 저장하기 위한 유연한 `컬렉션` 스키마를 생성합니다.
+
+저장된 각 메모리는 기억하고자 하는 주요 정보를 담고 있는 단일 `content` 필드를 가지며, 개별 항목으로 저장됩니다.
+
+이 방식을 통해 사용자에 대한 학습, 확장 및 변화가 가능한 개방형 메모리 컬렉션을 구축할 수 있습니다.
+
+컬렉션 스키마는 [Pydantic](https://docs.pydantic.dev/latest/){: target="_blank"} 객체로 정의할 수 있습니다.
+
+```python
+from pydantic import BaseModel, Field
+
+class Memory(BaseModel):
+    content: str = Field(description="The main content of the memory. For example: User expressed interest in learning about French.")
+
+class MemoryCollection(BaseModel):
+    memories: list[Memory] = Field(description="A list of memories about the user.")
+```
+
+```python
+_set_env("OPENAI_API_KEY")
+```
+
+엄격히 구조화된 출력을 위해 LangChain의 [채팅 모델](https://python.langchain.com/docs/concepts/chat_models/){: target="_blank"} 인터페이스에서 제공하는 [`with_structured_output`](https://python.langchain.com/docs/concepts/structured_outputs/#recommended-usage){: target="_blank"} 메서드를 제공합니다.
+
+```python
+from langchain_core.messages import HumanMessage
+from langchain_openai import ChatOpenAI
+
+# 모델 초기화
+model = ChatOpenAI(model="gpt-4o", temperature=0)
+
+# 모델에 스키마를 바인딩
+model_with_structure = model.with_structured_output(MemoryCollection)
+
+# 모델을 호출하여 스키마에 맞는 구조화된 출력 생성
+memory_collection = model_with_structure.invoke([HumanMessage("My name is Lance. I like to bike.")])
+memory_collection.memories
+```
+
+```
+# 출력
+
+[Memory(content="User's name is Lance."),
+ Memory(content='User likes to bike.')]
+```
+
+`Pydantic` 모델 인스턴스를 파이썬 딕셔너리로 직렬화하기 위해 `model_dump()`를 사용합니다.
+
+```python
+memory_collection.memories[0].model_dump()
+```
+
+```
+# 출력
+{'content': "User's name is Lance."}
+```
+
+그리고, 각 메모리의 딕셔너리를 스토어에 저장합니다.
+
+```python
+import uuid
+from langgraph.store.memory import InMemoryStore
+
+# 인-메모리 스토어 초기화
+in_memory_store = InMemoryStore()
+
+# 메모리를 저장할 네임스페이스 지정
+user_id = "1"
+namespace_for_memory = (user_id, "memories")
+
+# 키,값으로 네임스페이스에 저장
+key = str(uuid.uuid4())
+value = memory_collection.memories[0].model_dump()
+in_memory_store.put(namespace_for_memory, key, value)
+
+key = str(uuid.uuid4())
+value = memory_collection.memories[1].model_dump()
+in_memory_store.put(namespace_for_memory, key, value)
+```
+
+스토어에서 메모리를 검색합니다.
+
+```python
+# 검색 
+for m in in_memory_store.search(namespace_for_memory):
+    print(m.dict())
+```
+
+```
+# 출력
+
+{'namespace': ['1', 'memories'], 'key': '4e750e5f-225b-4cb2-bd13-e1eed6d4a9e3', 'value': {'content': "User's name is Lance."}, 'created_at': '2025-04-23T07:31:37.850796+00:00', 'updated_at': '2025-04-23T07:31:37.850800+00:00', 'score': None}
+{'namespace': ['1', 'memories'], 'key': '447a6175-6c30-443e-9b51-9b12c3768351', 'value': {'content': 'User likes to bike.'}, 'created_at': '2025-04-23T07:31:37.850910+00:00', 'updated_at': '2025-04-23T07:31:37.850911+00:00', 'score': None}
+```
+
+### 3.  2.  컬렉션 스키마 업데이트
+
+이전 포스팅에서 `프로필` 스키마를 업데이트할 때 매번 비효율적으로 다시 생성하는 것에 대한 문제 해결의 대안으로 [Trustcall](https://github.com/hinthornw/trustcall){: target="_blank"}을 설명했습니다.
+
+컬렉션도 마찬가지로 새로운 메모리 추가와 [기존 메모리 업데이트](https://github.com/hinthornw/trustcall?tab=readme-ov-file#simultanous-updates--insertions){: target="_blank"}를 위해 `Trustcall`을 사용하는 방법을 알아보겠습니다.
+
+우선 `Trustcall`을 사용하여 새로운 extractor를 정의하고 이전과 마찬가지로 각 메모리의 스키마인 `Memory`를 제공합니다.
+
+또한, 새 메모리를 컬렉션에 삽입할 수 있도록 `enable_inserts=True` 옵션을 추가할 수 있습니다.
+
+```python
+from trustcall import create_extractor
+
+# extractor 생성
+trustcall_extractor = create_extractor(
+    model,
+    tools=[Memory],
+    tool_choice="Memory",
+    enable_inserts=True, # 새 메모리 삽입
+)
+```
+
+```python
+from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
+
+# 지침
+instruction = """Extract memories from the following conversation:"""
+
+# 대화
+conversation = [HumanMessage(content="Hi, I'm Lance."), 
+                AIMessage(content="Nice to meet you, Lance."), 
+                HumanMessage(content="This morning I had a nice bike ride in San Francisco.")]
+
+# extractor 실행
+result = trustcall_extractor.invoke({"messages": [SystemMessage(content=instruction)] + conversation})
+```
+
+```python
+# 메시지에는 도구 호출이 포함
+for m in result["messages"]:
+    m.pretty_print()
+```
+
+```
+# 출력
+
+================================== Ai Message ==================================
+Tool Calls:
+  Memory (call_GEEkOwDzbrzXvpScifyfYRdy)
+ Call ID: call_GEEkOwDzbrzXvpScifyfYRdy
+  Args:
+    content: Lance had a nice bike ride in San Francisco this morning.
+```
+
+```python
+# 응답은 스키마에 부합하는 memory가 포함
+for m in result["responses"]: 
+    print(m)
+```
+
+```
+# 출력
+
+content='Lance had a nice bike ride in San Francisco this morning.'
+```
+
+```python
+# 메타데이터에는 도구 호출이 포함
+for m in result["response_metadata"]: 
+    print(m)
+```
+
+```
+# 출력
+
+{'id': 'call_GEEkOwDzbrzXvpScifyfYRdy'}
+```
+
+```python
+# 대화 업데이트
+updated_conversation = [AIMessage(content="That's great, did you do after?"), 
+                        HumanMessage(content="I went to Tartine and ate a croissant."),                
+                        AIMessage(content="What else is on your mind?"),
+                        HumanMessage(content="I was thinking about my Japan, and going back this winter!"),]
+
+# 지침 업데이트
+system_msg = """Update existing memories and create new ones based on the following conversation:"""
+
+# 기존 메모리를 저장하고 ID, 키(도구 이름), 값을 지정
+tool_name = "Memory"
+existing_memories = [(str(i), tool_name, memory.model_dump()) for i, memory in enumerate(result["responses"])] if result["responses"] else None
+existing_memories
+```
+
+```
+# 출력
+
+[('0',
+  'Memory',
+  {'content': 'Lance had a nice bike ride in San Francisco this morning.'})]
+```
+
+```python
+# 업데이트된 대화와 기존 메모리를 사용하여 extractor를 호출
+result = trustcall_extractor.invoke({"messages": updated_conversation, 
+                                     "existing": existing_memories})
+```
+
+```python
+# 모델의 메시지에서 두 개의 도구 호출이 생성됨을 보여줌
+for m in result["messages"]:
+    m.pretty_print()
+```
+
+```
+# 출력
+
+================================== Ai Message ==================================
+Tool Calls:
+  Memory (call_zDisQAPTNekKnxgGxv3HTYja)
+ Call ID: call_zDisQAPTNekKnxgGxv3HTYja
+  Args:
+    content: Lance had a nice bike ride in San Francisco this morning. Then, he went to Tartine and ate a croissant.
+  Memory (call_H4RcbWByX6VVDIRUODHTJelH)
+ Call ID: call_H4RcbWByX6VVDIRUODHTJelH
+  Args:
+    content: I was thinking about my trip to Japan, and going back this winter!
+```
+
+```python
+# 응답은 스키마에 부합하는 memory가 포함
+for m in result["responses"]: 
+    print(m)
+```
+
+```
+# 출력
+
+content='Lance had a nice bike ride in San Francisco this morning. Then, he went to Tartine and ate a croissant.'
+content='I was thinking about my trip to Japan, and going back this winter!'
+```
+
+이것은 우리가 `json_doc_id`를 지정함으로써 컬렉션의 첫 번째 메모리를 업데이트했음을 나타냅니다.
+
+```python
+# 메타데이터에는 도구 호출이 포함
+for m in result["response_metadata"]: 
+    print(m)
+```
+
+```
+# 출력
+
+{'id': 'call_zDisQAPTNekKnxgGxv3HTYja', 'json_doc_id': '0'}
+{'id': 'call_H4RcbWByX6VVDIRUODHTJelH'}
+```
+
+### 3.  3.  컬렉션 스키마 업데이트 기반 챗봇
+
+이제 Trustcall을 챗봇에 통합하여 메모리 컬렉션을 생성하고 업데이트합니다.
+
+```python
+from IPython.display import Image, display
+
+import uuid
+
+from langgraph.graph import StateGraph, MessagesState, START, END
+from langgraph.store.memory import InMemoryStore
+from langchain_core.messages import merge_message_runs
+from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_core.runnables.config import RunnableConfig
+from langgraph.checkpoint.memory import MemorySaver
+from langgraph.store.base import BaseStore
+
+# 모델 초기화
+model = ChatOpenAI(model="gpt-4o", temperature=0)
+
+# Memory 스키마
+class Memory(BaseModel):
+    content: str = Field(description="The main content of the memory. For example: User expressed interest in learning about French.")
+
+# Trustcall extractor 생성
+trustcall_extractor = create_extractor(
+    model,
+    tools=[Memory],
+    tool_choice="Memory",
+    # This allows the extractor to insert new memories
+    enable_inserts=True,
+)
+
+# 챗봇 지침
+MODEL_SYSTEM_MESSAGE = """You are a helpful chatbot. You are designed to be a companion to a user. 
+
+You have a long term memory which keeps track of information you learn about the user over time.
+
+Current Memory (may include updated memories from this conversation): 
+
+{memory}"""
+
+# Trustcall 지침
+TRUSTCALL_INSTRUCTION = """Reflect on following interaction. 
+
+Use the provided tools to retain any necessary memories about the user. 
+
+Use parallel tool calling to handle updates and insertions simultaneously:"""
+
+def call_model(state: MessagesState, config: RunnableConfig, store: BaseStore):
+
+    """Store에서 Memory를 불러와 챗봇 응답에서 개인화에 활용"""
+  
+    # 사용자 ID를 config에서 가져옴
+    user_id = config["configurable"]["user_id"]
+
+    # 프로필 메모리를 Store에서 검색
+    namespace = ("memories", user_id)
+    memories = store.search(namespace)
+
+    # 시스템 프롬프트에 메모리를 포맷
+    info = "\n".join(f"- {mem.value['content']}" for mem in memories)
+    system_msg = MODEL_SYSTEM_MESSAGE.format(memory=info)
+
+    # 메모리와 대화 기록을 사용하여 응답
+    response = model.invoke([SystemMessage(content=system_msg)]+state["messages"])
+
+    return {"messages": response}
+
+def write_memory(state: MessagesState, config: RunnableConfig, store: BaseStore):
+
+    """대화 내역을 반영하여 메모리를 스토어에 저장"""
+  
+    # config에서 사용자 ID를 가져옴
+    user_id = config["configurable"]["user_id"]
+
+    # 메모리의 네임스페이스 정의
+    namespace = ("memories", user_id)
+
+    # 최신 메모리 가져오기
+    existing_items = store.search(namespace)
+
+    # Trustcall extractor에 사용할 기존 기억 포맷팅
+    tool_name = "Memory"
+    existing_memories = ([(existing_item.key, tool_name, existing_item.value)
+                          for existing_item in existing_items]
+                          if existing_items
+                          else None
+                        )
+
+    # 대화 기록과 지침을 병합
+    updated_messages=list(merge_message_runs(messages=[SystemMessage(content=TRUSTCALL_INSTRUCTION)] + state["messages"]))
+
+    # extractor 실행
+    result = trustcall_extractor.invoke({"messages": updated_messages, 
+                                        "existing": existing_memories})
+
+    # Trustcall 메모리를 스토어에 저장
+    for r, rmeta in zip(result["responses"], result["response_metadata"]):
+        store.put(namespace,
+                  rmeta.get("json_doc_id", str(uuid.uuid4())),
+                  r.model_dump(mode="json"),
+            )
+
+# 그래프 정의
+builder = StateGraph(MessagesState)
+builder.add_node("call_model", call_model)
+builder.add_node("write_memory", write_memory)
+builder.add_edge(START, "call_model")
+builder.add_edge("call_model", "write_memory")
+builder.add_edge("write_memory", END)
+
+# 장기(스레드 간) 메모리용 스토어
+across_thread_memory = InMemoryStore()
+
+# 단기(스레드 내) 메모리용 체크포인터
+within_thread_memory = MemorySaver()
+
+# 체크포인터와 스토어로 그래프 컴파일
+graph = builder.compile(checkpointer=within_thread_memory, store=across_thread_memory)
+
+# 그래프 이미지
+display(Image(graph.get_graph(xray=1).draw_mermaid_png()))
+```
+
+```python
+# 단기(스레드 내) 메모리에는 thread ID를 지정
+# 장기(스레드 간) 메모리에는 user ID를 지정
+config = {"configurable": {"thread_id": "1", "user_id": "1"}}
+
+# 사용자 입력 메시지
+input_messages = [HumanMessage(content="Hi, my name is Lance")]
+
+# 그래프 실행
+for chunk in graph.stream({"messages": input_messages}, config, stream_mode="values"):
+    chunk["messages"][-1].pretty_print()
+```
+
+```
+# 출력
+
+================================ Human Message =================================
+
+Hi, my name is Lance
+================================== Ai Message ==================================
+
+Hi Lance! It's great to meet you. How can I assist you today?
+```
+
+```python
+# 사용자 입력 메시지
+input_messages = [HumanMessage(content="I like to bike around San Francisco")]
+
+# 그래프 실행
+for chunk in graph.stream({"messages": input_messages}, config, stream_mode="values"):
+    chunk["messages"][-1].pretty_print()
+```
+
+```
+# 출력
+
+================================ Human Message =================================
+
+I like to bike around San Francisco
+================================== Ai Message ==================================
+
+That sounds like a lot of fun! San Francisco has some beautiful routes for biking. Do you have a favorite trail or area you like to explore?
+```
+
+```python
+# 메모리 저장을 위한 네임스페이스 지정
+user_id = "1"
+namespace = ("memories", user_id)
+memories = across_thread_memory.search(namespace)
+for m in memories:
+    print(m.dict())
+```
+
+```
+# 출력
+
+{'namespace': ['memories', '1'], 'key': 'fc48c426-85c5-469e-a000-5392d14fbbae', 'value': {'content': 'User likes to bike around San Francisco.'}, 'created_at': '2025-04-23T07:37:02.779130+00:00', 'updated_at': '2025-04-23T07:37:02.779131+00:00', 'score': None}
+{'namespace': ['memories', '1'], 'key': '1ee46a63-ce12-421e-8fb7-3773d1f57132', 'value': {'content': 'User likes to bike around San Francisco.'}, 'created_at': '2025-04-23T07:37:02.779105+00:00', 'updated_at': '2025-04-23T07:37:02.779106+00:00', 'score': None}
+```
+
+```python
+# 사용자 입력 메시지
+input_messages = [HumanMessage(content="I also enjoy going to bakeries")]
+
+# 그래프 실행
+for chunk in graph.stream({"messages": input_messages}, config, stream_mode="values"):
+    chunk["messages"][-1].pretty_print()
+```
+
+```
+# 출력
+
+================================ Human Message =================================
+
+I also enjoy going to bakeries
+================================== Ai Message ==================================
+
+Biking and bakeries make a great combination! Do you have a favorite bakery in San Francisco, or are you on the lookout for new ones to try?
+```
+
+이전 프로필에서와 마찬가지로 새로운 스레드에서도 컨텍스트를 유지할 수 있습니다.
+
+```python
+# 단기(스레드 내) 메모리에는 thread ID를 지정
+# 장기(스레드 간) 메모리에는 user ID를 지정
+config = {"configurable": {"thread_id": "2", "user_id": "1"}}
+
+# 사용자 입력 메시지
+input_messages = [HumanMessage(content="What bakeries do you recommend for me?")]
+
+# 그래프 실행
+for chunk in graph.stream({"messages": input_messages}, config, stream_mode="values"):
+    chunk["messages"][-1].pretty_print()
+```
+
+```
+# 출력
+
+================================ Human Message =================================
+
+What bakeries do you recommend for me?
+================================== Ai Message ==================================
+
+Since you enjoy biking around San Francisco, you might like to visit some local bakeries that are perfect for a quick stop during your rides. Here are a few recommendations:
+
+1. **Tartine Bakery** - Located in the Mission District, it's famous for its bread and pastries. It's a great spot to grab a morning bun or a croissant.
+
+2. **Arizmendi Bakery** - This worker-owned cooperative in the Inner Sunset offers delicious scones, muffins, and pizza. It's a cozy spot to take a break.
+
+3. **B. Patisserie** - Situated in Lower Pacific Heights, this bakery is known for its kouign-amann and other French pastries. It's a bit of a treat after a long ride.
+
+4. **Mr. Holmes Bakehouse** - In the Tenderloin, this bakery is famous for its cruffins and other inventive pastries. It's a fun place to try something new.
+
+5. **Noe Valley Bakery** - A neighborhood favorite in Noe Valley, offering a variety of classic and seasonal pastries.
+
+These spots are not only delicious but also scattered around the city, giving you a chance to explore different neighborhoods on your bike. Enjoy your rides and treats!
+```
+
+## 4.   시맨틱 메모리 기반 에이전트 구축하기
+
+사용자 `프로필`과 `컬렉션` 기반으로 에이전트를 구축할 것입니다.
+
+다시 살펴보면 `시맨틱 메모리`는 `프로필(Profile)`과 `컬렉션(Collection)`의 두 가지 방식으로 관리됩니다.
+
+그리고 AI 에이전트에서는 사용자에 대한 정보(예: 이름, 직책, 선호도 등)를 기억하는 데 사용됩니다.
+
+이는 에이전트가 사용자와의 상호작용을 통해 얻은 정보를 기반으로 응답을 개선하고 개인화하는 데 도움을 줍니다.
+
+> 여기서 `시맨틱` 개념은 `시맨틱 검색(Semantic Search)`과 다릅니다. 시맨틱 검색은 `의미(meaning, 일반적으로 임베딩)`를 사용하여 유사한 콘텐츠를 찾는 기법입니다.
+{: .prompt-warning }
+
+장기 메모리 기반 에이전트를 구축하고 `프로필`과 `컬렉션`의 두 스키마를 업데이트하는 방법으로 `Trustcall`을 살펴보겠습니다.
+
+먼저 환경 구성을 합니다.
+
+```python
+# 환경 구성
+%%capture --no-stderr
+%pip install -U langchain_openai langgraph trustcall langchain_core
+```
+
+```python
+import os, getpass
+
+def _set_env(var: str):
+    # OS 환경 변수에 해당 값이 설정되어 있는지 확인
+    env_value = os.environ.get(var)
+    if not env_value:
+        # 값이 없으면 사용자에게 입력을 요청
+        env_value = getpass.getpass(f"{var}: ")
+  
+    # 현재 프로세스의 환경 변수로 설정
     os.environ[var] = env_value
 
 _set_env("LANGSMITH_API_KEY")
@@ -76,13 +596,13 @@ _set_env("OPENAI_API_KEY")
 
 ### 4.  1.  Trustcall 업데이트에 대한 가시성 (Visability)
 
-`Trustcall`은 LangGraph 기반 오픈소스 라이브러리로, LLM이 복잡한 구조의 JSON 출력을 생성, 수정할 때 발생하는 오류를 줄입니다.
+이전 내용에서 `Trustcall`은 LangGraph 기반 오픈소스 라이브러리로, LLM이 복잡한 구조의 JSON 출력을 생성, 수정할 때 발생하는 오류를 줄입니다.
 
 기존 방식은 전체 JSON을 한 번에 생성하려다 보니 오류가 발생하기 쉬웠습니다.
 
 `Trustcall`은 이러한 문제를 해결하기 위해 LLM에 `JSON Patch` 형식의 수정 지시를 생성하도록 요청합니다.
 
-`JSON Patch`는 부분적으로 수정이 가능하며, 반복적인 오류 수정이 용이합니다.
+`JSON Patch`는 부분적으로 수정할 수 있으며, 반복적인 오류 수정이 쉽습니다.
 
 다음 항목에서 `Trustcall` 추적 예를 확인할 수 있습니다.
 
@@ -437,22 +957,16 @@ _set_env("OPENAI_API_KEY")
 그래프의 전반적인 흐름은 다음과 같습니다.
 
 1. 스키마는 `Profile`과 `ToDo`는 `Pydantic` 기반 구조화, `instruction`은 딕셔너리의 `memory` 필드로 저장됩니다.
-
 2. 주요 노드는 `task_mAIstro`, `update_profile`, `update_todos`, `update_instructions`로 구성됩니다.
-
 3. `task_mAIstro`는 사용자의 입력 메시지를 바탕으로, LLM의 Reasoning을 통해 어떤 타입의 메모리를 업데이트할지 결정하고, `UpdateMemory` 도구 호출을 생성합니다.
-
 4. 조건부 엣지 `route_message`가 도구 호출의 타입(user/todo/instruction)에 따라 해당 노드로 분기합니다.
-
 5. 각 update_xxx 노드에서 `Trustcall Extractor`가 LLM 결과를 구조화하여 장기 메모리 컬렉션에 저장하거나 기존 데이터를 패치합니다.
-
 6. ToDo의 `time_to_complete` 등 세부 필드는 에이전트가 추론해 `자동으로 작성`합니다.
-
 7. 저장된 메모리는 user_id에 기반해 장기적으로 관리되며, 여러 세션과 스레드에서 재활용될 수 있습니다.
 
 아래 그림은 이 전체 프로세스를 간단하게 보여줍니다.
 
-![ReACT ToDo 에이전트 프로세스](assets/drafts/2025-05-28-langgraph-long-term-memory-1st/long-term-momory_03.png)
+![ReACT ToDo 에이전트 프로세스](assets/drafts/2025-05-28-langgraph-long-term-memory-2nd/long-term-momory_2nd_01.png)
 _ReACT ToDo 에이전트 프로세스_
 
 ```python
@@ -681,7 +1195,7 @@ def update_todos(state: MessagesState, config: RunnableConfig, store: BaseStore)
     TRUSTCALL_INSTRUCTION_FORMATTED=TRUSTCALL_INSTRUCTION.format(time=datetime.now().isoformat())
     updated_messages=list(merge_message_runs(messages=[SystemMessage(content=TRUSTCALL_INSTRUCTION_FORMATTED)] + state["messages"][:-1]))
 
-    # Trustcall Trustcall에서 발생한 도구 호출 내역 확인을 위한 Spy 초기화
+    # Trustcall에서 발생한 도구 호출 내역 확인을 위한 Spy 초기화
     spy = Spy()
   
     # ToDo 리스트 업데이트용 Trustcall extractor 생성 
@@ -776,7 +1290,7 @@ graph = builder.compile(checkpointer=within_thread_memory, store=across_thread_m
 display(Image(graph.get_graph(xray=1).draw_mermaid_png()))
 ```
 
-![ToDo 에이전트 그래프](assets/drafts/2025-05-28-langgraph-long-term-memory-1st/long-term-momory_04.png)
+![ToDo 에이전트 그래프](assets/drafts/2025-05-28-langgraph-long-term-memory-2nd/long-term-momory_2nd_02.png)
 _ToDo 에이전트 그래프_
 
 ```python
@@ -970,7 +1484,7 @@ I've updated the deadline for booking swim lessons to the end of November. If th
 
 ## 정리
 
-`LangGraph Memory Store`는 `key-value` 기반의 `Store`로, 스레드 간 정보 공유를 위해 `사용자 ID`를 `네임스페이스`로 활용합니다. 
+`LangGraph Memory Store`는 `key-value` 기반의 `Store`로, 스레드 간 정보 공유를 위해 `사용자 ID`를 `네임스페이스`로 활용합니다.
 
 이 구조 덕분에 동일 사용자의 정보를 여러 채팅 세션에서 일관되게 관리할 수 있습니다.
 
@@ -980,7 +1494,7 @@ I've updated the deadline for booking swim lessons to the end of November. If th
 
 마지막으로, 프로필, ToDo, 지침의 업데이트를 ReACT 기반 에이전트로 구현하며, `Trustcall + JSON Patch`의 실제 적용을 살펴보았습니다.
 
-다음 포스팅에서 `장기 메모리 프로필`과 `컬렉션`에 대해서 자세히 살펴보겠습니다.
+다음 포스팅에서 `배포`에 대해서 자세히 살펴보겠습니다.
 
 ## References
 

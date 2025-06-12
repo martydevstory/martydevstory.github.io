@@ -1,6 +1,6 @@
 ---
 title: LangGraph 장기 메모리 (1)
-date: 2025-05-29 12:15:43 +/-TTTT
+date: 2025-06-12 11:15:43 +/-TTTT
 categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
 math: true
@@ -20,11 +20,11 @@ series_order: 8
 > 학습할 리소스는 [LangChain Academy Github](https://github.com/langchain-ai/langchain-academy){: target="_blank"}를 사용합니다.
 {: .prompt-info }
 
-## 1.   메모리 기반 챗봇 (Chatbot w/ memory) 구축
+## 1.   메모리 기반 챗봇 구축
 
 먼저 스레드 내의 `단기 메모리(short-term)`와 스레드 간의 `장기 메모리(long-term)`를 모두 사용하는 챗봇을 구축하고
 
-`장기 메모리`를 저장하고 검색하는 방법인 [LangGraph Memory Store](https://langchain-ai.github.io/langgraph/reference/store/#langgraph.store.base.BaseStore){: target="_blank"}을 살펴보겠습니다.
+`장기 메모리`를 저장하고 검색하는 방법인 [LangGraph Memory Store](https://langchain-ai.github.io/langgraph/reference/store/#langgraph.store.base.BaseStore){: target="_blank"}를 살펴보겠습니다.
 
 `장기 메모리`를 통해 사용자의 정보를 기억하는 개인화된 챗봇을 구축하고 사용자와 대화하는 도중 `핫 패스(Hot Path)` 경로에서 메모리를 저장하도록 구현합니다.
 
@@ -32,7 +32,7 @@ series_order: 8
 
 `백그라운드 방식`은 메모리 업데이트를 별도의 비동기 작업으로 분리하여 주요 응답 경로의 지연을 제거하고, 애플리케이션 로직과 메모리 관리 로직을 깔끔하게 분리할 수 있습니다.
 
-![에이전트가 메모리를 기록하는 방식](assets/drafts/2025-05-28-langgraph-long-term-memory-1st/long-term-momory_02.png)
+![에이전트가 메모리를 기록하는 방식](assets/posts/2025-06-12-langgraph-long-term-memory-1st/long-term-momory_1st_02.png)
 _에이전트가 메모리를 기록하는 방식_
 
 `핫 패스`는 사용자가 채팅을 진행하는 흐름 속에서 `실시간으로 메모리를 기록`할 수 있습니다.
@@ -77,7 +77,7 @@ LangGraph 장기 메모리 객체를 [Store](https://langchain-ai.github.io/lang
 
 [put](https://langchain-ai.github.io/langgraph/reference/store/#langgraph.store.base.BaseStore.put){: target="_blank"} 메서드를 사용하여 `namespace`와 `key`를 통해 객체를 스토어에 저장합니다.
 
-![LangGraph Store 구조](assets/drafts/2025-05-28-langgraph-long-term-memory-1st/long-term-momory_01.png)
+![LangGraph Store 구조](assets/posts/2025-06-12-langgraph-long-term-memory-1st/long-term-momory_1st_01.png)
 _LangGraph Store 구조_
 
 ```python
@@ -300,7 +300,7 @@ graph = builder.compile(checkpointer=within_thread_memory, store=across_thread_m
 display(Image(graph.get_graph(xray=1).draw_mermaid_png()))
 ```
 
-챗봇과 상호작용할 때 다음 두 가지를 제공합니다.
+챗봇과 상호작용을 할 때 다음 두 가지를 제공합니다.
 
 1. `단기(스레드 내) 메모리` : 채팅 기록을 영속화하기 위한 스레드 ID
 2. `장기(스레드 간) 메모리` : 사용자의 장기 메모리에 네임스페이스를 지정하기 위한 사용자 ID
@@ -598,7 +598,7 @@ profile.value
 
 특정 스키마로 메모리를 생성하는 챗봇을 구축합니다.
 
-여기서 챗봇은 [사용자와의 대화로부터 메모리를 생성](https://langchain-ai.github.io/langgraph/concepts/memory/#profile){: target="_blank"}기 위해 [구조화된 출력(Structured outputs)](https://python.langchain.com/docs/concepts/structured_outputs/#recommended-usage){: target="_blank"}의 개념을 사용합니다.
+여기서 챗봇은 [사용자와의 대화로부터 메모리를 생성](https://langchain-ai.github.io/langgraph/concepts/memory/#profile){: target="_blank"}키 위해 [구조화된 출력(Structured outputs)](https://python.langchain.com/docs/concepts/structured_outputs/#recommended-usage){: target="_blank"}의 개념을 사용합니다.
 
 LangChain의 [채팅 모델](https://python.langchain.com/docs/concepts/chat_models/){: target="_blank"} 인터페이스에는 관련 스키마에 맞춰서 출력을 자동으로 파싱해 주는 [`with_structured_output`](https://python.langchain.com/docs/concepts/structured_outputs/#recommended-usage){: target="_blank"} 메서드가 있어서 구조화된 출력을 쉽게 적용할 수 있습니다.
 
@@ -626,6 +626,7 @@ model_with_structure = model.with_structured_output(UserProfile)
 structured_output = model_with_structure.invoke([HumanMessage("My name is Lance, I like to bike.")])
 structured_output
 ```
+
 ```
 # 출력
 
@@ -769,6 +770,7 @@ namespace = ("memory", user_id)
 existing_memory = across_thread_memory.get(namespace, "user_memory")
 existing_memory.value
 ```
+
 ```
 # 출력
 
@@ -777,11 +779,11 @@ existing_memory.value
 
 ### 2.  4.  복잡한 스키마의 구조화된 출력의 실패
 
-아래 대화 예는 일반적이지는 않지만 팀 워크 훈련에서 팀원들 간 `신뢰 구축 훈련(Trust fall)`을 위해서 운영자(Operator)에게 훈련 교관(Customer)이 구체적인 신뢰 구축 훈련 방법(사람이 떨어질 때 다이아몬드 모양을 만들어 사람을 받는 훈련)과 그것을 팀에 전달할 통신 방법(전보, 모스 부호, 기호 신호)에 대한 대화입니다.
+아래 대화 예는 일반적이지는 않지만 팀 워크 훈련에서 팀원 간 `신뢰 구축 훈련(Trust fall)`을 위해서 운영자(Operator)에게 훈련 교관(Customer)이 구체적인 신뢰 구축 훈련 방법(사람이 떨어질 때 다이아몬드 모양을 만들어 사람을 받는 훈련)과 그것을 팀에 전달할 통신 방법(전보, 모스 부호, 기호 신호)에 대한 대화입니다.
 
 스키마는 사용자의 Communication 및 Trust fall에 대한 선호도를 나타내는 Pydantic 모델로 구성합니다.
 
-![신뢰 구축 훈련](assets/drafts/2025-05-28-langgraph-long-term-memory-1st/long-term-momory_05.png)
+![신뢰 구축 훈련](assets/posts/2025-06-12-langgraph-long-term-memory-1st/long-term-momory_1st_03.png)
 
 ```python
 from typing import List, Optional
@@ -866,9 +868,9 @@ pertinent_user_preferences.communication_preferences.semaphore
 
 복잡한 스키마의 사례처럼 단순한 스키마도 업데이트 과정에서 에러가 발생할 수 있는데 복잡한 스키마는 추출 자체가 어려울 수 있습니다.
 
-또한 앞선 챗봇 경우 프로필 스키마를 매번 비효율적으로 다시 생성을 했습니다.
+또한 앞선 챗봇 경우 프로필 스키마를 매번 비효율적으로 다시 생성했습니다.
 
-특히 스키마에 재생성해야 할 정보가 많을 때는 모델의 토큰 낭비가 발생을 하고, 심각하게는 프로필을 처음부터 다시 생성하면서 정보가 소실될 수 있습니다.
+특히 스키마에 재생성해야 할 정보가 많을 때는 모델의 토큰 낭비가 발생하고, 심각하게는 프로필을 처음부터 다시 생성하면서 정보가 소실될 수 있습니다.
 
 이런 문제들을 해결하기 위한 것이 `Trustcall`입니다.
 
@@ -923,7 +925,7 @@ result = trustcall_extractor.invoke({"messages": [SystemMessage(content=system_m
 
 * `messages` : tool call을 포함한 AIMessages의 리스트
 * `responses` : 스키마와 일치하는 파싱된 tool call 결과들
-* `response_metadata` : 기존 tool call을 업데이트하는 경우에 적용되며, 각각의 응답이 어떤 기존 객체와 대응되는지 알려줌
+* `response_metadata` : 기존 tool call을 업데이트하는 경우에 적용되며, 각각의 응답이 어떤 기존 객체와 대응하는지 알려줌
 
 ```python
 for m in result["messages"]: 
@@ -979,9 +981,9 @@ result["response_metadata"]
 
 여기서 핵심은, `Trustcall`은 기존 스키마와 새로 들어온 메시지를 비교해 변경된 부분만 `JSON Patch` 형식으로 출력하도록 모델에 요청합니다.
 
-이 `JSON Pacth` 방식은 전체 스키마를 단순히 덮어쓰는 것보다 오류가 적고, 변경된 부분만 생성하므로 훨씬 효율적입니다.
+이 `JSON Patch` 방식은 전체 스키마를 단순히 덮어쓰는 것보다 오류가 적고, 변경된 부분만 생성하므로 훨씬 효율적입니다.
 
-이를 위해 먼저 기존 스키마를 JSON 타입(dict)으로 직렬화를 해야합니다.
+이를 위해 먼저 기존 스키마를 JSON 타입(dict)으로 직렬화해야 합니다.
 
 Pydantic 모델 인스턴스를 딕셔너리로 직렬화하려면 `model_dump()`를 통해 쉽게 dict로 바꿀 수 있습니다.
 
@@ -1081,7 +1083,7 @@ TelegramAndTrustFallPreferences(pertinent_user_preferences=UserPreferences(commu
 
 에러가 발생하지 않고 출력이 되었습니다.
 
-`with_structured_output`과 `Trustcall`은 둘다 Pydantic 모델을 사용하는데 semaphore 예외 처리가 안되어서 `with_structured_output`은 에러가 발생했습니다. 이유는 `with_structured_output`은 검증이 엄격합니다.
+`with_structured_output`과 `Trustcall`은 둘 다 Pydantic 모델을 사용하는데 semaphore 예외 처리가 안 되어서 `with_structured_output`은 에러가 발생했습니다. 이유는 `with_structured_output`은 검증이 엄격합니다.
 
 `Trustcall`은 전체를 재검증하지 않고 부분만 검증하고, optional이면 None을 생성합니다.
 
@@ -1294,9 +1296,10 @@ I also enjoy going to bakeries
 
 San Francisco has some amazing bakeries to explore. Do you have a favorite bakery, or are you looking for recommendations to try on your next ride?
 ```
+
 새로운 스레드에서 대화를 추가하겠습니다.
 
-`thread_id`를 바꾸면 단기 메모리는 새로 시작되지만 `user_id`를 유지하면 `프로필 기반 장기 메모리`를 사용하여 `컨텍스트`를 유지할 수 있습니다.
+`thread_id`를 바꾸면 단기 메모리는 새로 시작되지만, `user_id`를 유지하면 `프로필 기반 장기 메모리`를 사용하여 `컨텍스트`를 유지할 수 있습니다.
 
 ```python
 # 단기(스레드 내) 메모리를 위한 스레드 ID를 제공
@@ -1336,15 +1339,15 @@ These spots should satisfy your bakery cravings while you're biking around the c
 
 ## 정리
 
-`LangGraph Memory Store`는 `key-value` 기반의 `Store`로, 스레드 간 정보 공유를 위해 `사용자 ID`를 `네임스페이스`로 활용합니다.
+`LangGraph Memory Store`는 `key-value` 기반의 `Store`로, `스레드 간` 정보 공유를 위해 `사용자 ID`를 `네임스페이스`로 활용합니다.
 
 이 구조 덕분에 동일 사용자의 정보를 여러 채팅 세션에서 일관되게 관리할 수 있습니다.
 
-시맨틱 메모리는 `프로필`과 `컬렉션`으로 관리되며, 이들 스키마의 생성 및 업데이트는 `Trustcall`을 통해 자동화됩니다.
+`시맨틱 메모리`는 `프로필`과 `컬렉션`으로 관리되며, 이들 스키마의 생성 및 업데이트는 `Trustcall`을 통해 자동화됩니다.
 
-특히 `Trustcall`은 LLM이 구조화 데이터를 생성할 때 발생할 수 있는 JSON 오류나 전체 덮어쓰기 문제를 `JSON Patch` 방식으로 해결하여, 기존 데이터의 필요한 부분만 유연하게 업데이트할 수 있습니다.
+특히 `Trustcall`은 LLM이 구조화된 데이터를 생성할 때 발생할 수 있는 JSON 오류나 전체 덮어쓰기 문제를 `JSON Patch` 방식으로 해결하여, 기존 데이터의 필요한 부분만 유연하게 업데이트할 수 있습니다.
 
-다음 포스팅에는 컬렉션을 살펴보고 ReACT 기반 ToDo 리스트 에이전트로 구축해보겠습니다.
+다음 포스팅에는 컬렉션을 살펴보고 ReACT 기반 ToDo 리스트 에이전트를 구축해 보겠습니다.
 
 ## References
 
