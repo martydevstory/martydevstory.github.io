@@ -5,7 +5,7 @@
     "categories": "AI, LangGraph",
     "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
     "date": "2025-06-12 11:15:43 +0900",
-    "content": "메모리는 개인의 정체성 또는 사람들이 현재와 미래를 이해하기 위해 정보를 저장하고, 검색하며, 활용할 수 있게 해 주는 인지 기능으로 AI 애플리케이션에서 사용할 수 있는 여러 가지 장기 메모리 유형(Long-term Memory)이 있습니다.  장기 메모리와 일반적인 사실과 개념을 저장하는 인간의 장기 기억 중 하나인 시맨틱 메모리(Semantic ..."
+    "content": "장기 메모리와 일반적인 사실과 개념을 저장하는 인간의 장기 기억 중 하나인 시맨틱 메모리를 살펴보겠습니다."
   },
   {
     "title": "LangGraph 어시스턴트 구축하기 (2)",
@@ -13,7 +13,7 @@
     "categories": "AI, LangGraph",
     "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
     "date": "2025-06-07 12:15:43 +0900",
-    "content": "LangGraph에서 메모리, 휴먼-인-더-루프, 제어 가능성에 대해서 살펴보았습니다.  이 개념들을 바탕으로 챗 모델 기반 경량 멀티 에이전트 시스템 구성하고 리서치 및 보고서 생성 자동화 워크플로를 구축하겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   4.   리서치 어시스턴트 구축 (실습)  리서치..."
+    "content": "LangGraph 채팅 모델 기반 경량 멀티 에이전트 시스템을 구성하고 리서치 및 보고서 생성 자동화 워크플로를 구축하겠습니다."
   },
   {
     "title": "LangGraph 어시스턴트 구축하기 (1)",
@@ -21,7 +21,7 @@
     "categories": "AI, LangGraph",
     "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
     "date": "2025-06-02 11:15:43 +0900",
-    "content": "이전 포스팅에서 다뤘던 메모리 개념과 휴먼-인-더-루프 기반으로 멀티 에이전트(multi-agent) 워크플로를 살펴보겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   1.   병렬 노드 실행 (Parallel node execution)  멀티 에이전트 리서치 어시스턴트를 구축하기 위해 먼저 LangGr..."
+    "content": "LangGraph 메모리 개념과 휴먼-인-더-루프 기반 멀티 에이전트 워크플로를 살펴보겠습니다."
   },
   {
     "title": "LangGraph 사용자 경험(UX)과 휴먼-인-더-루프",
@@ -29,7 +29,7 @@
     "categories": "AI, LangGraph",
     "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
     "date": "2025-05-28 12:15:43 +0900",
-    "content": "그래프 상태와 메모리를 커스터마이징하는 방법과 장시간 대화를 유지할 수 있는 외부 메모리 기반 챗봇을 만들었습니다.  이번 포스팅에서는 스트리밍, 브레이크포인트, 타임트래블 등 다양한 방식으로 직접 상호작용을 할 수 있는 사용자 경험과  휴먼-인-더-루프를 살펴보겠습니다.  먼저, 그래프 실행 과정에서 모델 응답 또는 상태 변화를 실시간으로 출력하는 ..."
+    "content": "LangGraph에서 스트리밍, 브레이크포인트, 타임트래블 등 다양한 방식으로 직접 상호작용을 할 수 있는 사용자 경험과 휴먼-인-더-루프를 살펴보겠습니다."
   },
   {
     "title": "LangGraph 상태와 메모리 (2)",
@@ -37,7 +37,7 @@
     "categories": "AI, LangGraph",
     "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
     "date": "2025-05-23 11:15:43 +0900",
-    "content": "노드 간 통신을 위한 상태 스키마와 리듀서에 대해서 이해했습니다. 다음은 입·출력에서 상태 스키마를 위한 다중 스키마, 그리고 요약 기능과 외부메모리 기능을 가진 챗봇에 대해서 알아보겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   3.   다중 스키마 (Multiple Schemas)  일반적으로 모든 ..."
+    "content": "LangGraph에서 입력과 출력에서 상태 스키마를 위한 다중 스키마, 그리고 요약 기능과 외부메모리 기능을 가진 챗봇에 대해서 알아보겠습니다."
   },
   {
     "title": "LangGraph 상태와 메모리 (1)",
@@ -45,7 +45,7 @@
     "categories": "AI, LangGraph",
     "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
     "date": "2025-05-17 11:15:43 +0900",
-    "content": "LangGraph의 핵심 구성요소인 상태, 노드, 엣지를 이해했고, 워크플로와 에이전트 요소인 체인, 라우터, 에이전트, 에이전트 메모리에 대해서도 살펴보았습니다.  이번 포스팅에서 노드간의 통신을 위한 상태 스키마와 상태 업데이트의 수행 방식을 지정하는 리듀서에 대해서 살펴보겠습니다.     학습할 리소스는 LangChain Academy Githu..."
+    "content": "LangGraph에서 노드간의 통신을 위한 상태 스키마와 상태 업데이트의 수행 방식을 지정하는 리듀서에 대해서 살펴보겠습니다."
   },
   {
     "title": "LangGraph 핵심 구성과 그래프 생성",
@@ -53,7 +53,7 @@
     "categories": "AI, LangGraph",
     "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
     "date": "2025-05-12 11:15:43 +0900",
-    "content": "LangGraph 핵심 구성과 워크플로 요소 및 에이전트 요소에 대해서 알아보겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   1.   LangGraph 핵심 구성과 간단한 그래프 생성 그래프를 생성할 때 노드, 상태, 엣지 핵심 요소들을 먼저 정의하고, 이를 체인, 라우터, 에이전트 등 상위 워크플로 요..."
+    "content": "LangGraph 핵심 구성과 워크플로 요소 및 에이전트 요소에 대해서 알아보겠습니다."
   },
   {
     "title": "LangGraph 소개 및 환경 구성",
@@ -61,7 +61,7 @@
     "categories": "AI, LangGraph",
     "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
     "date": "2025-05-06 10:15:43 +0900",
-    "content": "1. LangGraph는  LangGraph는 LangChain의 추론(Reasoning) 흐름을 제어할 수 있는 상태 머신 프레임워크로, 상태(State)를 기반으로 각 노드(Node)가 동작합니다. LangGraph는 다음과 같은 문제를 개선하기 위해서 만들어졌습니다.  1.  1.  LLM만으로는 제한적  언어 모델(Language Model)은..."
+    "content": "LangGraph는 LangChain의 추론(Reasoning) 흐름을 제어할 수 있는 상태 머신 프레임워크로, 상태(State)를 기반으로 각 노드(Node)가 동작합니다. 환경 구성을 해보겠습니다."
   }
   
 ]

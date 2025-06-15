@@ -1,17 +1,17 @@
 
 
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <id>https://martydev.github.io/</id>
+  <id>https://martydevstory.github.io/</id>
   <title>마티데브스토리</title>
   <subtitle>AI, Cloud 기반 블로그 작성.</subtitle>
-  <updated>2025-06-12T11:41:54+09:00</updated>
+  <updated>2025-06-15T21:01:58+09:00</updated>
   <author>
     <name>마티(Marty)</name>
-    <uri>https://martydev.github.io/</uri>
+    <uri>https://martydevstory.github.io/</uri>
   </author>
-  <link rel="self" type="application/atom+xml" href="https://martydev.github.io/feed.xml"/>
+  <link rel="self" type="application/atom+xml" href="https://martydevstory.github.io/feed.xml"/>
   <link rel="alternate" type="text/html" hreflang="ko-KR"
-    href="https://martydev.github.io/"/>
+    href="https://martydevstory.github.io/"/>
   <generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator>
   <rights> © 2025 마티(Marty) </rights>
   <icon>/assets/img/favicons/favicon.ico</icon>
@@ -21,13 +21,13 @@
   
   <entry>
     <title>LangGraph 장기 메모리 (1)</title>
-    <link href="https://martydev.github.io/posts/langgraph-long-term-memory-1st/" rel="alternate" type="text/html" title="LangGraph 장기 메모리 (1)" />
+    <link href="https://martydevstory.github.io/posts/langgraph-long-term-memory-1st/" rel="alternate" type="text/html" title="LangGraph 장기 메모리 (1)" />
     <published>2025-06-12T11:15:43+09:00</published>
   
-    <updated>2025-06-12T11:15:43+09:00</updated>
+    <updated>2025-06-15T21:01:04+09:00</updated>
   
-    <id>https://martydev.github.io/posts/langgraph-long-term-memory-1st/</id>
-    <content type="text/html" src="https://martydev.github.io/posts/langgraph-long-term-memory-1st/" />
+    <id>https://martydevstory.github.io/posts/langgraph-long-term-memory-1st/</id>
+    <content type="text/html" src="https://martydevstory.github.io/posts/langgraph-long-term-memory-1st/" />
     <author>
       <name>마티(Marty)</name>
     </author>
@@ -40,20 +40,20 @@
     
   
 
-  <summary>메모리는 개인의 정체성 또는 사람들이 현재와 미래를 이해하기 위해 정보를 저장하고, 검색하며, 활용할 수 있게 해 주는 인지 기능으로 AI 애플리케이션에서 사용할 수 있는 여러 가지 장기 메모리 유형(Long-term Memory)이 있습니다.  장기 메모리와 일반적인 사실과 개념을 저장하는 인간의 장기 기억 중 하나인 시맨틱 메모리(Semantic Memory)를 살펴보겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   1.   메모리 기반 챗봇 구축  먼저 스레드 내의 단기 메모리(short-term)와 스레드 간의 장기 메모리(long-term)를 모두 사용하는 챗봇을 구축하고  장기 메모리를 저장하고 검색하는 방법인 LangGraph Memory St...</summary>
+  <summary>장기 메모리와 일반적인 사실과 개념을 저장하는 인간의 장기 기억 중 하나인 시맨틱 메모리를 살펴보겠습니다.</summary>
 
   </entry>
 
   
   <entry>
     <title>LangGraph 어시스턴트 구축하기 (2)</title>
-    <link href="https://martydev.github.io/posts/langgraph-building-assistant-2nd/" rel="alternate" type="text/html" title="LangGraph 어시스턴트 구축하기 (2)" />
+    <link href="https://martydevstory.github.io/posts/langgraph-building-assistant-2nd/" rel="alternate" type="text/html" title="LangGraph 어시스턴트 구축하기 (2)" />
     <published>2025-06-07T12:15:43+09:00</published>
   
-    <updated>2025-06-07T12:15:43+09:00</updated>
+    <updated>2025-06-15T21:01:04+09:00</updated>
   
-    <id>https://martydev.github.io/posts/langgraph-building-assistant-2nd/</id>
-    <content type="text/html" src="https://martydev.github.io/posts/langgraph-building-assistant-2nd/" />
+    <id>https://martydevstory.github.io/posts/langgraph-building-assistant-2nd/</id>
+    <content type="text/html" src="https://martydevstory.github.io/posts/langgraph-building-assistant-2nd/" />
     <author>
       <name>마티(Marty)</name>
     </author>
@@ -66,20 +66,20 @@
     
   
 
-  <summary>LangGraph에서 메모리, 휴먼-인-더-루프, 제어 가능성에 대해서 살펴보았습니다.  이 개념들을 바탕으로 챗 모델 기반 경량 멀티 에이전트 시스템 구성하고 리서치 및 보고서 생성 자동화 워크플로를 구축하겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   4.   리서치 어시스턴트 구축 (실습)  리서치 어시스턴트 구축을 위해 아래 단계로 구성을 진행합니다.     소스 선택 : 사용자가 리서치에 사용할 입력 소스를 선택   기획 : 사용자는 리서치 주제를 입력하고 시스템은 하위 주제별 AI 분석가 팀을 구성, 하위 주제는 휴먼-인-더-루프로 검토 및 수정   LLM 사용 : 각 분석가는 하위 주제별 AI 분석가와 심층 인터뷰 진행, STORM 논문의 방...</summary>
+  <summary>LangGraph 채팅 모델 기반 경량 멀티 에이전트 시스템을 구성하고 리서치 및 보고서 생성 자동화 워크플로를 구축하겠습니다.</summary>
 
   </entry>
 
   
   <entry>
     <title>LangGraph 어시스턴트 구축하기 (1)</title>
-    <link href="https://martydev.github.io/posts/langgraph-building-assistant-1st/" rel="alternate" type="text/html" title="LangGraph 어시스턴트 구축하기 (1)" />
+    <link href="https://martydevstory.github.io/posts/langgraph-building-assistant-1st/" rel="alternate" type="text/html" title="LangGraph 어시스턴트 구축하기 (1)" />
     <published>2025-06-02T11:15:43+09:00</published>
   
-    <updated>2025-06-02T11:15:43+09:00</updated>
+    <updated>2025-06-15T21:01:04+09:00</updated>
   
-    <id>https://martydev.github.io/posts/langgraph-building-assistant-1st/</id>
-    <content type="text/html" src="https://martydev.github.io/posts/langgraph-building-assistant-1st/" />
+    <id>https://martydevstory.github.io/posts/langgraph-building-assistant-1st/</id>
+    <content type="text/html" src="https://martydevstory.github.io/posts/langgraph-building-assistant-1st/" />
     <author>
       <name>마티(Marty)</name>
     </author>
@@ -92,20 +92,20 @@
     
   
 
-  <summary>이전 포스팅에서 다뤘던 메모리 개념과 휴먼-인-더-루프 기반으로 멀티 에이전트(multi-agent) 워크플로를 살펴보겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   1.   병렬 노드 실행 (Parallel node execution)  멀티 에이전트 리서치 어시스턴트를 구축하기 위해 먼저 LangGraph의 제어 가능성(controllability)에 대해서 살펴보겠습니다.  1.  1.  팬아웃(Fan out)과 팬인(fan in)  각 단계마다 상태를 덮어쓰는 간단한 선형 그래프를 생성합니다.  # 환경 구성 %%capture --no-stderr %pip install -U  langgraph tavily-python wikipedia langc...</summary>
+  <summary>LangGraph 메모리 개념과 휴먼-인-더-루프 기반 멀티 에이전트 워크플로를 살펴보겠습니다.</summary>
 
   </entry>
 
   
   <entry>
     <title>LangGraph 사용자 경험(UX)과 휴먼-인-더-루프</title>
-    <link href="https://martydev.github.io/posts/langgraph-ux-and-human-in-the-loop/" rel="alternate" type="text/html" title="LangGraph 사용자 경험(UX)과 휴먼-인-더-루프" />
+    <link href="https://martydevstory.github.io/posts/langgraph-ux-and-human-in-the-loop/" rel="alternate" type="text/html" title="LangGraph 사용자 경험(UX)과 휴먼-인-더-루프" />
     <published>2025-05-28T12:15:43+09:00</published>
   
-    <updated>2025-05-28T12:15:43+09:00</updated>
+    <updated>2025-06-15T21:01:04+09:00</updated>
   
-    <id>https://martydev.github.io/posts/langgraph-ux-and-human-in-the-loop/</id>
-    <content type="text/html" src="https://martydev.github.io/posts/langgraph-ux-and-human-in-the-loop/" />
+    <id>https://martydevstory.github.io/posts/langgraph-ux-and-human-in-the-loop/</id>
+    <content type="text/html" src="https://martydevstory.github.io/posts/langgraph-ux-and-human-in-the-loop/" />
     <author>
       <name>마티(Marty)</name>
     </author>
@@ -118,20 +118,20 @@
     
   
 
-  <summary>그래프 상태와 메모리를 커스터마이징하는 방법과 장시간 대화를 유지할 수 있는 외부 메모리 기반 챗봇을 만들었습니다.  이번 포스팅에서는 스트리밍, 브레이크포인트, 타임트래블 등 다양한 방식으로 직접 상호작용을 할 수 있는 사용자 경험과  휴먼-인-더-루프를 살펴보겠습니다.  먼저, 그래프 실행 과정에서 모델 응답 또는 상태 변화를 실시간으로 출력하는 스트리밍을 살펴보겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   # 환경 구성 %%capture --no-stderr %pip install --quiet -U langgraph langchain_openai langgraph_sdk   1.   스트리밍 (Streaming)  LangGraph는 스트리밍 기...</summary>
+  <summary>LangGraph에서 스트리밍, 브레이크포인트, 타임트래블 등 다양한 방식으로 직접 상호작용을 할 수 있는 사용자 경험과 휴먼-인-더-루프를 살펴보겠습니다.</summary>
 
   </entry>
 
   
   <entry>
     <title>LangGraph 상태와 메모리 (2)</title>
-    <link href="https://martydev.github.io/posts/langgraph-state-and-memory-2nd/" rel="alternate" type="text/html" title="LangGraph 상태와 메모리 (2)" />
+    <link href="https://martydevstory.github.io/posts/langgraph-state-and-memory-2nd/" rel="alternate" type="text/html" title="LangGraph 상태와 메모리 (2)" />
     <published>2025-05-23T11:15:43+09:00</published>
   
-    <updated>2025-05-23T11:15:43+09:00</updated>
+    <updated>2025-06-15T21:01:04+09:00</updated>
   
-    <id>https://martydev.github.io/posts/langgraph-state-and-memory-2nd/</id>
-    <content type="text/html" src="https://martydev.github.io/posts/langgraph-state-and-memory-2nd/" />
+    <id>https://martydevstory.github.io/posts/langgraph-state-and-memory-2nd/</id>
+    <content type="text/html" src="https://martydevstory.github.io/posts/langgraph-state-and-memory-2nd/" />
     <author>
       <name>마티(Marty)</name>
     </author>
@@ -144,7 +144,7 @@
     
   
 
-  <summary>노드 간 통신을 위한 상태 스키마와 리듀서에 대해서 이해했습니다. 다음은 입·출력에서 상태 스키마를 위한 다중 스키마, 그리고 요약 기능과 외부메모리 기능을 가진 챗봇에 대해서 알아보겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   3.   다중 스키마 (Multiple Schemas)  일반적으로 모든 그래프 노드는 단일 스키마(Single Schema)로 통신합니다.  단일 스키마는 그래프의 입력 및 출력 키/채널을 포함합니다.  노드끼리 필수가 아닌 정보를 전달하고 싶지 않거나 서로 다른 입·출력 스키마를 사용하고 싶을 때 다중 스키마를 사용할 수 있습니다.  # 환경 구성 %%capture --no-stderr %pip install --quiet ...</summary>
+  <summary>LangGraph에서 입력과 출력에서 상태 스키마를 위한 다중 스키마, 그리고 요약 기능과 외부메모리 기능을 가진 챗봇에 대해서 알아보겠습니다.</summary>
 
   </entry>
 

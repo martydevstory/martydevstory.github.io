@@ -2,4 +2,4 @@ User-agent: *
 
 Disallow: /norobots/
 
-Sitemap: https://martydev.github.io/sitemap.xml
+Sitemap: https://martydevstory.github.io/sitemap.xml

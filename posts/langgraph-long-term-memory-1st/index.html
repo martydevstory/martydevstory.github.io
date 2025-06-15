@@ -31,20 +31,22 @@
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="LangGraph 장기 메모리 (1)" />
+<meta name="author" content="Marty" />
 <meta property="og:locale" content="ko_KR" />
-<meta name="description" content="메모리는 개인의 정체성 또는 사람들이 현재와 미래를 이해하기 위해 정보를 저장하고, 검색하며, 활용할 수 있게 해 주는 인지 기능으로 AI 애플리케이션에서 사용할 수 있는 여러 가지 장기 메모리 유형(Long-term Memory)이 있습니다." />
-<meta property="og:description" content="메모리는 개인의 정체성 또는 사람들이 현재와 미래를 이해하기 위해 정보를 저장하고, 검색하며, 활용할 수 있게 해 주는 인지 기능으로 AI 애플리케이션에서 사용할 수 있는 여러 가지 장기 메모리 유형(Long-term Memory)이 있습니다." />
-<link rel="canonical" href="https://martydev.github.io/posts/langgraph-long-term-memory-1st/" />
-<meta property="og:url" content="https://martydev.github.io/posts/langgraph-long-term-memory-1st/" />
+<meta name="description" content="장기 메모리와 일반적인 사실과 개념을 저장하는 인간의 장기 기억 중 하나인 시맨틱 메모리를 살펴보겠습니다." />
+<meta property="og:description" content="장기 메모리와 일반적인 사실과 개념을 저장하는 인간의 장기 기억 중 하나인 시맨틱 메모리를 살펴보겠습니다." />
+<link rel="canonical" href="https://martydevstory.github.io/posts/langgraph-long-term-memory-1st/" />
+<meta property="og:url" content="https://martydevstory.github.io/posts/langgraph-long-term-memory-1st/" />
 <meta property="og:site_name" content="마티데브스토리" />
-<meta property="og:image" content="https://martydev.github.io/assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png" />
+<meta property="og:image" content="https://martydevstory.github.io/assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2025-06-12T11:15:43+09:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="https://martydev.github.io/assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png" />
+<meta property="twitter:image" content="https://martydevstory.github.io/assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png" />
 <meta property="twitter:title" content="LangGraph 장기 메모리 (1)" />
+<meta name="google-site-verification" content="yVTwKzr9_2sdUNkd752ReHsuWqteISd7HQCzIYZppyY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-06-12T11:15:43+09:00","datePublished":"2025-06-12T11:15:43+09:00","description":"메모리는 개인의 정체성 또는 사람들이 현재와 미래를 이해하기 위해 정보를 저장하고, 검색하며, 활용할 수 있게 해 주는 인지 기능으로 AI 애플리케이션에서 사용할 수 있는 여러 가지 장기 메모리 유형(Long-term Memory)이 있습니다.","headline":"LangGraph 장기 메모리 (1)","image":{"alt":null,"url":"https://martydev.github.io/assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://martydev.github.io/posts/langgraph-long-term-memory-1st/"},"url":"https://martydev.github.io/posts/langgraph-long-term-memory-1st/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Marty"},"dateModified":"2025-06-15T21:01:04+09:00","datePublished":"2025-06-12T11:15:43+09:00","description":"장기 메모리와 일반적인 사실과 개념을 저장하는 인간의 장기 기억 중 하나인 시맨틱 메모리를 살펴보겠습니다.","headline":"LangGraph 장기 메모리 (1)","image":{"alt":null,"url":"https://martydevstory.github.io/assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://martydevstory.github.io/posts/langgraph-long-term-memory-1st/"},"url":"https://martydevstory.github.io/posts/langgraph-long-term-memory-1st/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -978,6 +980,8 @@
   <header>
     <h1 data-toc-skip>LangGraph 장기 메모리 (1)</h1>
     
+      <p class="post-desc fw-light mb-4">장기 메모리와 일반적인 사실과 개념을 저장하는 인간의 장기 기억 중 하나인 시맨틱 메모리를 살펴보겠습니다.</p>
+    
 
     <div class="post-meta text-muted">
       <!-- published date -->
@@ -1005,6 +1009,29 @@
       </span>
 
       <!-- lastmod date -->
+      
+        <span>
+          업데이트
+          <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1749988864"
+  data-df="YYYY/MM/DD"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  2025/06/15
+</time>
+
+        </span>
       
 
       
@@ -3560,21 +3587,21 @@ These spots should satisfy your bakery cravings while you're biking around the c
 
       
 
-      <a href="https://twitter.com/intent/tweet?text=LangGraph%20%EC%9E%A5%EA%B8%B0%20%EB%A9%94%EB%AA%A8%EB%A6%AC%20(1)%20-%20%EB%A7%88%ED%8B%B0%EB%8D%B0%EB%B8%8C%EC%8A%A4%ED%86%A0%EB%A6%AC&url=https%3A%2F%2Fmartydev.github.io%2Fposts%2Flanggraph-long-term-memory-1st%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+      <a href="https://twitter.com/intent/tweet?text=LangGraph%20%EC%9E%A5%EA%B8%B0%20%EB%A9%94%EB%AA%A8%EB%A6%AC%20(1)%20-%20%EB%A7%88%ED%8B%B0%EB%8D%B0%EB%B8%8C%EC%8A%A4%ED%86%A0%EB%A6%AC&url=https%3A%2F%2Fmartydevstory.github.io%2Fposts%2Flanggraph-long-term-memory-1st%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
         <i class="fa-fw fa-brands fa-square-x-twitter"></i>
       </a>
     
 
       
 
-      <a href="https://www.facebook.com/sharer/sharer.php?title=LangGraph%20%EC%9E%A5%EA%B8%B0%20%EB%A9%94%EB%AA%A8%EB%A6%AC%20(1)%20-%20%EB%A7%88%ED%8B%B0%EB%8D%B0%EB%B8%8C%EC%8A%A4%ED%86%A0%EB%A6%AC&u=https%3A%2F%2Fmartydev.github.io%2Fposts%2Flanggraph-long-term-memory-1st%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+      <a href="https://www.facebook.com/sharer/sharer.php?title=LangGraph%20%EC%9E%A5%EA%B8%B0%20%EB%A9%94%EB%AA%A8%EB%A6%AC%20(1)%20-%20%EB%A7%88%ED%8B%B0%EB%8D%B0%EB%B8%8C%EC%8A%A4%ED%86%A0%EB%A6%AC&u=https%3A%2F%2Fmartydevstory.github.io%2Fposts%2Flanggraph-long-term-memory-1st%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
         <i class="fa-fw fab fa-facebook-square"></i>
       </a>
     
 
       
 
-      <a href="https://t.me/share/url?url=https%3A%2F%2Fmartydev.github.io%2Fposts%2Flanggraph-long-term-memory-1st%2F&text=LangGraph%20%EC%9E%A5%EA%B8%B0%20%EB%A9%94%EB%AA%A8%EB%A6%AC%20(1)%20-%20%EB%A7%88%ED%8B%B0%EB%8D%B0%EB%B8%8C%EC%8A%A4%ED%86%A0%EB%A6%AC" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+      <a href="https://t.me/share/url?url=https%3A%2F%2Fmartydevstory.github.io%2Fposts%2Flanggraph-long-term-memory-1st%2F&text=LangGraph%20%EC%9E%A5%EA%B8%B0%20%EB%A9%94%EB%AA%A8%EB%A6%AC%20(1)%20-%20%EB%A7%88%ED%8B%B0%EB%8D%B0%EB%B8%8C%EC%8A%A4%ED%86%A0%EB%A6%AC" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
         <i class="fa-fw fab fa-telegram"></i>
       </a>
     
@@ -3629,21 +3656,14 @@ These spots should satisfy your bakery cravings while you're biking around the c
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/langgraph-long-term-memory-1st/">LangGraph 장기 메모리 (1)</a>
+          <a href="/posts/langgraph-introduce/">LangGraph 소개 및 환경 구성</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/langgraph-building-assistant-2nd/">LangGraph 어시스턴트 구축하기 (2)</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/langgraph-building-assistant-1st/">LangGraph 어시스턴트 구축하기 (1)</a>
+          <a href="/posts/langgraph-component/">LangGraph 핵심 구성과 그래프 생성</a>
         </li>
       
         
@@ -3651,6 +3671,13 @@ These spots should satisfy your bakery cravings while you're biking around the c
         
         <li class="text-truncate lh-lg">
           <a href="/posts/langgraph-state-and-memory-1st/">LangGraph 상태와 메모리 (1)</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/langgraph-state-and-memory-2nd/">LangGraph 상태와 메모리 (2)</a>
         </li>
       
         
@@ -4043,7 +4070,7 @@ These spots should satisfy your bakery cravings while you're biking around the c
 
               <h4 class="pt-0 my-2">LangGraph 어시스턴트 구축하기 (2)</h4>
               <div class="text-muted">
-                <p>LangGraph에서 메모리, 휴먼-인-더-루프, 제어 가능성에 대해서 살펴보았습니다.  이 개념들을 바탕으로 챗 모델 기반 경량 멀티 에이전트 시스템 구성하고 리서치 및 보고서 생성 자동화 워크플로를 구축하겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   4.   리서치 어시스턴트 구축 (실습)  리서치...</p>
+                <p>LangGraph 채팅 모델 기반 경량 멀티 에이전트 시스템을 구성하고 리서치 및 보고서 생성 자동화 워크플로를 구축하겠습니다.</p>
               </div>
             </div>
           </a>
@@ -4071,7 +4098,7 @@ These spots should satisfy your bakery cravings while you're biking around the c
 
               <h4 class="pt-0 my-2">LangGraph 어시스턴트 구축하기 (1)</h4>
               <div class="text-muted">
-                <p>이전 포스팅에서 다뤘던 메모리 개념과 휴먼-인-더-루프 기반으로 멀티 에이전트(multi-agent) 워크플로를 살펴보겠습니다.     학습할 리소스는 LangChain Academy Github를 사용합니다.   1.   병렬 노드 실행 (Parallel node execution)  멀티 에이전트 리서치 어시스턴트를 구축하기 위해 먼저 LangGr...</p>
+                <p>LangGraph 메모리 개념과 휴먼-인-더-루프 기반 멀티 에이전트 워크플로를 살펴보겠습니다.</p>
               </div>
             </div>
           </a>
@@ -4099,7 +4126,7 @@ These spots should satisfy your bakery cravings while you're biking around the c
 
               <h4 class="pt-0 my-2">LangGraph 사용자 경험(UX)과 휴먼-인-더-루프</h4>
               <div class="text-muted">
-                <p>그래프 상태와 메모리를 커스터마이징하는 방법과 장시간 대화를 유지할 수 있는 외부 메모리 기반 챗봇을 만들었습니다.  이번 포스팅에서는 스트리밍, 브레이크포인트, 타임트래블 등 다양한 방식으로 직접 상호작용을 할 수 있는 사용자 경험과  휴먼-인-더-루프를 살펴보겠습니다.  먼저, 그래프 실행 과정에서 모델 응답 또는 상태 변화를 실시간으로 출력하는 ...</p>
+                <p>LangGraph에서 스트리밍, 브레이크포인트, 타임트래블 등 다양한 방식으로 직접 상호작용을 할 수 있는 사용자 경험과 휴먼-인-더-루프를 살펴보겠습니다.</p>
               </div>
             </div>
           </a>
