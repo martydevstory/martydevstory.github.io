@@ -233,3 +233,4 @@ jekyll-archives:
 url: "https://martydevstory.github.io"
 plugins:
   - jekyll-seo-tag
+  - jekyll-sitemap
