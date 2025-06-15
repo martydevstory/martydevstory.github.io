@@ -31,6 +31,8 @@ github:
 #twitter:
 #  username: twitter_username # change to your Twitter username
 
+author : Marty
+
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
@@ -46,7 +48,7 @@ social:
 
 # Site Verification Settings
 webmaster_verifications:
-  google: # fill in your Google verification code
+  google: yVTwKzr9_2sdUNkd752ReHsuWqteISd7HQCzIYZppyY # fill in your Google verification code
   bing: # fill in your Bing verification code
   alexa: # fill in your Alexa verification code
   yandex: # fill in your Yandex verification code
@@ -227,3 +229,7 @@ jekyll-archives:
   permalinks:
     tag: /tags/:name/
     category: /categories/:name/
+
+url: "https://martydevstory.github.io"
+plugins:
+  - jekyll-seo-tag

@@ -1,6 +1,7 @@
 ---
 title: LangGraph 상태와 메모리 (1)
 date: 2025-05-17 11:15:43 +/-TTTT
+description : LangGraph에서 노드간의 통신을 위한 상태 스키마와 상태 업데이트의 수행 방식을 지정하는 리듀서에 대해서 살펴보겠습니다.
 categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
 math: true

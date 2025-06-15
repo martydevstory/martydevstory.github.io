@@ -1,6 +1,7 @@
 ---
 title: LangGraph 장기 메모리 (2)
 date: 2025-06-02 12:15:43 +/-TTTT
+description : LangGraph 메모리 컬렉션에 대해서 더 자세히 알아보고 시맨틱 메모리 기반 에이전트을 구축해 보겠습니다.
 categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
 math: true

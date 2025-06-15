@@ -1,6 +1,7 @@
 ---
 title: LangGraph 핵심 구성과 그래프 생성
 date: 2025-05-12 11:15:43 +/-TTTT
+description : LangGraph 핵심 구성과 워크플로 요소 및 에이전트 요소에 대해서 알아보겠습니다.
 categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
 math: true

@@ -1,6 +1,7 @@
 ---
 title: LangGraph 어시스턴트 구축하기 (2)
 date: 2025-06-07 12:15:43 +/-TTTT
+description : LangGraph 채팅 모델 기반 경량 멀티 에이전트 시스템을 구성하고 리서치 및 보고서 생성 자동화 워크플로를 구축하겠습니다.
 categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
 math: true

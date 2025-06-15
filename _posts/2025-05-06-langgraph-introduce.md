@@ -1,6 +1,7 @@
 ---
 title: LangGraph 소개 및 환경 구성
 date: 2025-05-06 10:15:43 +/-TTTT
+description : LangGraph는 LangChain의 추론(Reasoning) 흐름을 제어할 수 있는 상태 머신 프레임워크로, 상태(State)를 기반으로 각 노드(Node)가 동작합니다. 환경 구성을 해보겠습니다.
 categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
 math: true
