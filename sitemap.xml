@@ -7,9 +7,9 @@ layout: null
     <url>
       <loc>{{ site.url }}{{ post.url }}</loc>
       {% if post.lastmod == null %}
-        <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
+        <lastmod>{{ post.date | date: "%Y-%m-%dT%H:%M:%SZ" }}</lastmod>
       {% else %}
-        <lastmod>{{ post.lastmod | date_to_xmlschema }}</lastmod>
+        <lastmod>{{ post.lastmod | date: "%Y-%m-%dT%H:%M:%SZ" }}</lastmod>
       {% endif %}
 
       {% if post.sitemap.changefreq == null %}
