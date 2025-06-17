@@ -4,7 +4,7 @@
   <id>https://martydevstory.github.io/</id>
   <title>마티데브스토리</title>
   <subtitle>AI, Cloud 기반 블로그 작성.</subtitle>
-  <updated>2025-06-16T13:35:58+09:00</updated>
+  <updated>2025-06-17T10:43:21+09:00</updated>
   <author>
     <name>마티(Marty)</name>
     <uri>https://martydevstory.github.io/</uri>
@@ -72,6 +72,32 @@
 
   
   <entry>
+    <title>LangGraph 장기 메모리 (2)</title>
+    <link href="https://martydevstory.github.io/posts/langgraph-long-term-memory-2nd/" rel="alternate" type="text/html" title="LangGraph 장기 메모리 (2)" />
+    <published>2025-06-02T12:15:43+09:00</published>
+  
+    <updated>2025-06-02T12:15:43+09:00</updated>
+  
+    <id>https://martydevstory.github.io/posts/langgraph-long-term-memory-2nd/</id>
+    <content type="text/html" src="https://martydevstory.github.io/posts/langgraph-long-term-memory-2nd/" />
+    <author>
+      <name>마티(Marty)</name>
+    </author>
+
+  
+    
+    <category term="AI" />
+    
+    <category term="LangGraph" />
+    
+  
+
+  <summary>LangGraph 메모리 컬렉션에 대해서 더 자세히 알아보고 시맨틱 메모리 기반 에이전트을 구축해 보겠습니다.</summary>
+
+  </entry>
+
+  
+  <entry>
     <title>LangGraph 어시스턴트 구축하기 (1)</title>
     <link href="https://martydevstory.github.io/posts/langgraph-building-assistant-1st/" rel="alternate" type="text/html" title="LangGraph 어시스턴트 구축하기 (1)" />
     <published>2025-06-02T11:15:43+09:00</published>
@@ -119,32 +145,6 @@
   
 
   <summary>LangGraph에서 스트리밍, 브레이크포인트, 타임트래블 등 다양한 방식으로 직접 상호작용을 할 수 있는 사용자 경험과 휴먼-인-더-루프를 살펴보겠습니다.</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>LangGraph 상태와 메모리 (2)</title>
-    <link href="https://martydevstory.github.io/posts/langgraph-state-and-memory-2nd/" rel="alternate" type="text/html" title="LangGraph 상태와 메모리 (2)" />
-    <published>2025-05-23T11:15:43+09:00</published>
-  
-    <updated>2025-06-15T21:01:04+09:00</updated>
-  
-    <id>https://martydevstory.github.io/posts/langgraph-state-and-memory-2nd/</id>
-    <content type="text/html" src="https://martydevstory.github.io/posts/langgraph-state-and-memory-2nd/" />
-    <author>
-      <name>마티(Marty)</name>
-    </author>
-
-  
-    
-    <category term="AI" />
-    
-    <category term="LangGraph" />
-    
-  
-
-  <summary>LangGraph에서 입력과 출력에서 상태 스키마를 위한 다중 스키마, 그리고 요약 기능과 외부메모리 기능을 가진 챗봇에 대해서 알아보겠습니다.</summary>
 
   </entry>
 
