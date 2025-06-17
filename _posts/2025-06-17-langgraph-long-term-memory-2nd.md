@@ -967,7 +967,7 @@ _set_env("OPENAI_API_KEY")
 
 아래 그림은 이 전체 프로세스를 간단하게 보여줍니다.
 
-![ReACT ToDo 에이전트 프로세스](assets/drafts/2025-05-28-langgraph-long-term-memory-2nd/long-term-momory_2nd_01.png)
+![ReACT ToDo 에이전트 프로세스](assets/posts/2025-06-17-langgraph-long-term-memory-2nd/long-term-momory_2nd_01.png)
 _ReACT ToDo 에이전트 프로세스_
 
 ```python
@@ -1291,7 +1291,7 @@ graph = builder.compile(checkpointer=within_thread_memory, store=across_thread_m
 display(Image(graph.get_graph(xray=1).draw_mermaid_png()))
 ```
 
-![ToDo 에이전트 그래프](assets/drafts/2025-05-28-langgraph-long-term-memory-2nd/long-term-momory_2nd_02.png)
+![ToDo 에이전트 그래프](assets/posts/2025-06-17-langgraph-long-term-memory-2nd/long-term-momory_2nd_02.png)
 _ToDo 에이전트 그래프_
 
 ```python

@@ -14,48 +14,48 @@ is_series: true
 series_title: "LangGraph"
 series_order: 10
 ---
-이번 포스팅에서는 이제까지 구현한 LangGraph 어플리케이션 배포 및 운영에 도움이 되는 이중 입력과 어시스턴트에 대해서 살펴보겠습니다.
+이번 포스팅에서는 LangGraph 어플리케이션 `배포`와 실제 운영에 도움이 되는 `이중 입력`과 `어시스턴트`에 대해서 살펴보겠습니다.
 
 > 학습할 리소스는 [LangChain Academy Github](https://github.com/langchain-ai/langchain-academy){: target="_blank"}를 사용합니다.
-> {: .prompt-info }
+{: .prompt-info }
 
 ## 1.   배포 생성하기
 
 이전 포스트에서 만든 `task_maistro` 어플리케이션을 배포해보겠습니다.
 
-어플리케이션 샘플 코드는 [`module 5`](https://github.com/langchain-ai/langchain-academy/tree/main/module-5https:/) 디렉터리에 있습니다.
+어플리케이션 샘플 코드는 [`module 6`](https://github.com/langchain-ai/langchain-academy/tree/main/module-6/deployment){: target="_blank"} 디렉터리에 있습니다.
 
 ### 1.  1.  코드 구조
 
-LangGraph 플랫폼 배포 생성하기 위해서는 [다음 항목를 제공해야 합니다](https://langchain-ai.github.io/langgraph/concepts/application_structure/):
+LangGraph 플랫폼 배포 생성하기 위해서는 [다음 항목를 제공해야 합니다](https://langchain-ai.github.io/langgraph/concepts/application_structure/){: target="_blank"}:
 
 * LangGraph API 구성 파일 (예: `langgraph.json`)
 * 애플리케이션 로직을 구현한 그래프 파일 (예: `task_maistro.py`)
 * 애플리케이션 실행에 필요한 의존성을 나열한 파일 (예: `requirements.txt`)
 * 애플리케이션 실행에 필요한 환경 변수를 지정하는 파일 (예: `.env` 또는 `docker-compose.yml`)
 
-해당 파일은 [`module-6/deployment`](https://github.com/langchain-ai/langchain-academy/tree/main/module-6/deployment) 디렉터리에 준비되어 있습니다.
+해당 파일은 [`module-6/deployment`](https://github.com/langchain-ai/langchain-academy/tree/main/module-6/deployment){: target="_blank"} 디렉터리에 준비되어 있습니다.
 
 ### 1.  2.  CLI
 
-[LangGraph CLI](https://langchain-ai.github.io/langgraph/concepts/langgraph_cli/)는 LangGraph 플랫폼 배포를 생성하기 위한 명령줄 인터페이스로 아래와 같이 실행합니다.
+[LangGraph CLI](https://langchain-ai.github.io/langgraph/concepts/langgraph_cli/){: target="_blank"}는 LangGraph 플랫폼 배포를 생성하기 위한 명령줄 인터페이스로 아래와 같이 실행합니다.
 
 ```python
 %%capture --no-stderr
 %pip install -U langgraph-cli
 ```
 
-[자체 호스팅 배포](https://langchain-ai.github.io/langgraph/how-tos/deploy-self-hosted/#how-to-do-a-self-hosted-deployment-of-langgraph)를 만들기 위해, 다음 단계를 진행합니다.
+[자체 호스팅 배포](https://langchain-ai.github.io/langgraph/how-tos/deploy-self-hosted/#how-to-do-a-self-hosted-deployment-of-langgraph){: target="_blank"}를 만들기 위해, 다음 단계를 진행합니다.
 
 #### 1. 2.  1.  LangGraph 서버용 Docker 이미지 빌드하기
 
-먼저 LangGraph CLI를 사용하여 [LangGraph 서버](https://docs.google.com/presentation/d/18MwIaNR2m4Oba6roK_2VQcBE_8Jq_SI7VHTXJdl7raU/edit#slide=id.g313fb160676_0_32)용 Docker 이미지를 생성합니다.
+먼저 LangGraph CLI를 사용하여 [LangGraph 서버](https://docs.google.com/presentation/d/18MwIaNR2m4Oba6roK_2VQcBE_8Jq_SI7VHTXJdl7raU/edit#slide=id.g313fb160676_0_32){: target="_blank"}용 Docker 이미지를 생성합니다.
 
 이 명령은 그래프와 의존성을 Docker 이미지 하나로 패키징합니다.
 
 Docker 이미지는 애플리케이션 실행에 필요한 코드와 의존성을 포함하는 컨테이너 템플릿입니다.
 
-[Docker](https://docs.docker.com/engine/install/)가 설치되어 있는지 확인한 후, 다음 명령으로 `my-image`라는 이름의 Docker 이미지를 생성합니다:
+[Docker](https://docs.docker.com/engine/install/){: target="_blank"}가 설치되어 있는지 확인한 후, 다음 명령으로 `my-image`라는 이름의 Docker 이미지를 생성합니다:
 
 ```bash
 $ cd module-6/deployment
@@ -64,7 +64,7 @@ $ langgraph build -t my-image
 
 #### 1. 2.  2.  Redis 및 PostgreSQL 설정하기
 
-이미 `Redis`와 `PostgreSQL`이 로컬이나 다른 서버에서 실행 중이면, `Redis`와 `PostgreSQL`의 `URI`를 지정하여 LangGraph 서버 컨테이너만 [단독으로 실행](https://langchain-ai.github.io/langgraph/how-tos/deploy-self-hosted/#running-the-application-locally)할 수 있습니다:
+이미 `Redis`와 `PostgreSQL`이 로컬이나 다른 서버에서 실행 중이면, `Redis`와 `PostgreSQL`의 `URI`를 지정하여 LangGraph 서버 컨테이너만 [단독으로 실행](https://langchain-ai.github.io/langgraph/how-tos/deploy-self-hosted/#running-the-application-locally){: target="_blank"}할 수 있습니다:
 
 ```bash
 docker run \
@@ -138,7 +138,7 @@ services:
 
 ```
 
-그런 다음, [배포를 시작](https://langchain-ai.github.io/langgraph/how-tos/deploy-self-hosted/#using-docker-compose)합니다:
+그런 다음, [배포를 시작](https://langchain-ai.github.io/langgraph/how-tos/deploy-self-hosted/#using-docker-compose){: target="_blank"}합니다:
 
 ```bash
 $ cd module-6/deployment
@@ -157,25 +157,25 @@ $ docker compose up
 
 배포 실행이 완료되면 다음 경로를 통해 배포된 서비스를 이용할 수 있습니다.
 
-* `API` : [http://localhost:8123](http://localhost:8123)
-* `Docs` : [http://localhost:8123/docs](http://localhost:8123/docs)
-* `LangGraph Studio` : [https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:8123](https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:8123)
+* `API` : [http://localhost:8123](http://localhost:8123){: target="_blank"}
+* `Docs` : [http://localhost:8123/docs](http://localhost:8123/docs){: target="_blank"}
+* `LangGraph Studio` : [https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:8123](https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:8123){: target="_blank"}
 
 ### 2.  2.  API 사용하기
 
-LangGraph 서버는 배포된 에이전트와 상호작용을 위한 [다양한 API 엔드포인트](https://github.com/langchain-ai/agent-protocol)를 제공합니다.
+LangGraph 서버는 배포된 에이전트와 상호작용을 위한 [다양한 API 엔드포인트](https://github.com/langchain-ai/agent-protocol){: target="_blank"}를 제공합니다.
 
-이 엔드포인트들은 [공통적인 에이전트 요구 사항을 기반으로 API를 그룹화](https://github.com/langchain-ai/agent-protocol)할 수 있습니다:
+이 엔드포인트들은 [공통적인 에이전트 요구 사항을 기반으로 API를 그룹화](https://github.com/langchain-ai/agent-protocol){: target="_blank"}할 수 있습니다:
 
 * `Runs` : 원자적(단일) 에이전트 실행
 * `Threads` : 다중-턴 상호작용 또는 휴먼-인-더-루프
 * `Store` : 장기 메모리
 
-그리고 [API 문서 페이지](http://localhost:8123/docs#tag/thread-runs) 직접 요청을 통해 테스트할 수 있습니다.
+그리고 [API 문서 페이지](http://localhost:8123/docs#tag/thread-runs){: target="_blank"} 직접 요청을 통해 테스트할 수 있습니다.
 
 ### 2.  3.  SDK
 
-[LangGraph SDK](https://langchain-ai.github.io/langgraph/concepts/sdk/) (Python 및 JS)는 위에서 설명한 LangGraph Server API와 상호작용할 수 있도록 개발자 친화적인 인터페이스를 제공합니다.
+[LangGraph SDK](https://langchain-ai.github.io/langgraph/concepts/sdk/){: target="_blank"} (Python 및 JS)는 위에서 설명한 LangGraph Server API와 상호작용할 수 있도록 개발자 친화적인 인터페이스를 제공합니다.
 
 ```python
 %%capture --no-stderr
@@ -192,7 +192,7 @@ client = get_client(url=url_for_cli_deployment)
 
 ### 2.  4.  Remote Graph
 
-LangGraph 라이브러리에서 작업하는 경우, [Remote Graph](https://langchain-ai.github.io/langgraph/how-tos/use-remote-graph/)를 사용하면 그래프에 직접 연결할 수 있습니다.
+LangGraph 라이브러리에서 작업하는 경우, [Remote Graph](https://langchain-ai.github.io/langgraph/how-tos/use-remote-graph/){: target="_blank"}를 사용하면 그래프에 직접 연결할 수 있습니다.
 
 ```python
 %%capture --no-stderr
@@ -212,7 +212,7 @@ remote_graph = RemoteGraph(graph_name, url=url)
 
 ### 2.  5.  단일 실행 (Runs)
 
-`run`은 그래프의 [단일 실행](https://github.com/langchain-ai/agent-protocol?tab=readme-ov-file#runs-atomic-agent-executions)을 나타냅니다. 클라이언트가 요청을 보낼 때마다 다음 과정이 발생합니다:
+`run`은 그래프의 [단일 실행](https://github.com/langchain-ai/agent-protocol?tab=readme-ov-file#runs-atomic-agent-executions){: target="_blank"}을 나타냅니다. 클라이언트가 요청을 보낼 때마다 다음 과정이 발생합니다:
 
 1. `HTTP 워커`가 고유한 `run ID`를 생성합니다.
 2. 해당 `run`과 그 결과는 `PostgreSQL`에 저장됩니다.
@@ -221,11 +221,12 @@ remote_graph = RemoteGraph(graph_name, url=url)
    * 결과 조회
    * 실행 이력 추적
 
-여러 종류의 `run`에 대해 자세히 다루는 [How To 가이드](https://langchain-ai.github.io/langgraph/how-tos/#runs)를 확인할 수 있습니다.
+여러 종류의 `run`에 대해 자세히 다루는 [How To 가이드](https://langchain-ai.github.io/langgraph/how-tos/#runs){: target="_blank"}를 확인할 수 있습니다.
 
-이제 `run`을 통해 할 수 있는 몇 가지 흥미로운 [작업](https://langchain-ai.github.io/langgraph/cloud/how-tos/background_run/#check-runs-on-thread)을 살펴보겠습니다.
+이제 `run`을 통해 할 수 있는 몇 가지 흥미로운 [작업](https://langchain-ai.github.io/langgraph/cloud/how-tos/background_run/#check-runs-on-thread){: target="_blank"}을 살펴보겠습니다.
 
 > `Run`은 `Agent` 또는 `Graph`가 실제로 동작하는 하나의 실행 인스턴스입니다.
+{: .prompt-info }
 
 #### 2. 5.  1.  백그라운드 실행 (Background Runs)
 
@@ -236,7 +237,7 @@ LangGraph 서버는 두 가지 타입의 `run`을 지원합니다:
 
 두 가지 타입의 `Background run`과 `polling`은 장시간 실행되는 에이전트 작업에서 특히 유용합니다.
 
-어떻게 동작하는지 자세한 내용은 [링크](https://langchain-ai.github.io/langgraph/cloud/how-tos/background_run/#check-runs-on-thread)에서 확인할 수 있습니다.
+어떻게 동작하는지 자세한 내용은 [링크](https://langchain-ai.github.io/langgraph/cloud/how-tos/background_run/#check-runs-on-thread){: target="_blank"}에서 확인할 수 있습니다.
 
 ```python
 # 스레드 생성
@@ -331,11 +332,11 @@ print(await client.runs.get(thread["thread_id"], run["run_id"]))
 
 이 과정을 통해 스트리밍이 가능해집니다.
 
-[스트리밍](https://langchain-ai.github.io/langgraph/how-tos/#streaming_1)에 대해서는 이전 포스팅에서 살펴보았습니다, 여기서는 그 중 하나인 `토큰 스트리밍` 방식을 살펴보겠습니다.
+[스트리밍](https://python.langchain.com/docs/concepts/streaming/){: target="_blank"}에 대해서는 이전 포스팅에서 살펴보았습니다, 여기서는 그 중 하나인 `토큰 스트리밍` 방식을 살펴보겠습니다.
 
 `토큰`을 클라이언트로 실시간 전송하는 것은, 실행에 시간이 오래 걸릴 수 있는 프로덕션 에이전트와 작업할 때 특히 유용합니다.
 
-`stream_mode="messages-tuple"` 옵션을 사용하여 [토큰을 스트리밍](https://langchain-ai.github.io/langgraph/cloud/how-tos/stream_messages/#setup)합니다.
+`stream_mode="messages-tuple"` 옵션을 사용하여 [토큰을 스트리밍](https://langchain-ai.github.io/langgraph/cloud/how-tos/stream_messages/#setup){: target="_blank"}합니다.
 
 ```python
 user_input = "What ToDo should I focus on first."
@@ -359,13 +360,13 @@ You should focus on "Call parents back about Thanksgiving plans" first. It has n
 
 `run`이 그래프의 `단일 실행`만을 의미하는 반면, `스레드`는 `멀티-턴(multi-turn)`의 상호작용을 지원합니다.
 
-클라이언트가 `thread_id`와 함께 그래프 실행을 요청하면, 서버는 해당 `run`의 모든 [체크포인트](https://langchain-ai.github.io/langgraph/concepts/persistence/#checkpoints) (단계)를 `Postgres` 데이터베이스의 해당 `스레드`에 저장합니다.
+클라이언트가 `thread_id`와 함께 그래프 실행을 요청하면, 서버는 해당 `run`의 모든 [체크포인트](https://langchain-ai.github.io/langgraph/concepts/persistence/#checkpoints){: target="_blank"} (단계)를 `Postgres` 데이터베이스의 해당 `스레드`에 저장합니다.
 
-서버는 [생성된 스레드의 상태를 확인](https://langchain-ai.github.io/langgraph/cloud/how-tos/check_thread_status/)할 수 있게 해줍니다.
+서버는 생성된 스레드의 상태를 확인할 수 있게 해줍니다.
 
 #### 2. 6.  1.  스레드 상태 확인
 
-또한, 특정 `thread`에 저장된 상태 [체크포인트](https://langchain-ai.github.io/langgraph/concepts/persistence/#checkpoints)에 쉽게 접근할 수 있습니다.
+또한, 특정 `thread`에 저장된 상태 [체크포인트](https://langchain-ai.github.io/langgraph/concepts/persistence/#checkpoints){: target="_blank"}에 쉽게 접근할 수 있습니다.
 
 ```python
 thread_state = await client.threads.get_state(thread['thread_id'])
@@ -403,7 +404,7 @@ You should focus on "Call parents back about Thanksgiving plans" first. It has n
 
 #### 2.  6.  2.  스레드 복사
 
-기존의 `스레드`를 [복사](https://langchain-ai.github.io/langgraph/cloud/how-tos/copy_threads/)(fork)할 수도 있습니다.
+기존의 `스레드`를 복사(fork)할 수도 있습니다.
 
 이렇게 하면 기존 `스레드`의 히스토리는 그대로 유지되지만, 원래 `스레드`에 영향을 주지 않는 독립적인 `run`을 새로 만들 수 있습니다.
 
@@ -449,7 +450,7 @@ You should focus on "Call parents back about Thanksgiving plans" first. It has n
 
 ### 2.  7.  휴먼-인-더-루프 (Human in the loop)
 
-이전 포스팅에서 [휴먼-인-더-루프](https://langchain-ai.github.io/langgraph/concepts/human_in_the_loop/)에 대해 다뤘습니다. 다시 살펴보면 다음 기능을 지원합니다..
+이전 포스팅에서 [휴먼-인-더-루프](https://langchain-ai.github.io/langgraph/concepts/human_in_the_loop/){: target="_blank"}에 대해 다뤘습니다. 다시 살펴보면 다음 기능을 지원합니다..
 
 * 체크 포인트 저장
 * 과거 상태 검색
@@ -458,7 +459,7 @@ You should focus on "Call parents back about Thanksgiving plans" first. It has n
 * 검토 승인 또는 거절
 * 유효성 검사 및 재입력 요청
 
-위에서 설명한 기능처럼, [이전 체크포인트에서 그래프 실행을 검색, 편집 또는 계속 진행](https://langchain-ai.github.io/langgraph/concepts/persistence/#capabilities)할 수 있습니다.
+위에서 설명한 기능처럼, [이전 체크포인트에서 그래프 실행을 검색, 편집 또는 계속 진행](https://langchain-ai.github.io/langgraph/concepts/persistence/#capabilities){: target="_blank"}할 수 있습니다.
 
 상태관련 작업을 하겠습니다.
 
@@ -551,17 +552,17 @@ It looks like there are no tasks in your ToDo list with a deadline within the ne
 
 ### 2.  8.  스레드 간 메모리 (Across-thread memory)
 
-이전 포스팅에서 [LangGraph memory store](https://langchain-ai.github.io/langgraph/concepts/persistence/#memory-store)를 사용해 여러 스레드에 걸쳐 정보를 저장하는 방법을 다루었습니다.
+이전 포스팅에서 [LangGraph memory store](https://langchain-ai.github.io/langgraph/concepts/persistence/#memory-store){: target="_blank"}를 사용해 여러 스레드에 걸쳐 정보를 저장하는 방법을 다루었습니다.
 
 배포된 그래프인 `task_maistro`는 `store`를 활용해서 ToDo와 같은 정보를 `user_id` 네임스페이스로 저장했습니다.
 
 배포 환경은 `Postgres` 데이터베이스가 있었고, 장기(스레드 간) 메모리를 저장했습니다.
 
-여기서는 `LangGraph SDK`를 활용해 [스토어와 상호작용할 수 있는 다양한 방법](https://langchain-ai.github.io/langgraph/cloud/reference/sdk/python_sdk_ref/#langgraph_sdk.client.StoreClient)을 확인할 수 있습니다.
+여기서는 `LangGraph SDK`를 활용해 [스토어와 상호작용할 수 있는 다양한 방법](https://langchain-ai.github.io/langgraph/cloud/reference/sdk/python_sdk_ref/#langgraph_sdk.client.StoreClient){: target="_blank"}을 확인할 수 있습니다.
 
 #### 2. 8.  1.  항목 검색 (Search items)
 
-[`module-6/deployment`](https://github.com/langchain-ai/langchain-academy/tree/main/module-6/deployment)의 `task_maistro` 그래프는 기본적으로 `todo`, `todo_category`, `user_id`를 사용해서 네임스페이스로 지정된 ToDo를 `store`에 저장합니다.
+[`module-6/deployment`](https://github.com/langchain-ai/langchain-academy/tree/main/module-6/deployment){: target="_blank"}의 `task_maistro` 그래프는 기본적으로 `todo`, `todo_category`, `user_id`를 사용해서 네임스페이스로 지정된 ToDo를 `store`에 저장합니다.
 이전 포스팅에서는 `task_maistro` 그래프는 `todo_category`는 없었지만 업무용, 개인용, 일반적인 용도로 구분하는 것을 추가했습니다.
 
 `todo_category`는 기본적으로 `general`로 설정되어 있습니다. 이는 `deployment/configuration.py`에서 확인할 수 있습니다.
@@ -620,7 +621,7 @@ items['items']
 
 그래프에서는 `put`을 호출하여 항목을 `store`에 추가합니다.
 
-그래프 외부에서 직접 `store`에 항목을 추가하고 싶다면, SDK의 [put](https://langchain-ai.github.io/langgraph/cloud/reference/sdk/python_sdk_ref/#langgraph_sdk.client.StoreClient.put_item) 메서드를 사용할 수 있습니다.
+그래프 외부에서 직접 `store`에 항목을 추가하고 싶다면, SDK의 [put](https://langchain-ai.github.io/langgraph/cloud/reference/sdk/python_sdk_ref/#langgraph_sdk.client.StoreClient.put_item){: target="_blank"} 메서드를 사용할 수 있습니다.
 
 ```python
 from uuid import uuid4
@@ -653,7 +654,7 @@ items['items']
 
 #### 2. 8.  3.  항목 삭제 (Delete items)
 
-SDK를 사용하여 키(key)로 `store`에서 [항목을 삭제](https://langchain-ai.github.io/langgraph/cloud/reference/sdk/python_sdk_ref/#langgraph_sdk.client.StoreClient.delete_item)할 수 있습니다.
+SDK를 사용하여 키(key)로 `store`에서 [항목을 삭제](https://langchain-ai.github.io/langgraph/cloud/reference/sdk/python_sdk_ref/#langgraph_sdk.client.StoreClient.delete_item){: target="_blank"}할 수 있습니다.
 
 ```python
 [item['key'] for item in items['items']]
@@ -694,15 +695,16 @@ items['items']
 
 ## 3.   Double Texting (이중 입력)
 
-프로덕션 환경에서 챗봇 애플리케이션 사용시 [Double Texting (이중 입력)](https://langchain-ai.github.io/langgraph/concepts/double_texting/)을 원활하게 처리하는 것은 중요합니다.
+프로덕션 환경에서 챗봇 애플리케이션 사용시 [Double Texting (이중 입력)](https://langchain-ai.github.io/langgraph/concepts/double_texting/){: target="_blank"}을 원활하게 처리하는 것은 중요합니다.
 
 사용자는 이전 `run`이 완료되기도 전에, 메시지를 연달아 보낼 수 있으며, 이를 원할하게 처리해야합니다.
 
 > 사용자가 첫 번째 실행이 완료되기 전에 그래프를 두 번째로 호출할 수 있습니다. 이를 `Double Texting (이중 입력)`이라고 합니다.
+{: .prompt-info }
 
 ### 3.  1.  Reject
 
-가장 쉬운 방법은, [Reject](https://langchain-ai.github.io/langgraph/cloud/how-tos/reject_concurrent/) 전략을 통해 현재 `run`이 완료될 때까지, 새로운 `run`을 `모두 거부`하는 것입니다.
+가장 쉬운 방법은, [Reject](https://langchain-ai.github.io/langgraph/cloud/how-tos/reject_concurrent/){: target="_blank"} 전략을 통해 현재 `run`이 완료될 때까지, 새로운 `run`을 `모두 거부`하는 것입니다.
 
 ```python
 # 환경 구성
@@ -780,7 +782,7 @@ It looks like the task "Follow-up with DI Repairs" is already on your ToDo list.
 
 ### 3.  2.  Enqueue
 
-[enqueue](https://langchain-ai.github.io/langgraph/cloud/how-tos/enqueue_concurrent/)를 사용하면, 현재 `run`이 끝날 때까지 새로운 실행을 `대기열(queue)`에 추가할 수 있습니다.
+[enqueue](https://langchain-ai.github.io/langgraph/cloud/how-tos/enqueue_concurrent/){: target="_blank"}를 사용하면, 현재 `run`이 끝날 때까지 새로운 실행을 `대기열(queue)`에 추가할 수 있습니다.
 
 ```python
 # 새 스레드 생성
@@ -863,7 +865,7 @@ I've updated your ToDo list to ensure you get cash and pay the nanny for 2 weeks
 
 ### 3.  3.  Interrupt
 
-[interrupt](https://langchain-ai.github.io/langgraph/cloud/how-tos/interrupt_concurrent/)를 사용하면, 현재 `run`을 중단하고, 지금까지 진행된 작업 내역은 저장할 수 있습니다.
+[interrupt](https://langchain-ai.github.io/langgraph/cloud/how-tos/interrupt_concurrent/){: target="_blank"}를 사용하면, 현재 `run`을 중단하고, 지금까지 진행된 작업 내역은 저장할 수 있습니다.
 
 ```python
 import asyncio
@@ -946,7 +948,7 @@ interrupted
 
 ### 3.  4.  Rollback
 
-[rollback](https://langchain-ai.github.io/langgraph/cloud/how-tos/rollback_concurrent/)을 사용하면, 그래프의 이전 실행을 중단하고 삭제한 뒤, 새 입력으로 새로운 `run`을 시작합니다.
+[rollback](https://langchain-ai.github.io/langgraph/cloud/how-tos/rollback_concurrent/){: target="_blank"}을 사용하면, 그래프의 이전 실행을 중단하고 삭제한 뒤, 새 입력으로 새로운 `run`을 시작합니다.
 
 ```python
 # 새 스레드 생성
@@ -1011,7 +1013,7 @@ Original run was correctly deleted
 
 ### 3.  5.  Double texting (이중 입력) 전략 요약
 
-[Double texting 전략에 대한 요약](https://langchain-ai.github.io/langgraph/concepts/double_texting/):
+[Double texting 전략에 대한 요약](https://langchain-ai.github.io/langgraph/concepts/double_texting/){: target="_blank"}:
 
 ![Double texting 전략](assets/posts/2025-06-13-langgraph-deployment/langgraph-deployment_01.png)
 _Double texting 전략_
@@ -1021,13 +1023,17 @@ _Double texting 전략_
 
 ## 4.   어시스턴트 (Assistants)
 
-[어시스턴트(Assistants)](https://langchain-ai.github.io/langgraph/concepts/assistants/#resources)는 개발자들이 에이전트를 실험 목적으로 **빠르고 쉽게 수정** 하고 버전 관리할 수 있는 방법을 제공합니다.
+[어시스턴트](https://langchain-ai.github.io/langgraph/concepts/assistants/#resources){: target="_blank"}는 에이전트를 빠르게 생성하고 다양한 방식으로 실험하며, 필요에 따라 수정하고 버전 관리를 할 수 있도록 돕는 LangGraph의 추상화 계층입니다.
 
-> **Assistant** 는 "특정 목적을 가진 대화형 에이전트 시스템"입니다.
+> `어시스턴트`, `에이전트`, `도구`에 개념을 다시 살펴 보면
+> `어시스턴트`는 특정 목적을 가진 대화형 에이전트 시스템으로 사용자와 소통하는 챗봇 전체를 의미합니다.
+> `에이전트`는 어시스턴트 내에서 상태를 보고 판단하여 행동을 결정합니다.
+> `도구`는 함수, 기능 또는 외부 API 입니다.
+{: .prompt-info }
 
 ### 4. 1.   그래프에 설정값 전달하기
 
-우리의 `task_maistro` 그래프는 이미 어시스턴트를 사용할 수 있도록 설정되어 있습니다!
+[`task_maistro`](https://github.com/langchain-ai/langchain-academy/tree/main/module-6/deployment){: target="_blank"} 그래프는 이미 어시스턴트를 사용할 수 있도록 설정되어 있습니다.
 
 이 그래프에는 `configuration.py` 파일이 정의되어 있고, 그래프 내에서 불러와서 사용합니다.
 
@@ -1035,22 +1041,21 @@ _Double texting 전략_
 
 ### 4.  2.  어시스턴트 생성하기
 
-그렇다면 우리가 만든 `task_maistro` 앱에서 어시스턴트를 실질적으로 어떻게 활용할 수 있을까요?
+`task_maistro` 어플리케이션에서 어시스턴트 활용은 `개인용` 및 `업무용` 작업을 위한 어시스턴트를 각각 구성하는 것과 같이
 
-저에게 있어 어시스턴트의 가장 큰 장점은, **다양한 카테고리의 작업에 대해 각각 별도의 ToDo 리스트를 가질 수 있다는 점** 입니다.
+다양한 카테고리의 작업에 대해 별도의 `ToDo 리스트`를 가질 수 있습니다.
 
-예를 들어, 저는 개인용 작업을 위한 어시스턴트 하나, 업무용 작업을 위한 어시스턴트 하나가 필요합니다.
+이처럼 서로 다른 어시스턴트는 `todo_category`와 `task_maistro_role`과 같은 설정 가능한 필드를 사용해 손쉽게 만들 수 있습니다.
 
-이처럼 서로 다른 어시스턴트는 `todo_category`와 `task_maistro_role`과 같은 **설정 가능한 필드** 를 사용해 손쉽게 만들 수 있습니다.
-
-[그림]
+![개인용 및 업무용 작업을 위한 어시스턴트를 각각 구성](assets/posts/2025-06-13-langgraph-deployment/langgraph-deployment_02.png)
+_개인용 및 업무용 작업을 위한 어시스턴트를 각각 구성_
 
 ```python
 %%capture --no-stderr
 %pip install -U langgraph_sdk
 ```
 
-이것은 우리가 그래프를 배포할 때 생성한 **기본 어시스턴트(default assistant)**입니다.
+그래프를 배포할 때 생성한 기본 어시스턴트입니다.
 
 ```python
 from langgraph_sdk import get_client
@@ -1058,13 +1063,13 @@ url_for_cli_deployment = "http://localhost:8123"
 client = get_client(url=url_for_cli_deployment)
 ```
 
-### 4.  3.  개인 어시스턴트(Personal assistant)
+### 4.  3.  개인 어시스턴트 (Personal assistant)
 
-이것은 제가 개인적인 작업을 관리하기 위해 사용할 개인 어시스턴트입니다.
+이것은 개인적인 작업을 관리하기 위해 사용할 `개인 어시스턴트`입니다.
 
 ```python
 personal_assistant = await client.assistants.create(
-    # "task_maistro" is the name of a graph we deployed
+    # task_maistro는 배포한 그래프의 이름입니다
     "task_maistro", 
     config={"configurable": {"todo_category": "personal"}}
 )
@@ -1078,7 +1083,7 @@ print(personal_assistant)
 
 ```
 
-이제, 이 어시스턴트에 **내 `user_id`를 추가해서** 더 편리하게 사용할 수 있도록 [새 버전을 만듭니다](https://langchain-ai.github.io/langgraph/cloud/how-tos/assistant_versioning/#create-a-new-version-for-your-assistant)
+이제, 이 어시스턴트에 내 `user_id`를 추가해서 편리하게 사용할 수 있도록 `update`를 사용하여 [새 버전을 만듭니다](https://langchain-ai.github.io/langgraph/cloud/how-tos/assistant_versioning/#create-a-new-version-for-your-assistant){: target="_blank"}.
 
 ```python
 task_maistro_role = """You are a friendly and organized personal task assistant. Your main focus is helping users stay on top of their personal tasks and commitments. Specifically:
@@ -1113,9 +1118,9 @@ print(personal_assistant)
 {'assistant_id': 'ccaa907b-1faf-4873-8aa3-752412505884', 'graph_id': 'task_maistro', 'created_at': '2025-04-24T08:07:49.565100+00:00', 'updated_at': '2025-04-24T08:07:49.565100+00:00', 'config': {'configurable': {'user_id': 'lance', 'todo_category': 'personal', 'task_maistro_role': 'You are a friendly and organized personal task assistant. Your main focus is helping users stay on top of their personal tasks and commitments. Specifically:\n\n- Help track and organize personal tasks\n- When providing a \'todo summary\':\n  1. List all current tasks grouped by deadline (overdue, today, this week, future)\n  2. Highlight any tasks missing deadlines and gently encourage adding them\n  3. Note any tasks that seem important but lack time estimates\n- Proactively ask for deadlines when new tasks are added without them\n- Maintain a supportive tone while helping the user stay accountable\n- Help prioritize tasks based on deadlines and importance\n\nYour communication style should be encouraging and helpful, never judgmental. \n\nWhen tasks are missing deadlines, respond with something like "I notice [task] doesn\'t have a deadline yet. Would you like to add one to help us track it better?'}}, 'metadata': {}, 'version': 2, 'name': 'Untitled', 'description': None}
 ```
 
-### 4.  4.  업무용 어시스턴트(Work assistant)
+### 4.  4.  업무용 어시스턴트 (Work assistant)
 
-이제 업무용 어시스턴트를 만들어 보겠습니다. 이 어시스턴트는 업무 관련 작업을 관리할 때 사용할 것입니다.
+이제 `업무용 어시스턴트`를 만들어 보겠습니다. 이 어시스턴트는 업무 관련 작업을 관리할 때 사용합니다.
 
 ```python
 task_maistro_role = """You are a focused and efficient work task assistant. 
@@ -1145,7 +1150,7 @@ configurations = {"todo_category": "work",
                   "task_maistro_role": task_maistro_role}
 
 work_assistant = await client.assistants.create(
-    # "task_maistro" is the name of a graph we deployed
+    # task_maistro는 배포한 그래프의 이름입니다
     "task_maistro", 
     config={"configurable": configurations}
 )
@@ -1160,9 +1165,7 @@ print(work_assistant)
 
 ### 4.  5.  어시스턴트 활용하기
 
-어시스턴트는 배포 환경에서 **Postgres** 에 저장됩니다.
-
-이렇게 하면 SDK를 사용해 [검색(search)](https://langchain-ai.github.io/langgraph/cloud/how-tos/configuration_cloud/)을 통해 어시스턴트를 쉽게 찾을 수 있습니다.
+어시스턴트는 배포 환경에서 `Postgres`에 저장되고 `SDK`를 사용하면 [검색](https://langchain-ai.github.io/langgraph/cloud/how-tos/configuration_cloud/){: target="_blank"}을 통해 어시스턴트를 쉽게 찾을 수 있습니다.
 
 ```python
 assistants = await client.assistants.search()
@@ -1182,13 +1185,13 @@ for assistant in assistants:
 {'assistant_id': 'ea4ebafa-a81d-5063-a5fa-67c755d98a21', 'version': 1, 'config': {}}
 ```
 
-SDK를 통해 어시스턴트를 쉽게 관리할 수 있습니다. 예를 들어, 더 이상 사용하지 않는 어시스턴트는 삭제할 수도 있습니다.
+이처럼 SDK를 통해 쉽게 관리가 가능합니다. 더 이상 사용하지 않는 어시스턴트도 쉽게 삭제할 수 있습니다.
 
 ```python
 await client.assistants.delete("ea4ebafa-a81d-5063-a5fa-67c755d98a21") #assistant_id
 ```
 
-이제 사용할 `personal`과 `work` 어시스턴트의 assistant ID를 설정해 보겠습니다.
+이제 사용할 `개인용(personal)`과 `업무용(work)` 어시스턴트의 `assistant ID`를 설정해 보겠습니다.
 
 ```python
 work_assistant_id = assistants[0]['assistant_id']
@@ -1278,9 +1281,7 @@ Create another ToDo: Finalize set of report generation tutorials.
 I notice the task "Finalize set of report generation tutorials" doesn't have a deadline yet. Based on similar tasks, this might take around 2 days. Would you like to set a deadline with this in mind?
 ```
 
-이 어시스턴트는 **자신의 지침(instructions)**을 사용하여, 작업 생성 과정에서 저에게 추가 정보를 요청합니다!
-
-예를 들어, **마감일(deadline)**을 지정해 달라고 요청하네요. :)
+이 어시스턴트는 해당 `지침(instructions)`을 사용하여, `마감일(deadline)`이 설정되어 있지 않기 때문에 `Ai Message`는 작업 생성 과정에서` 마감일`을 지정해 달라고 요청합니다.
 
 ```python
 user_input = "OK, for this task let's get it done by next Tuesday."
@@ -1315,7 +1316,7 @@ Content: {'task': 'Finalize set of report generation tutorials', 'time_to_comple
 I've updated the task "Finalize set of report generation tutorials" with a deadline of next Tuesday, April 29, 2025. If there's anything else you'd like to add or adjust, just let me know!
 ```
 
-### 4.  7.  개인 어시스턴트
+### 4.  7.  개인용 어시스턴트
 
 마찬가지로, 개인 어시스턴트에도 할 일(ToDo)을 추가할 수 있습니다.
 
