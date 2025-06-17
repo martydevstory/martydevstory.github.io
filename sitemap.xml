@@ -2,6 +2,22 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
     <url>
+      <loc>https://martydevstory.github.io/posts/langgraph-long-term-memory-2nd/</loc>
+      
+        <lastmod>2025-06-17T10:15:43+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
       <loc>https://martydevstory.github.io/posts/langgraph-long-term-memory-1st/</loc>
       
         <lastmod>2025-06-12T11:15:43+09:00</lastmod>
