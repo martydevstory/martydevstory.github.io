@@ -16,14 +16,6 @@
     "content": "LangGraph 채팅 모델 기반 경량 멀티 에이전트 시스템을 구성하고 리서치 및 보고서 생성 자동화 워크플로를 구축하겠습니다."
   },
   {
-    "title": "LangGraph 장기 메모리 (2)",
-    "url": "/posts/langgraph-long-term-memory-2nd/",
-    "categories": "AI, LangGraph",
-    "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
-    "date": "2025-06-02 12:15:43 +0900",
-    "content": "LangGraph 메모리 컬렉션에 대해서 더 자세히 알아보고 시맨틱 메모리 기반 에이전트을 구축해 보겠습니다."
-  },
-  {
     "title": "LangGraph 어시스턴트 구축하기 (1)",
     "url": "/posts/langgraph-building-assistant-1st/",
     "categories": "AI, LangGraph",
