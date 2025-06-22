@@ -46,7 +46,7 @@
 <meta property="twitter:title" content="LangGraph 소개 및 환경 구성" />
 <meta name="google-site-verification" content="yVTwKzr9_2sdUNkd752ReHsuWqteISd7HQCzIYZppyY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Marty"},"dateModified":"2025-06-15T21:01:04+09:00","datePublished":"2025-05-06T10:15:43+09:00","description":"LangGraph는 LangChain의 추론(Reasoning) 흐름을 제어할 수 있는 상태 머신 프레임워크로, 상태(State)를 기반으로 각 노드(Node)가 동작합니다. 환경 구성을 해보겠습니다.","headline":"LangGraph 소개 및 환경 구성","image":{"alt":null,"url":"https://martydevstory.github.io/assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://martydevstory.github.io/posts/langgraph-introduce/"},"url":"https://martydevstory.github.io/posts/langgraph-introduce/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Marty"},"dateModified":"2025-06-22T12:47:12+09:00","datePublished":"2025-05-06T10:15:43+09:00","description":"LangGraph는 LangChain의 추론(Reasoning) 흐름을 제어할 수 있는 상태 머신 프레임워크로, 상태(State)를 기반으로 각 노드(Node)가 동작합니다. 환경 구성을 해보겠습니다.","headline":"LangGraph 소개 및 환경 구성","image":{"alt":null,"url":"https://martydevstory.github.io/assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://martydevstory.github.io/posts/langgraph-introduce/"},"url":"https://martydevstory.github.io/posts/langgraph-introduce/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -1287,13 +1287,13 @@
 
 <time
   
-  data-ts="1749988864"
+  data-ts="1750564032"
   data-df="YYYY/MM/DD"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  2025/06/15
+  2025/06/22
 </time>
 
         </span>
@@ -1422,6 +1422,10 @@
         <li><a href="/posts/langgraph-long-term-memory-2nd/">LangGraph 장기 메모리 (2)</a></li>
       
     
+      
+        <li><a href="/posts/langgraph-deployment/">LangGraph 배포 및 운영</a></li>
+      
+    
   </ul>
 
   <div class="content">
@@ -1441,7 +1445,7 @@
 
 <h3 id="1--3--langgraph의-신뢰성-곡선-개선"><span class="me-2">1.  3.  LangGraph의 신뢰성 곡선 개선</span><a href="#1--3--langgraph의-신뢰성-곡선-개선" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
-<p>LangGraph는 상태와 중간 결괏값을 저장할 수 있는 <code class="language-plaintext highlighter-rouge">퍼시스턴스(Persistence)</code>, 결과를 청크(Chunk) 단위로 전달 할 수 있는 <code class="language-plaintext highlighter-rouge">스트리밍(Streaming)</code>, 중요 분기나 예외 처리에 사람 개입이 가능한 <code class="language-plaintext highlighter-rouge">휴먼-인-더-루프(Human-in-the-loop)</code>, 상태 그래프의 엄격한 단계 관리를 할 수 있는 <code class="language-plaintext highlighter-rouge">고급 제어 기능</code>이라는 네 가지 주요 기반을 제공하며, 이러한 요소들은 에이전트 워크플로 모듈의 핵심이 됩니다.</p>
+<p>LangGraph는 상태와 중간 결과값을 저장할 수 있는 <code class="language-plaintext highlighter-rouge">퍼시스턴스(Persistence)</code>, 결과를 청크(Chunk) 단위로 전달 할 수 있는 <code class="language-plaintext highlighter-rouge">스트리밍(Streaming)</code>, 중요 분기나 예외 처리에 사람 개입이 가능한 <code class="language-plaintext highlighter-rouge">휴먼-인-더-루프(Human-in-the-loop)</code>, 상태 그래프의 엄격한 단계 관리를 할 수 있는 <code class="language-plaintext highlighter-rouge">고급 제어 기능</code>이라는 네 가지 주요 기반을 제공하며, 이러한 요소들은 에이전트 워크플로 모듈의 핵심이 됩니다.</p>
 
 <p><a href="/assets/posts/2025-05-06-langgraph-introduce/20250506_120211_module01_01.png" class="popup img-link  shimmer"><img src="/assets/posts/2025-05-06-langgraph-introduce/20250506_120211_module01_01.png" alt="신뢰성 곡선" loading="lazy"></a>
 <em>신뢰성 곡선 - 제어 수준에 더 많은 자율성을 부여하면 신뢰성은 떨어집니다</em></p>
@@ -1710,6 +1714,10 @@ langgraph dev
         <li><a href="/posts/langgraph-long-term-memory-2nd/">LangGraph 장기 메모리 (2)</a></li>
       
     
+      
+        <li><a href="/posts/langgraph-deployment/">LangGraph 배포 및 운영</a></li>
+      
+    
   </ul>
 
   <div class="post-tail-wrapper text-muted">
@@ -1861,14 +1869,21 @@ langgraph dev
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/langgraph-long-term-memory-2nd/">LangGraph 장기 메모리 (2)</a>
+          <a href="/posts/langgraph-introduce/">LangGraph 소개 및 환경 구성</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/langgraph-introduce/">LangGraph 소개 및 환경 구성</a>
+          <a href="/posts/langgraph-deployment/">LangGraph 배포 및 운영</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/langgraph-long-term-memory-2nd/">LangGraph 장기 메모리 (2)</a>
         </li>
       
         
@@ -1883,13 +1898,6 @@ langgraph dev
         
         <li class="text-truncate lh-lg">
           <a href="/posts/langgraph-state-and-memory-1st/">LangGraph 상태와 메모리 (1)</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/langgraph-state-and-memory-2nd/">LangGraph 상태와 메모리 (2)</a>
         </li>
       
     </ul>
@@ -2251,6 +2259,18 @@ langgraph dev
 
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
 
@@ -2264,6 +2284,34 @@ langgraph dev
   <aside id="related-posts" aria-labelledby="related-label">
     <h3 class="mb-4" id="related-label">관련된 글</h3>
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
+      
+        <article class="col">
+          <a href="/posts/langgraph-deployment/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1750557403"
+  data-df="YYYY/MM/DD"
+  
+>
+  2025/06/22
+</time>
+
+              <h4 class="pt-0 my-2">LangGraph 배포 및 운영</h4>
+              <div class="text-muted">
+                <p>LangGraph 애플리케이션 배포 및 운영에 도움이 되는 이중 입력과 어시스턴트에 대해서 살펴보겠습니다</p>
+              </div>
+            </div>
+          </a>
+        </article>
       
         <article class="col">
           <a href="/posts/langgraph-long-term-memory-2nd/" class="post-preview card h-100">
@@ -2316,34 +2364,6 @@ langgraph dev
               <h4 class="pt-0 my-2">LangGraph 장기 메모리 (1)</h4>
               <div class="text-muted">
                 <p>장기 메모리와 일반적인 사실과 개념을 저장하는 인간의 장기 기억 중 하나인 시맨틱 메모리를 살펴보겠습니다.</p>
-              </div>
-            </div>
-          </a>
-        </article>
-      
-        <article class="col">
-          <a href="/posts/langgraph-building-assistant-2nd/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1749266143"
-  data-df="YYYY/MM/DD"
-  
->
-  2025/06/07
-</time>
-
-              <h4 class="pt-0 my-2">LangGraph 어시스턴트 구축하기 (2)</h4>
-              <div class="text-muted">
-                <p>LangGraph 채팅 모델 기반 경량 멀티 에이전트 시스템을 구성하고 리서치 및 보고서 생성 자동화 워크플로를 구축하겠습니다.</p>
               </div>
             </div>
           </a>

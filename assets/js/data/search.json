@@ -1,5 +1,13 @@
 [
   {
+    "title": "LangGraph 배포 및 운영",
+    "url": "/posts/langgraph-deployment/",
+    "categories": "AI, LangGraph",
+    "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
+    "date": "2025-06-22 10:56:43 +0900",
+    "content": "LangGraph 애플리케이션 배포 및 운영에 도움이 되는 이중 입력과 어시스턴트에 대해서 살펴보겠습니다"
+  },
+  {
     "title": "LangGraph 장기 메모리 (2)",
     "url": "/posts/langgraph-long-term-memory-2nd/",
     "categories": "AI, LangGraph",
