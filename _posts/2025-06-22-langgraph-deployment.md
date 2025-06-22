@@ -1,7 +1,7 @@
 ---
 title: LangGraph 배포 및 운영
-date: 2025-06-10 12:15:43 +/-TTTT
-description : LangGraph 어플리케이션 배포 및 운영에 도움이 되는 이중 입력과 어시스턴트에 대해서 살펴보겠습니다
+date: 2025-06-22 10:56:43 +/-TTTT
+description : LangGraph 애플리케이션 배포 및 운영에 도움이 되는 이중 입력과 어시스턴트에 대해서 살펴보겠습니다
 categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
 math: true
@@ -14,20 +14,20 @@ is_series: true
 series_title: "LangGraph"
 series_order: 10
 ---
-이번 포스팅에서는 LangGraph 어플리케이션 `배포`와 실제 운영에 도움이 되는 `이중 입력`과 `어시스턴트`에 대해서 살펴보겠습니다.
+이번 포스팅에서는 LangGraph 애플리케이션 `배포`와 실제 운영에 도움이 되는 `이중 입력`과 `어시스턴트`에 대해서 살펴보겠습니다.
 
 > 학습할 리소스는 [LangChain Academy Github](https://github.com/langchain-ai/langchain-academy){: target="_blank"}를 사용합니다.
 {: .prompt-info }
 
 ## 1.   배포 생성하기
 
-이전 포스트에서 만든 `task_maistro` 어플리케이션을 배포해보겠습니다.
+이전 포스트에서 만든 `task_maistro` 애플리케이션을 배포해 보겠습니다.
 
-어플리케이션 샘플 코드는 [`module 6`](https://github.com/langchain-ai/langchain-academy/tree/main/module-6/deployment){: target="_blank"} 디렉터리에 있습니다.
+애플리케이션 샘플 코드는 [`module 6`](https://github.com/langchain-ai/langchain-academy/tree/main/module-6/deployment){: target="_blank"} 디렉터리에 있습니다.
 
 ### 1.  1.  코드 구조
 
-LangGraph 플랫폼 배포 생성하기 위해서는 [다음 항목를 제공해야 합니다](https://langchain-ai.github.io/langgraph/concepts/application_structure/){: target="_blank"}:
+LangGraph 플랫폼 배포 생성하기 위해서는 [다음 항목을 제공해야 합니다](https://langchain-ai.github.io/langgraph/concepts/application_structure/){: target="_blank"}:
 
 * LangGraph API 구성 파일 (예: `langgraph.json`)
 * 애플리케이션 로직을 구현한 그래프 파일 (예: `task_maistro.py`)
@@ -82,7 +82,7 @@ docker run \
 * `langgraph-postgres`: 공식 PostgreSQL 이미지를 사용하는 컨테이너
 * `langgraph-api`: 미리 빌드한 API 이미지를 사용하는 컨테이너
 
-`docker-compose-example.yml`을 복사한 뒤, 다음 환경 변수를 추가하여 `task_maistro` 어플리케이션을 실행합니다:
+`docker-compose-example.yml`을 복사한 뒤, 다음 환경 변수를 추가하여 `task_maistro` 애플리케이션을 실행합니다:
 
 * `IMAGE_NAME` (예: `my-image`)
 * `LANGSMITH_API_KEY`
@@ -149,7 +149,7 @@ $ docker compose up
 
 ### 2.  1.  배포 생성 확인
 
-`task_maistro` 어플리케이션 배포를 생성했습니다.
+`task_maistro` 애플리케이션 배포를 생성했습니다.
 
 그리고 LangGraph 서버와 `task_maistro` 그래프를 포함한 Docker 이미지를 빌드하기 위해 `LangGraph CLI`를 사용했습니다.
 
@@ -168,7 +168,7 @@ LangGraph 서버는 배포된 에이전트와 상호작용을 위한 [다양한 
 이 엔드포인트들은 [공통적인 에이전트 요구 사항을 기반으로 API를 그룹화](https://github.com/langchain-ai/agent-protocol){: target="_blank"}할 수 있습니다:
 
 * `Runs` : 원자적(단일) 에이전트 실행
-* `Threads` : 다중-턴 상호작용 또는 휴먼-인-더-루프
+* `Threads` : 멀티-턴 상호작용 또는 휴먼-인-더-루프
 * `Store` : 장기 메모리
 
 그리고 [API 문서 페이지](http://localhost:8123/docs#tag/thread-runs){: target="_blank"} 직접 요청을 통해 테스트할 수 있습니다.
@@ -332,7 +332,7 @@ print(await client.runs.get(thread["thread_id"], run["run_id"]))
 
 이 과정을 통해 스트리밍이 가능해집니다.
 
-[스트리밍](https://python.langchain.com/docs/concepts/streaming/){: target="_blank"}에 대해서는 이전 포스팅에서 살펴보았습니다, 여기서는 그 중 하나인 `토큰 스트리밍` 방식을 살펴보겠습니다.
+[스트리밍](https://python.langchain.com/docs/concepts/streaming/){: target="_blank"}에 대해서는 이전 포스팅에서 살펴보았습니다, 여기서는 그중 하나인 `토큰 스트리밍` 방식을 살펴보겠습니다.
 
 `토큰`을 클라이언트로 실시간 전송하는 것은, 실행에 시간이 오래 걸릴 수 있는 프로덕션 에이전트와 작업할 때 특히 유용합니다.
 
@@ -563,7 +563,7 @@ It looks like there are no tasks in your ToDo list with a deadline within the ne
 #### 2. 8.  1.  항목 검색 (Search items)
 
 [`module-6/deployment`](https://github.com/langchain-ai/langchain-academy/tree/main/module-6/deployment){: target="_blank"}의 `task_maistro` 그래프는 기본적으로 `todo`, `todo_category`, `user_id`를 사용해서 네임스페이스로 지정된 ToDo를 `store`에 저장합니다.
-이전 포스팅에서는 `task_maistro` 그래프는 `todo_category`는 없었지만 업무용, 개인용, 일반적인 용도로 구분하는 것을 추가했습니다.
+이전 포스팅에서는 `task_maistro` 그래프는 `todo_category`는 없었지만, 업무용, 개인용, 일반적인 용도로 구분하는 것을 추가했습니다.
 
 `todo_category`는 기본적으로 `general`로 설정되어 있습니다. 이는 `deployment/configuration.py`에서 확인할 수 있습니다.
 
@@ -695,9 +695,9 @@ items['items']
 
 ## 3.   Double Texting (이중 입력)
 
-프로덕션 환경에서 챗봇 애플리케이션 사용시 [Double Texting (이중 입력)](https://langchain-ai.github.io/langgraph/concepts/double_texting/){: target="_blank"}을 원활하게 처리하는 것은 중요합니다.
+프로덕션 환경에서 챗봇 애플리케이션 사용 시 [Double Texting (이중 입력)](https://langchain-ai.github.io/langgraph/concepts/double_texting/){: target="_blank"}을 원활하게 처리하는 것은 중요합니다.
 
-사용자는 이전 `run`이 완료되기도 전에, 메시지를 연달아 보낼 수 있으며, 이를 원할하게 처리해야합니다.
+사용자는 이전 `run`이 완료되기도 전에, 메시지를 연달아 보낼 수 있으며, 이를 원활하게 처리해야 합니다.
 
 > 사용자가 첫 번째 실행이 완료되기 전에 그래프를 두 번째로 호출할 수 있습니다. 이를 `Double Texting (이중 입력)`이라고 합니다.
 {: .prompt-info }
@@ -1015,20 +1015,20 @@ Original run was correctly deleted
 
 [Double texting 전략에 대한 요약](https://langchain-ai.github.io/langgraph/concepts/double_texting/){: target="_blank"}:
 
-![Double texting 전략](assets/posts/2025-06-13-langgraph-deployment/langgraph-deployment_01.png)
+![Double texting 전략](assets/posts/2025-06-22-langgraph-deployment/langgraph-deployment_01.png)
 _Double texting 전략_
 
 그림에서 특히 Enequeue에 `Run 2`가 `Human message`가 점선인 이유는 `Run 1`의 `AI message`를 대기하다가 완료되면 `Run 2`가 실행됩니다.
-그리고 `Interrupt`의 `Run 1`도 `Run 2`가 실행되자 마자 중단됩니다.
+그리고 `Interrupt`의 `Run 1`도 `Run 2`가 실행되자마자 중단됩니다.
 
 ## 4.   어시스턴트 (Assistants)
 
 [어시스턴트](https://langchain-ai.github.io/langgraph/concepts/assistants/#resources){: target="_blank"}는 에이전트를 빠르게 생성하고 다양한 방식으로 실험하며, 필요에 따라 수정하고 버전 관리를 할 수 있도록 돕는 LangGraph의 추상화 계층입니다.
 
-> `어시스턴트`, `에이전트`, `도구`에 개념을 다시 살펴 보면
+> `어시스턴트`, `에이전트`, `도구`에 개념을 다시 살펴보면
 > `어시스턴트`는 특정 목적을 가진 대화형 에이전트 시스템으로 사용자와 소통하는 챗봇 전체를 의미합니다.
 > `에이전트`는 어시스턴트 내에서 상태를 보고 판단하여 행동을 결정합니다.
-> `도구`는 함수, 기능 또는 외부 API 입니다.
+> `도구`는 함수, 기능 또는 외부 API입니다.
 {: .prompt-info }
 
 ### 4. 1.   그래프에 설정값 전달하기
@@ -1041,13 +1041,11 @@ _Double texting 전략_
 
 ### 4.  2.  어시스턴트 생성하기
 
-`task_maistro` 어플리케이션에서 어시스턴트 활용은 `개인용` 및 `업무용` 작업을 위한 어시스턴트를 각각 구성하는 것과 같이
-
-다양한 카테고리의 작업에 대해 별도의 `ToDo 리스트`를 가질 수 있습니다.
+`task_maistro` 애플리케이션에서 어시스턴트 활용은 `개인용` 및 `업무용` 작업을 위한 어시스턴트를 각각 구성하는 것처럼 다양한 카테고리의 작업에 대해 별도의 `ToDo 리스트`를 가질 수 있습니다.
 
 이처럼 서로 다른 어시스턴트는 `todo_category`와 `task_maistro_role`과 같은 설정 가능한 필드를 사용해 손쉽게 만들 수 있습니다.
 
-![개인용 및 업무용 작업을 위한 어시스턴트를 각각 구성](assets/posts/2025-06-13-langgraph-deployment/langgraph-deployment_02.png)
+![개인용 및 업무용 작업을 위한 어시스턴트를 각각 구성](assets/posts/2025-06-22-langgraph-deployment/langgraph-deployment_02.png)
 _개인용 및 업무용 작업을 위한 어시스턴트를 각각 구성_
 
 ```python
@@ -1390,7 +1388,24 @@ I notice all tasks have deadlines and time estimates, which is great for staying
 
 ## 정리
 
-ㅇㅇ
+LangGraph 플랫폼 배포 생성을 위한 항목(`LangGraph API 구성 파일`, `그래프 파일`, `의존성 파일`, `환경 변수 파일`)을 살펴보았습니다. 그리고 `LangGraph CLI`를 사용해서 LangGraph 서버용 Docker 이미지를 생성하고 docker-compose를 구성하여 배포했습니다. 
+
+LangGraph 서버는 배포된 에이전트와 상호작용을 위한 `API`와 `SDK`를 제공합니다.
+
+그래프의 단일 실행인 `run`은 실행 후 완료 여부를 기다리지 않거나 출력이 나올 때까지 기다리는 두 가지 타입을 지원합니다.
+
+또한 `토큰 스트리밍`을 통해 실행이 오래 걸릴 수 있는 프로덕션 에이전트와 작업의 유용성을 보았습니다.
+
+멀티-턴 상호작용을 지원하는 `스레드`에서 상태 확인 및 복사가 가능했고, `휴먼-인-더-루프`를 통해 이전 체크포인트에서 그래프 실행을 검색, 편집 또는 계속 실행이 가능했습니다.
+
+`LangGraph SDK`를 사용하여 `항목 검색`, `추가`, `삭제`와 같이 `장기메모리`와 다양한 상호 작용을 알아보았습니다.
+
+또, `이중 입력` 처리를 위한 `거부`, `대기열 추가`, `중단 후 작업 내역을 저장` 및 `삭제`할 수 있는 전략도 살펴보았습니다.
+
+마지막으로 에이전트를 빠르게 생성하고 다양한 방식의 실험 및 수정과 버전관리를 돕는 `어시스턴트`를 `개인용`과 `업무용` 작업을 위한 `어시스턴트`로 각각 구성하였습니다.
+
+10개의 포스팅에서 우리는 LangGraph의 다양한 기능들을 살펴보았습니다. LangGraph는 추론 흐름을 제어하는 상태 머신 프레임워크로서 우리의 완전 자율 에이전트의 높은 제어 수준에서 신뢰성을 개선할 수 있게 도와줄 것입니다.
+
 
 ## References
 
