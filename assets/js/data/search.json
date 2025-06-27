@@ -1,5 +1,13 @@
 [
   {
+    "title": "MCP (Model Context Protocol) 소개",
+    "url": "/posts/mcp/",
+    "categories": "",
+    "tags": "mcp, python, llm, generative-ai",
+    "date": "2025-06-27 11:56:43 +0900",
+    "content": "MCP 아키텍처 및 주요 개념에 대해서 살펴보겠습니다."
+  },
+  {
     "title": "LangGraph 배포 및 운영",
     "url": "/posts/langgraph-deployment/",
     "categories": "AI, LangGraph",
