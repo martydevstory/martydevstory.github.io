@@ -1,5 +1,4 @@
 User-agent: *
-
-Disallow: /norobots/
+Allow: /
 
 Sitemap: https://martydevstory.github.io/sitemap.xml
