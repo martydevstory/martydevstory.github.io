@@ -1,5 +1,13 @@
 [
   {
+    "title": "Claude Code 소개",
+    "url": "/posts/claude-code-introduce/",
+    "categories": "",
+    "tags": "claude-code, llm, generative-ai, claude, vibe-coding",
+    "date": "2025-08-18 11:56:43 +0900",
+    "content": "앤트로픽에서 발표한 Claude Code가 무엇인지 또 어떻게 사용하고 최대한 활용할 수 있는지 알아보겠습니다"
+  },
+  {
     "title": "MCP (Model Context Protocol) 소개",
     "url": "/posts/mcp/",
     "categories": "",
