@@ -6,9 +6,9 @@ tags: [claude-code, llm, generative-ai, claude, vibe-coding]
 math: true
 toc: true
 pin: false
-# image:
-#     path: assets/posts/2025-05-06-langg`raph-introduce/langgraph_logo.png
-#     alt:
+image:
+    path: assets/posts/2025-08-18-claude-code-introduce/claude-code-logo.png
+    alt:
 is_series: false
 series_title: "Claude Code"
 series_order: 1
