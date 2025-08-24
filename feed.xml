@@ -4,7 +4,7 @@
   <id>https://martydevstory.github.io/</id>
   <title>마티데브스토리</title>
   <subtitle>AI, Cloud 기반 블로그 작성.</subtitle>
-  <updated>2025-08-18T15:02:46+09:00</updated>
+  <updated>2025-08-24T21:26:26+09:00</updated>
   <author>
     <name>마티(Marty)</name>
     <uri>https://martydevstory.github.io/</uri>
@@ -24,7 +24,7 @@
     <link href="https://martydevstory.github.io/posts/claude-code-introduce/" rel="alternate" type="text/html" title="Claude Code 소개" />
     <published>2025-08-18T11:56:43+09:00</published>
   
-    <updated>2025-08-18T15:01:56+09:00</updated>
+    <updated>2025-08-24T21:25:41+09:00</updated>
   
     <id>https://martydevstory.github.io/posts/claude-code-introduce/</id>
     <content type="text/html" src="https://martydevstory.github.io/posts/claude-code-introduce/" />
@@ -46,7 +46,7 @@
     <link href="https://martydevstory.github.io/posts/mcp/" rel="alternate" type="text/html" title="MCP (Model Context Protocol) 소개" />
     <published>2025-06-27T11:56:43+09:00</published>
   
-    <updated>2025-06-27T11:56:43+09:00</updated>
+    <updated>2025-08-24T21:25:41+09:00</updated>
   
     <id>https://martydevstory.github.io/posts/mcp/</id>
     <content type="text/html" src="https://martydevstory.github.io/posts/mcp/" />
