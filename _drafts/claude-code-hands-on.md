@@ -6,9 +6,9 @@ tags: [claude-code, llm, generative-ai, claude, vibe-coding]
 math: true
 toc: true
 pin: false
-# image:
-#     path: assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png
-#     alt:
+image:
+    path: assets/posts/2025-08-18-claude-code-introduce/claude-code-logo.png
+    alt:
 is_series: true
 series_title: "Claude Code"
 series_order: 2
@@ -37,7 +37,7 @@ series_order: 2
 > Google Cloud Vertex에 대한 [안내](https://docs.anthropic.com/en/docs/claude-code/)
 {: .prompt-info }
 
-## 프로젝트 설정하기
+## 샘플 프로젝트 설정하기
 
 프로젝트를 위한 하기 설정을 합니다.
 
@@ -53,6 +53,11 @@ series_order: 2
     - API 키를 `.env` 파일에 입력합니다.
 
 4. `npm run dev` 실행하여 프로젝트를 시작합니다.
+
+5. 마지막으로 `Claude Code`를 실행합니다.
+  ```bash
+  claude
+  ```
 
 ## 컨텍스트 추가
 
@@ -110,6 +115,9 @@ _CLAUDE.md 파일_
 
 Claude가 이 지시사항을 자동으로 `CLAUDE.md` 파일에 병합합니다.
 
+![코드 스타일 추가 정의](assets/drafts/claude-code-handson/code-style.png)
+_코드 스타일 추가 정의_
+
 ### `'@'`를 사용한 파일 언급
 
 Claude가 특정 파일을 살펴보도록 하려면, `@` 기호 뒤에 파일 경로를 사용하세요.
@@ -123,6 +131,9 @@ Claude가 특정 파일을 살펴보도록 하려면, `@` 기호 뒤에 파일 �
 
 Claude가 auth 관련 파일 목록을 보여주고, 선택한 파일을 대화에 포함시킵니다.
 
+![인증 파일 언급](assets/drafts/claude-code-handson/file-mention-01.png)
+_인증 파일 언급_
+
 ### `CLAUDE.md`에서 파일 참조
 
 같은 `@` 구문을 사용하여 `CLAUDE.md`파일에서 직접 파일을 언급할 수도 있습니다.
@@ -133,7 +144,13 @@ Claude가 auth 관련 파일 목록을 보여주고, 선택한 파일을 대화�
 데이터베이스 스키마는 @prisma/schema.prisma 파일에 정의되어 있습니다.
 ```
 
+![직접 파일 언급](../assets/drafts/claude-code-handson/direct-file-mention.png)
+_직접 파일 언급_
+
 이런 방식으로 파일을 언급하면, 그 내용이 모든 요청에 자동으로 포함되므로 Claude가 매번 스키마 파일을 검색하고 읽을 필요 없이 데이터 구조에 대한 질문에 즉시 답변할 수 있습니다.
+
+![데이터 구조 즉시 답변](assets/drafts/claude-code-handson/direct-file-mention-02.png)
+_데이터 구조 즉시 답변_
 
 ## 변경 사항 만들기
 
@@ -145,6 +162,15 @@ Claude와 소통하는 가장 효과적인 방법 중 하나는 스크린샷을 
 Claude에 스크린샷을 붙여넣으려면 `Ctrl+V`를 사용합니다(macOS에서는 `Cmd+V`). 
 이 키보드 단축키는 채팅 인터페이스에 스크린샷을 붙여넣기 위해 특별히 설계되었습니다. 
 이미지를 붙여넣은 후, Claude에게 애플리케이션의 해당 영역에 특정 변경사항을 요청할 수 있습니다.
+
+#### 예: 스크린샷 붙여넣고 위치 수정
+
+실행한 샘플 프로젝트에서 좌측 상단에 있던 대화창을 스크린샷을 붙여넣고 세로 중간 위치로 변경 요청했습니다.
+
+![예: 스크린 샷 기반 위치 수정](../assets/drafts/claude-code-handson/making-changes-01.png)
+_예: 스크린 샷 기반 위치 수정_
+
+> Sonnet 모델 기반으로 했을 경우 바로 적용 되지 않았고 다시 확인을 해서 조정이 되었습니다.
 
 ### 계획 모드 (Planning Mode)
 
@@ -161,7 +187,12 @@ Claude에 스크린샷을 붙여넣으려면 `Ctrl+V`를 사용합니다(macOS�
 
 이를 통해 계획을 검토하고, Claude가 중요한 것을 놓쳤거나 특정 시나리오를 고려하지 않았다면 방향을 재조정할 기회를 얻을 수 있습니다.
 
-### 사고 모드 (Thinking Modes)
+#### 예: 계획 모드에서 시스템 용어를 친근한 문장 표현으로 수정 요청
+
+![계획 모드](../assets/drafts/claude-code-handson/plan-mode.png)
+_계획 모드_
+
+### 사고 모드 (Thinking Mode)
 
 Claude는 `사고 모드`를 통해 다양한 수준의 추론을 제공합니다.
 이를 통해 Claude가 솔루션을 제공하기 전에 복잡한 문제에 대해 더 많은 시간을 들여 추론할 수 있습니다.
@@ -175,6 +206,11 @@ Claude는 `사고 모드`를 통해 다양한 수준의 추론을 제공합니�
 - `"Ultrathink"` : 최대 추론 능력
 
 각 모드는 Claude에게 점진적으로 더 많은 토큰을 제공하여, 도전적 문제에 대한 더 깊은 분석을 가능하게 합니다.
+
+#### 예: 사고 모드 활성화하기
+
+![사고 모드](../assets/drafts/claude-code-handson/think-mode.png)
+_사고 모드_
 
 ### 계획 모드 vs 사고 모드 사용 시기
 
@@ -193,28 +229,8 @@ Claude는 `사고 모드`를 통해 다양한 수준의 추론을 제공합니�
 - 알고리즘 도전과제
 
 폭과 깊이가 모두 필요한 작업의 경우 두 모드를 결합할 수 있습니다.
-다만 두 기능 모두 `추가 토큰을 소비`하므로, 사용 시 `비용을 고려`해야 합니다.\
+다만 두 기능 모두 `추가 토큰을 소비`하므로, 사용 시 `비용을 고려`해야 합니다.
 
-### Claude가 사용할 수 있는 도구
-
-| 도구 | 설명 | 
-|------|------| 
-| Bash | 환경에서 셸 명령을 실행합니다 | 
-| Edit | 특정 파일에 대상 편집을 수행합니다 | 
-| Glob | 패턴 매칭을 기반으로 파일을 찾습니다 | 
-| Grep | 파일 내용에서 패턴을 검색합니다 | 
-| LS | 파일과 디렉토리를 나열합니다 | 
-| MultiEdit | 단일 파일에서 여러 편집을 원자적으로 수행합니다 | 
-| NotebookEdit | Jupyter 노트북 셀을 수정합니다 | 
-| NotebookRead | Jupyter 노트북 내용을 읽고 표시합니다 | 
-| Read | 파일의 내용을 읽습니다 | 
-| Task | 복잡한 다단계 작업을 처리하기 위해 서브에이전트를 실행합니다 | 
-| TodoWrite | 구조화된 작업 목록을 생성하고 관리합니다 | 
-| WebFetch | 지정된 URL에서 콘텐츠를 가져옵니다 | 
-| WebSearch | 도메인 필터링으로 웹 검색을 수행합니다 | 
-| Write | 파일을 생성하거나 덮어씁니다 |
-
-[유즈케이스 추가]
 
 ## 컨텍스트 제어
 
@@ -228,7 +244,12 @@ Claude와 복잡한 작업을 수행할 때, 대화를 집중적이고 생산적
 이는 Claude가 여러 가지를 동시에 처리하려고 하는 대신 하나의 특정 작업에 집중하기를 원할 때 특히 유용합니다. 
 예를 들어, Claude에게 여러 함수에 대한 테스트를 작성하도록 요청했는데 모든 함수에 대한 포괄적인 계획을 세우기 시작한다면, 중단하고 한 번에 하나의 함수에만 집중하도록 요청할 수 있습니다.
 
-### Escape와 메모리 결합하기
+#### 예 : 존재하지 않는 테스트 파일의 검색 중단을 위한 `ESC` 키
+
+![중단을 위한 ESC 키](../assets/drafts/claude-code-handson/controlling-esc.png)
+_중단을 위한 ESC 키_
+
+### Escape와 메모리(#) 결합하기
 `Escape` 기법의 가장 강력한 활용 중 하나는 반복적인 오류를 수정하는 것입니다. 
 Claude가 서로 다른 대화에서 같은 실수를 반복적으로 할 때:
 
@@ -238,7 +259,12 @@ Claude가 서로 다른 대화에서 같은 실수를 반복적으로 할 때:
 
 이렇게 하면 Claude가 프로젝트의 향후 대화에서 같은 오류를 범하는 것을 방지할 수 있습니다.
 
-### 대화 되감기
+#### 예 : ESC로 중지 후 바로 올바른 파일명을 단축키 `#`을 이용하여 메모리에 추가
+
+![올바른 파일명을 #을 이용 메모리 추가](../assets/drafts/claude-code-handson/controlling-sharp.png)
+_올바른 파일명을 #을 이용 메모리 추가_
+
+### 대화 되감기 (ESC 연속 두번 클릭)
 긴 대화 중에는 관련성이 없거나 주의를 산만하게 하는 컨텍스트가 누적될 수 있습니다. 
 예를 들어, Claude가 오류를 만나고 디버깅에 시간을 많이 보낸다면, Claude와 주고 받은 논의가 다음 작업에는 유용하지 않을 수 있습니다.
 
@@ -248,6 +274,16 @@ Claude가 서로 다른 대화에서 같은 실수를 반복적으로 할 때:
 - 가치 있는 컨텍스트 유지 (Claude의 코드베이스 이해 등)
 - 주의를 산만하게 하거나 관련 없는 대화 기록 제거
 - Claude가 현재 작업에 집중하도록 유지
+
+#### 예: 되감기 실행 화면
+
+![되감기 실행 화면](../assets/drafts/claude-code-handson/controlling-rewind-0.png)
+_되감기 실행 화면_
+
+#### 예: 디버깅 완료 후 에러 관련 대화 제외하기 위해 되감기
+
+![대화 되감기](../assets/drafts/claude-code-handson/controlling-rewind.png)
+_대화 대감기_
 
 ### 컨텍스트 관리 명령어
 Claude는 대화 컨텍스트를 효과적으로 관리하는 데 도움이 되는 여러 명령어를 제공합니다:
@@ -303,9 +339,25 @@ Claude Code는 `슬래시`를 입력하여 액세스할 수 있는 내장 명령
 2. `npm audit fix`를 실행하여 업데이트를 적용합니다.
 3. 테스트를 실행하여 업데이트가 아무것도 손상시키지 않았는지 확인합니다.
 
+```
+Your goal is to update any vulnerable dependencies.
+
+Do the following:
+
+1. Run 'npm audit' to find vulnerable installed packages in this project
+2. Run 'npm audit fix' to apply updates
+3. Run tests and verify the updates didn't break anything
+```
+
 명령어 파일을 생성한 후, Claude Code가 새 명령어를 인식하도록 하려면 Claude Code를 다시 시작해야 합니다.
 
-### 인수가 있는 명령어
+![사용자 정의 명령어 파일 생성](../assets/drafts/claude-code-handson/custom-cmd-01.png)
+_사용자 정의 명령어 파일 생성_
+
+![사용자 정의 명령어 실행](../assets/drafts/claude-code-handson/custom-cmd-02.png)
+_사용자 정의 명령어 실행_
+
+### 예: 인수가 있는 명령어
 사용자 정의 명령어는 `$ARGUMENTS` 플레이스홀더를 사용하여 인수를 받을 수 있습니다. 이렇게 하면 훨씬 더 유연하고 재사용 가능해집니다.
 
 예를 들어, `write_tests.md` 명령어는 다음을 포함할 수 있습니다:
@@ -333,6 +385,9 @@ Coverage:
 
 인수는 파일 경로일 필요가 없습니다. Claude에게 작업에 대한 컨텍스트와 방향을 제공하기 위해 전달하고 싶은 모든 문자열이 될 수 있습니다.
 
+![인수가 있는 사용자 정의 명령어 실행](../assets/drafts/claude-code-handson/custom-cmd-03.png)
+_인수가 있는 사용자 정의 명령어 실행_
+
 ### 주요 이점
 - 자동화 : 반복적인 워크플로우를 단일 명령어로 변환
 - 일관성 : 매번 동일한 단계가 수행되도록 보장
@@ -346,7 +401,7 @@ Coverage:
 `MCP(Model Context Protocol)` 서버를 추가하여 Claude Code의 기능을 확장할 수 있습니다. 
 이러한 서버는 원격으로 또는 머신에서 로컬로 실행되며, Claude에게 일반적으로는 갖지 못할 새로운 도구와 능력을 제공합니다.
 
-가장 인기 있는 MCP 서버 중 하나는 Playwright로, Claude에게 웹 브라우저를 제어할 수 있는 능력을 제공합니다. 
+가장 인기 있는 MCP 서버 중 하나는 Playwright로, Claude에게 `웹 브라우저를 제어`할 수 있는 능력을 제공합니다. 
 이는 웹 개발 워크플로우에 강력한 가능성을 열어줍니다.
 
 ### Playwright MCP 서버 설치하기
@@ -361,6 +416,10 @@ claude mcp add playwright npx @playwright/mcp@latest
 - MCP 서버의 이름을 "playwright"로 지정합니다
 - 머신에서 서버를 로컬로 시작하는 명령어를 제공합니다
 
+![MCP 서버 추가하기](../assets/drafts/claude-code-handson/mcp-01.png)
+_MCP 서버 추가하기_
+
+
 ### 권한 관리
 MCP 서버 도구를 처음 사용할 때, Claude는 매번 권한을 요청합니다. 이러한 권한 프롬프트가 번거롭다면, 설정을 편집하여 서버를 사전 승인할 수 있습니다.
 
@@ -374,7 +433,10 @@ MCP 서버 도구를 처음 사용할 때, Claude는 매번 권한을 요청합�
    }
 }
 ```
-`mcp__playwright`의 이중 밑줄에 주목하세요. 이렇게 하면 Claude가 매번 권한을 요청하지 않고 Playwright 도구를 사용할 수 있습니다.
+`mcp__playwright`의 이중 밑줄로 권한 설정하고 싶은 mcp 서버를 설정하면 Claude가 매번 권한을 요청하지 않고 Playwright 도구를 사용할 수 있습니다.
+
+![MCP 서버 Claude 권한 설정](../assets/drafts/claude-code-handson/mcp-02.png)
+_MCP 서버 Claude 권한 설정_
 
 ### 예: 컴포넌트 생성 개선
 다음은 Playwright MCP 서버가 개발 워크플로우를 어떻게 개선할 수 있는지 보여주는 실제 예시입니다. 
@@ -392,9 +454,21 @@ MCP 서버 도구를 처음 사용할 때, Claude는 매번 권한을 요청합�
 
 Claude는 브라우저 도구를 사용하여 앱과 상호작용하고, 생성된 출력을 검사한 다음, 더 독창적이고 창의적인 디자인을 장려하도록 프롬프트 파일을 수정합니다.
 
+```
+Your goal is to improve the component generation prompt at @src/lib/prompts/generation.tsx. Here's how:\
+\
+1. Open a browser and navigate to localhost:3000\
+2. Request a basic component to be generated\
+3. Review the generated component and its source codel\
+4. Identify areas for improvement\
+5. Update the prompt to produce better components going forward.\
+\
+For now, only evaluate visual styling aspects. We don't want components generated that look like typical tailwindess components - we want something more original.
+```
+
 ### 결과와 이점
-이 접근법은 훨씬 더 나은 결과를 가져올 수 있습니다. 
-일반적인 보라색에서 파란색으로의 그라데이션과 표준 Tailwind 패턴 대신, Claude는 다음을 장려하도록 프롬프트를 업데이트할 수 있습니다:
+이 접근법은 훨씬 더 좋은 결과를 가져올 수 있습니다. 
+일반적인 보라색에서 파란색으로의 그라데이션과 표준 Tailwind 패턴 대신, Claude는 다음을 추천하여 프롬프트를 업데이트할 수 있습니다:
 
 - 따뜻한 일몰 그라데이션 (주황색-분홍색-보라색)
 - 깊은 바다 테마 (청록색-에메랄드-시안)
@@ -403,8 +477,11 @@ Claude는 브라우저 도구를 사용하여 앱과 상호작용하고, 생성�
 
 주요 장점은 Claude가 코드뿐만 아니라 실제 시각적 출력을 볼 수 있고, 이를 통해 스타일링 개선에 대해 훨씬 더 정보에 기반한 결정을 내릴 수 있습니다.
 
+![Playwright MCP를 통한 시각적 출력 분석 후 제안](../assets/drafts/claude-code-handson/mcp-03.png)
+_Playwright MCP를 통한 시각적 출력 분석 후 제안_
+
 ### 다른 MCP 서버 탐색하기
-Playwright는 MCP 서버로 가능한 것의 한 예일 뿐입니다. 생태계에는 다음을 위한 서버들이 포함되어 있습니다:
+Playwright는 MCP 서버는 한 예일 뿐이며, 에코 시스템에는 다음 기능을 위한 MCP 서버들이 포함되어 있습니다:
 
 - 데이터베이스 상호작용
 - API 테스팅 및 모니터링
@@ -412,7 +489,7 @@ Playwright는 MCP 서버로 가능한 것의 한 예일 뿐입니다. 생태계�
 - 클라우드 서비스 통합
 - 개발 도구 자동화
 
-특정 개발 요구사항에 맞는 MCP 서버를 탐색해보세요. 이들은 Claude를 단순한 코드 어시스턴트에서 전체 도구체인과 상호작용할 수 있는 포괄적인 개발 파트너로 변화시킬 수 있습니다.
+특정 개발 요구사항에 맞는 MCP 서버를 찾아보세요. MCP는 Claude를 단순한 코드 어시스턴트에서 전체 도구체인과 상호작용할 수 있는 포괄적인 개발 파트너가 될 수 있습니다.
 
 ## Github 통합
 

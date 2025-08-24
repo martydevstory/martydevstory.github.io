@@ -9,7 +9,7 @@ pin: false
 image:
     path: assets/posts/2025-08-18-claude-code-introduce/claude-code-logo.png
     alt:
-is_series: false
+is_series: true
 series_title: "Claude Code"
 series_order: 1
 ---
@@ -66,7 +66,7 @@ _코딩 어시스턴트의 작동 방식_
 
 이 시스템을 통해 `언어 모델`은 실제로는 포맷된 텍스트 응답을 생성하는 것뿐이지만, 효과적으로 "파일 읽기", "코드 작성", "명령 실행"을 할 수 있습니다.
 
-### 1.4 Claude의 도구 사용이 중요한 이유
+### 1.4 Claude Code의 도구 사용이 중요한 이유
 
 모든 `언어 모델`이 도구를 똑같이 잘 사용하는 것은 아닙니다.
 
@@ -77,7 +77,7 @@ Claude 시리즈 모델(Opus, Sonnet, Haiku)은 도구가 무엇을 하는지 �
 ![도구 사용](assets/posts/2025-08-18-claude-code-introduce/tool-use.png)
 _도구 사용_
 
-#### 1.5  Claude의 강력한 도구 사용의 이점
+#### 1.5 Claude Code의 강력한 도구 사용의 이점
 
 `더 어려운 작업 처리` : Claude는 다양한 도구를 결합하여 복잡한 작업을 처리할 수 있으며, 이전에 본 적이 없는 도구도 사용할 수 있습니다.
 
@@ -85,7 +85,26 @@ _도구 사용_
 
 `더 나은 보안` : Claude Code는 인덱싱 없이도 코드베이스를 탐색할 수 있어, 전체 코드베이스를 외부 서버로 보내지 않아도 되는 경우가 많습니다.
 
-### 1.6 사용 사례
+### 1.6 Claude Code가 사용할 수 있는 도구
+
+| 도구 | 설명 | 
+|------|------| 
+| Bash | 환경에서 셸 명령을 실행합니다 | 
+| Edit | 특정 파일에 대상 편집을 수행합니다 | 
+| Glob | 패턴 매칭을 기반으로 파일을 찾습니다 | 
+| Grep | 파일 내용에서 패턴을 검색합니다 | 
+| LS | 파일과 디렉토리를 나열합니다 | 
+| MultiEdit | 단일 파일에서 여러 편집을 원자적으로 수행합니다 | 
+| NotebookEdit | Jupyter 노트북 셀을 수정합니다 | 
+| NotebookRead | Jupyter 노트북 내용을 읽고 표시합니다 | 
+| Read | 파일의 내용을 읽습니다 | 
+| Task | 복잡한 다단계 작업을 처리하기 위해 서브에이전트를 실행합니다 | 
+| TodoWrite | 구조화된 작업 목록을 생성하고 관리합니다 | 
+| WebFetch | 지정된 URL에서 콘텐츠를 가져옵니다 | 
+| WebSearch | 도메인 필터링으로 웹 검색을 수행합니다 | 
+| Write | 파일을 생성하거나 덮어씁니다 |
+
+### 1.7 사용 사례
 
 #### 사용 사례 1 : 라이브러리 최적화
 
@@ -131,7 +150,7 @@ _Github 통합_
 ![Claude Code PR](assets/posts/2025-08-18-claude-code-introduce/usecase-04-02.png)
 _Claude Code PR Review_
 
-### 1.7 핵심 요점
+### 1.8 핵심 요점
 
 `코딩 어시스턴트`를 이해하는 것은 몇 가지 핵심 사항으로 요약됩니다:
 
