@@ -4,7 +4,7 @@
   <id>https://martydevstory.github.io/</id>
   <title>마티데브스토리</title>
   <subtitle>AI, Cloud 기반 블로그 작성.</subtitle>
-  <updated>2025-08-24T21:26:26+09:00</updated>
+  <updated>2025-08-25T15:30:12+09:00</updated>
   <author>
     <name>마티(Marty)</name>
     <uri>https://martydevstory.github.io/</uri>
@@ -17,6 +17,28 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Claude Code 프로젝트 설정 및 기능들</title>
+    <link href="https://martydevstory.github.io/posts/claude-code-hands-on/" rel="alternate" type="text/html" title="Claude Code 프로젝트 설정 및 기능들" />
+    <published>2025-08-25T11:56:43+09:00</published>
+  
+    <updated>2025-08-25T11:56:43+09:00</updated>
+  
+    <id>https://martydevstory.github.io/posts/claude-code-hands-on/</id>
+    <content type="text/html" src="https://martydevstory.github.io/posts/claude-code-hands-on/" />
+    <author>
+      <name>마티(Marty)</name>
+    </author>
+
+  
+    
+  
+
+  <summary>Claude Code 프로젝트 설정과 변경 사항, 컨텍스트 제어, 사용자 정의 명령어, MCP 구성 및 Github 통합에 대해서 자세히 알아보겠습니다.</summary>
+
+  </entry>
 
   
   <entry>
@@ -111,32 +133,6 @@
   
 
   <summary>LangGraph 메모리 컬렉션에 대해서 더 자세히 알아보고 시맨틱 메모리 기반 에이전트을 구축해 보겠습니다.</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>LangGraph 장기 메모리 (1)</title>
-    <link href="https://martydevstory.github.io/posts/langgraph-long-term-memory-1st/" rel="alternate" type="text/html" title="LangGraph 장기 메모리 (1)" />
-    <published>2025-06-12T11:15:43+09:00</published>
-  
-    <updated>2025-06-15T21:01:04+09:00</updated>
-  
-    <id>https://martydevstory.github.io/posts/langgraph-long-term-memory-1st/</id>
-    <content type="text/html" src="https://martydevstory.github.io/posts/langgraph-long-term-memory-1st/" />
-    <author>
-      <name>마티(Marty)</name>
-    </author>
-
-  
-    
-    <category term="AI" />
-    
-    <category term="LangGraph" />
-    
-  
-
-  <summary>장기 메모리와 일반적인 사실과 개념을 저장하는 인간의 장기 기억 중 하나인 시맨틱 메모리를 살펴보겠습니다.</summary>
 
   </entry>
 

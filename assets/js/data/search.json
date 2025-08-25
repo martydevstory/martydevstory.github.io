@@ -1,5 +1,13 @@
 [
   {
+    "title": "Claude Code 프로젝트 설정 및 기능들",
+    "url": "/posts/claude-code-hands-on/",
+    "categories": "",
+    "tags": "claude-code, llm, generative-ai, claude, vibe-coding",
+    "date": "2025-08-25 11:56:43 +0900",
+    "content": "Claude Code 프로젝트 설정과 변경 사항, 컨텍스트 제어, 사용자 정의 명령어, MCP 구성 및 Github 통합에 대해서 자세히 알아보겠습니다."
+  },
+  {
     "title": "Claude Code 소개",
     "url": "/posts/claude-code-introduce/",
     "categories": "",
