@@ -46,7 +46,7 @@
 <meta property="twitter:title" content="Claude Code 프로젝트 설정 및 기능들" />
 <meta name="google-site-verification" content="yVTwKzr9_2sdUNkd752ReHsuWqteISd7HQCzIYZppyY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Marty"},"dateModified":"2025-08-25T11:56:43+09:00","datePublished":"2025-08-25T11:56:43+09:00","description":"Claude Code 프로젝트 설정과 변경 사항, 컨텍스트 제어, 사용자 정의 명령어, MCP 구성 및 Github 통합에 대해서 자세히 알아보겠습니다.","headline":"Claude Code 프로젝트 설정 및 기능들","image":{"alt":null,"url":"https://martydevstory.github.io/assets/posts/2025-08-18-claude-code-introduce/claude-code-logo.png","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://martydevstory.github.io/posts/claude-code-hands-on/"},"url":"https://martydevstory.github.io/posts/claude-code-hands-on/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Marty"},"dateModified":"2025-08-26T11:24:19+09:00","datePublished":"2025-08-25T11:56:43+09:00","description":"Claude Code 프로젝트 설정과 변경 사항, 컨텍스트 제어, 사용자 정의 명령어, MCP 구성 및 Github 통합에 대해서 자세히 알아보겠습니다.","headline":"Claude Code 프로젝트 설정 및 기능들","image":{"alt":null,"url":"https://martydevstory.github.io/assets/posts/2025-08-18-claude-code-introduce/claude-code-logo.png","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://martydevstory.github.io/posts/claude-code-hands-on/"},"url":"https://martydevstory.github.io/posts/claude-code-hands-on/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -2846,6 +2846,29 @@
 
       <!-- lastmod date -->
       
+        <span>
+          업데이트
+          <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1756175059"
+  data-df="YYYY/MM/DD"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  2025/08/26
+</time>
+
+        </span>
+      
 
       
         
@@ -2897,9 +2920,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="7359 단어"
+  title="7381 단어"
 >
-  <em>40 분</em>읽는 시간</span>
+  <em>41 분</em>읽는 시간</span>
 
         </div>
       </div>
@@ -2945,11 +2968,15 @@
   </ul>
 
   <div class="content">
-    <h2 id="2-1---claude-code-설정하기"><span class="me-2">2. 1   Claude Code 설정하기</span><a href="#2-1---claude-code-설정하기" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+    <blockquote class="prompt-info">
+  <p>학습할 리소스는 <a href="https://www.anthropic.com/learn" target="_blank">Anthropic Academy</a>를 사용합니다.</p>
+</blockquote>
+
+<h2 id="2-1---claude-code-설정하기"><span class="me-2">2. 1   Claude Code 설정하기</span><a href="#2-1---claude-code-설정하기" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
 <p>먼저 <code class="language-plaintext highlighter-rouge">Claude Code</code>를 로컬에 설치합니다.</p>
 
-<p>전체 설정 지침은 <a href="https://docs.anthropic.com/en/docs/claude-code/setup">여기</a>에서 확인할 수 있습니다:</p>
+<p>전체 설정 지침은 <a href="https://docs.anthropic.com/en/docs/claude-code/setup" target="_blank">여기</a>에서 확인할 수 있습니다:</p>
 
 <p>다음을 수행합니다:</p>
 
@@ -2957,7 +2984,7 @@
   <li>
     <p><code class="language-plaintext highlighter-rouge">NodeJS</code>가 설치되어 있는지 확인합니다.</p>
 
-    <p>이미 설치되어 있는지 확실하지 않으면 설치 프로그램을 <a href="https://nodejs.org/en/download">다운로드</a>할 수 있습니다.</p>
+    <p>이미 설치되어 있는지 확실하지 않으면 설치 프로그램을 <a href="https://nodejs.org/en/download" target="_blank">다운로드</a>할 수 있습니다.</p>
   </li>
   <li>터미널에서 실행합니다.
     <div class="language-bash highlighter-rouge"><div class="code-header">
@@ -2973,8 +3000,8 @@
 <blockquote class="prompt-info">
   <p>AWS Bedrock이나 Google Cloud Vertex를 사용하는 경우 추가 설정이 필요합니다.</p>
 
-  <p>AWS Bedrock에 대한 <a href="https://docs.anthropic.com/en/docs/claude-code/amazon-bedrock">안내</a>, 
-Google Cloud Vertex에 대한 <a href="https://docs.anthropic.com/en/docs/claude-code/">안내</a></p>
+  <p>AWS Bedrock에 대한 <a href="https://docs.anthropic.com/en/docs/claude-code/amazon-bedrock" target="_blank">안내</a>, 
+Google Cloud Vertex에 대한 <a href="https://docs.anthropic.com/en/docs/claude-code/" target="_blank">안내</a></p>
 </blockquote>
 
 <h2 id="2-2-샘플-프로젝트-설정하기"><span class="me-2">2. 2 샘플 프로젝트 설정하기</span><a href="#2-2-샘플-프로젝트-설정하기" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
@@ -2982,7 +3009,7 @@ Google Cloud Vertex에 대한 <a href="https://docs.anthropic.com/en/docs/claude
 <p><code class="language-plaintext highlighter-rouge">리액트 컴포넌트 자동 생성기 프로젝트</code>를 위해 하기 설정을 합니다.</p>
 
 <ol>
-  <li><a href="https://cc.sj-cdn.net/instructor/4hdejjwplbrm-anthropic/assets/1750970894/uigen.zip?response-content-disposition=attachment&amp;Expires=1755329806&amp;Signature=GV1vldsm3Eq84hbd58NtazGj7E-L9rH1f1ukgW~U~8Pby1SW-Iu-YZMFSNmjZENGGeYeOZyN4407Gr5WlYBYMmma8WLAuIFQgkQdcJALgTXjBaj~1tnfoB2Pu8q926eYrf72tbOTzDrt6DHYR5qhtKTeCfnz-3k8FQ45i45jO-fnkyYwOYVcptY2g4LQhaPDK~1PT9n-Y3LxXP-Prm93T4GEZF~uzdqlriM1a98Ux1G3Y~w7x09AwRTqe2ag-WBmWxpdkh6Lz0Mf7716yyap9OuMlwRw1KIIOrwGxAGx9SUGD1m25bW4FCQsTG7arz-WVuxsDNvxHKsfbTiEdo2vtg__&amp;Key-Pair-Id=APKAI3B7HFD2VYJQK4MQ">uigen.zip</a> 파일 다운로드 후 압축을 풉니다.</li>
+  <li><a href="https://cc.sj-cdn.net/instructor/4hdejjwplbrm-anthropic/assets/1750970894/uigen.zip?response-content-disposition=attachment&amp;Expires=1755329806&amp;Signature=GV1vldsm3Eq84hbd58NtazGj7E-L9rH1f1ukgW~U~8Pby1SW-Iu-YZMFSNmjZENGGeYeOZyN4407Gr5WlYBYMmma8WLAuIFQgkQdcJALgTXjBaj~1tnfoB2Pu8q926eYrf72tbOTzDrt6DHYR5qhtKTeCfnz-3k8FQ45i45jO-fnkyYwOYVcptY2g4LQhaPDK~1PT9n-Y3LxXP-Prm93T4GEZF~uzdqlriM1a98Ux1G3Y~w7x09AwRTqe2ag-WBmWxpdkh6Lz0Mf7716yyap9OuMlwRw1KIIOrwGxAGx9SUGD1m25bW4FCQsTG7arz-WVuxsDNvxHKsfbTiEdo2vtg__&amp;Key-Pair-Id=APKAI3B7HFD2VYJQK4MQ" target="_blank">uigen.zip</a> 파일 다운로드 후 압축을 풉니다.</li>
   <li>프로젝트 디렉터리에서 <code class="language-plaintext highlighter-rouge">npm run setup</code> 종속성을 설치하고 로컬 SQLite 데이터베이스를 설정합니다.</li>
   <li>
     <p><code class="language-plaintext highlighter-rouge">선택 사항</code>:
@@ -2992,7 +3019,7 @@ API 키를 제공하지 않으면 앱에서 정적 페이크 코드를 생성합
 API 키를 설정하는 방법은 다음과 같습니다:</p>
 
     <ul>
-      <li><a href="https://console.anthropic.com/"><code class="language-plaintext highlighter-rouge">https://console.anthropic.com/</code></a>에서 Anthropic API 키를 받으세요.</li>
+      <li><a href="https://console.anthropic.com/" target="_blank"><code class="language-plaintext highlighter-rouge">https://console.anthropic.com/</code></a>에서 Anthropic API 키를 받으세요.</li>
       <li>API 키를 <code class="language-plaintext highlighter-rouge">.env</code> 파일에 입력합니다.</li>
     </ul>
   </li>
@@ -3042,7 +3069,7 @@ Claude가 이 파일을 생성할 권한을 요청할 때, <code class="language
 
 <p>이 파일은 Claude에게 하는 모든 요청에 포함되므로, 프로젝트를 위한 지속적인 시스템 프롬프트를 갖는 것과 같습니다.</p>
 
-<h3 id="2-3-3-claudemd-파일"><span class="me-2">2. 3. 3 CLAUDE.md 파일</span><a href="#2-3-3-claudemd-파일" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<h3 id="2-3-3-세-가지-위치의-claudemd-파일"><span class="me-2">2. 3. 3 세 가지 위치의 CLAUDE.md 파일</span><a href="#2-3-3-세-가지-위치의-claudemd-파일" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
 <p>Claude는 세 가지 일반적인 위치에서 세 가지 다른 <code class="language-plaintext highlighter-rouge">CLAUDE.md</code> 파일을 인식합니다:</p>
 
