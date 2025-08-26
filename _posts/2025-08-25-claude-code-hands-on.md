@@ -13,17 +13,21 @@ is_series: true
 series_title: "Claude Code"
 series_order: 2
 ---
+
+> 학습할 리소스는 [Anthropic Academy](https://www.anthropic.com/learn){: target="_blank"}를 사용합니다.
+{: .prompt-info }
+
 ## 2. 1   Claude Code 설정하기
 
 먼저 `Claude Code`를 로컬에 설치합니다.
 
-전체 설정 지침은 [여기](https://docs.anthropic.com/en/docs/claude-code/setup)에서 확인할 수 있습니다:
+전체 설정 지침은 [여기](https://docs.anthropic.com/en/docs/claude-code/setup){: target="_blank"}에서 확인할 수 있습니다:
 
 다음을 수행합니다:
 
 1. `NodeJS`가 설치되어 있는지 확인합니다.
 
-   이미 설치되어 있는지 확실하지 않으면 설치 프로그램을 [다운로드](https://nodejs.org/en/download)할 수 있습니다.
+   이미 설치되어 있는지 확실하지 않으면 설치 프로그램을 [다운로드](https://nodejs.org/en/download){: target="_blank"}할 수 있습니다.
 2. 터미널에서 실행합니다.
     ```bash
     npm install -g @anthropic-ai/claude-code
@@ -33,15 +37,15 @@ series_order: 2
 
 > AWS Bedrock이나 Google Cloud Vertex를 사용하는 경우 추가 설정이 필요합니다.
 >
-> AWS Bedrock에 대한 [안내](https://docs.anthropic.com/en/docs/claude-code/amazon-bedrock), 
-> Google Cloud Vertex에 대한 [안내](https://docs.anthropic.com/en/docs/claude-code/)
+> AWS Bedrock에 대한 [안내](https://docs.anthropic.com/en/docs/claude-code/amazon-bedrock){: target="_blank"}, 
+> Google Cloud Vertex에 대한 [안내](https://docs.anthropic.com/en/docs/claude-code/){: target="_blank"}
 {: .prompt-info }
 
 ## 2. 2 샘플 프로젝트 설정하기
 
 `리액트 컴포넌트 자동 생성기 프로젝트`를 위해 하기 설정을 합니다.
 
-1. [uigen.zip](https://cc.sj-cdn.net/instructor/4hdejjwplbrm-anthropic/assets/1750970894/uigen.zip?response-content-disposition=attachment&Expires=1755329806&Signature=GV1vldsm3Eq84hbd58NtazGj7E-L9rH1f1ukgW~U~8Pby1SW-Iu-YZMFSNmjZENGGeYeOZyN4407Gr5WlYBYMmma8WLAuIFQgkQdcJALgTXjBaj~1tnfoB2Pu8q926eYrf72tbOTzDrt6DHYR5qhtKTeCfnz-3k8FQ45i45jO-fnkyYwOYVcptY2g4LQhaPDK~1PT9n-Y3LxXP-Prm93T4GEZF~uzdqlriM1a98Ux1G3Y~w7x09AwRTqe2ag-WBmWxpdkh6Lz0Mf7716yyap9OuMlwRw1KIIOrwGxAGx9SUGD1m25bW4FCQsTG7arz-WVuxsDNvxHKsfbTiEdo2vtg__&Key-Pair-Id=APKAI3B7HFD2VYJQK4MQ) 파일 다운로드 후 압축을 풉니다.
+1. [uigen.zip](https://cc.sj-cdn.net/instructor/4hdejjwplbrm-anthropic/assets/1750970894/uigen.zip?response-content-disposition=attachment&Expires=1755329806&Signature=GV1vldsm3Eq84hbd58NtazGj7E-L9rH1f1ukgW~U~8Pby1SW-Iu-YZMFSNmjZENGGeYeOZyN4407Gr5WlYBYMmma8WLAuIFQgkQdcJALgTXjBaj~1tnfoB2Pu8q926eYrf72tbOTzDrt6DHYR5qhtKTeCfnz-3k8FQ45i45jO-fnkyYwOYVcptY2g4LQhaPDK~1PT9n-Y3LxXP-Prm93T4GEZF~uzdqlriM1a98Ux1G3Y~w7x09AwRTqe2ag-WBmWxpdkh6Lz0Mf7716yyap9OuMlwRw1KIIOrwGxAGx9SUGD1m25bW4FCQsTG7arz-WVuxsDNvxHKsfbTiEdo2vtg__&Key-Pair-Id=APKAI3B7HFD2VYJQK4MQ){: target="_blank"} 파일 다운로드 후 압축을 풉니다.
 2. 프로젝트 디렉터리에서 `npm run setup` 종속성을 설치하고 로컬 SQLite 데이터베이스를 설정합니다.
 3. `선택 사항`:
    이 프로젝트에서는 Anthropic API를 통해 Claude를 사용하여 UI 구성 요소를 생성합니다.
@@ -49,7 +53,7 @@ series_order: 2
    API 키를 제공하지 않으면 앱에서 정적 페이크 코드를 생성합니다.
    API 키를 설정하는 방법은 다음과 같습니다:
 
-    - [`https://console.anthropic.com/`](https://console.anthropic.com/)에서 Anthropic API 키를 받으세요.
+    - [`https://console.anthropic.com/`](https://console.anthropic.com/){: target="_blank"}에서 Anthropic API 키를 받으세요.
     - API 키를 `.env` 파일에 입력합니다.
 
 4. `npm run dev` 실행하여 프로젝트를 시작합니다.
@@ -89,7 +93,7 @@ Claude가 이 파일을 생성할 권한을 요청할 때, `Enter`를 눌러 각
 
 이 파일은 Claude에게 하는 모든 요청에 포함되므로, 프로젝트를 위한 지속적인 시스템 프롬프트를 갖는 것과 같습니다.
 
-### 2. 3. 3 CLAUDE.md 파일
+### 2. 3. 3 세 가지 위치의 CLAUDE.md 파일
 
 Claude는 세 가지 일반적인 위치에서 세 가지 다른 `CLAUDE.md` 파일을 인식합니다:
 
