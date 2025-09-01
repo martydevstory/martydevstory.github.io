@@ -1,5 +1,13 @@
 [
   {
+    "title": "Claude Code 훅(hooks)과 SDK",
+    "url": "/posts/claude-code-hook-sdk/",
+    "categories": "",
+    "tags": "claude-code, llm, generative-ai, claude, vibe-coding",
+    "date": "2025-09-01 10:56:43 +0900",
+    "content": "Claude Code에서 도구 호출이 실행되기 전, 후에 가로채어 제어하는 훅과, 프로그래밍 방식으로 실행 가능한 SDK를 알아보겠습니다."
+  },
+  {
     "title": "Claude Code 프로젝트 설정 및 기능들",
     "url": "/posts/claude-code-hands-on/",
     "categories": "",

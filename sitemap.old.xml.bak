@@ -5,6 +5,22 @@ layout: null
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
     <url>
+      <loc>https://martydevstory.github.io/posts/claude-code-hook-sdk/</loc>
+      
+        <lastmod>2025-09-01T10:56:43+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
       <loc>https://martydevstory.github.io/posts/claude-code-hands-on/</loc>
       
         <lastmod>2025-08-25T11:56:43+09:00</lastmod>
