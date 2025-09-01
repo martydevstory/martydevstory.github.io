@@ -33,7 +33,7 @@ series_order: 3
 ### 3. 1.   2   파일 읽기 도구 사용 시 훅 워크플로
 Claude가 파일을 읽기 위해 ReadFile 도구를 사용하면서 `도구 실행 전`에 실행하는 `훅`을 `PreToolUse 훅`이라고 하고, `도구 실행 후`에 실행하는 `훅`을 `PostPreUse 훅`이라고 합니다.
 
-![ReadFile 도구를 사용한 훅 워크플로](../assets/drafts/claude-code-hook-sdk/hook-workflow.png)
+![ReadFile 도구를 사용한 훅 워크플로](../assets/posts/2025-09-01-claude-code-hook-sdk/hook-workflow.png)
 _ReadFile 도구를 사용한 훅 워크플로_
 
 ### 3. 1.   3   훅 정의하기
@@ -103,7 +103,7 @@ Claude Code의 `훅`을 사용하면 도구 호출이 실행되기 전이나 후
 
 ### 3. 2.   1   훅 구축하기 : PreToolUse 또는 PostToolUse 훅 결정
 
-![훅을 사용하여 .env 파일 읽기](../assets/drafts/claude-code-hook-sdk/hook-read-file.png)
+![훅을 사용하여 .env 파일 읽기](../assets/posts/2025-09-01-claude-code-hook-sdk/hook-read-file.png)
 _훅을 사용하여 .env 파일 읽기_
 
 ### 3. 2.   2   사용할 수 있는 도구들 : 감시할 도구 호출 유형 결정
@@ -156,7 +156,7 @@ Claude Code는 `훅`으로 모니터링할 수 있는 여러 내장 도구를 �
 
 `PreToolUse 훅`에서 코드 2로 종료하면, 표준 오류에 작성한 모든 오류 메시지가 Claude에게 피드백으로 전송되어 작업이 차단된 이유를 설명합니다.
 
-![Exit Code를 통해 Claude 통신](../assets/drafts/claude-code-hook-sdk/hook-define-exitcode.png)
+![Exit Code를 통해 Claude 통신](../assets/posts/2025-09-01-claude-code-hook-sdk/hook-define-exitcode.png)
 _Exit Code를 통해 Claude 통신_
 
 ## 3.   3   훅 구현하기
@@ -183,7 +183,7 @@ Claude에서 다음 프롬프트를 실행하고 접근할 수 있는 도구 목
 List out the names of all the tools you have access to, bullet point list.
 ```
 
-![읽기 접근 가능한 도구들](../assets/drafts/claude-code-hook-sdk/read-tool.png)
+![읽기 접근 가능한 도구들](../assets/posts/2025-09-01-claude-code-hook-sdk/read-tool.png)
 _읽기 접근 가능한 도구들_
 
 먼저 설정 파일에서 `훅`을 구성해야 합니다. `.claude > settings.local.json` 파일을 열고 `훅` 설정을 합니다. 
@@ -218,7 +218,7 @@ _읽기 접근 가능한 도구들_
 }
 ```
 
-![훅 설정하기](../assets/drafts/claude-code-hook-sdk/sample-hook-01.png)
+![훅 설정하기](../assets/posts/2025-09-01-claude-code-hook-sdk/sample-hook-01.png)
 _훅 설정하기_
 
 
@@ -265,7 +265,7 @@ Read the .env file
 Claude가 읽기 작업을 시도하면 `훅`이 이를 가로채고 오류 메시지를 반환합니다. 
 Claude는 작업이 차단되었음을 인식하고 이를 설명하며, 종종 읽기 `훅`이 파일 액세스를 차단했다고 언급합니다.
 
-![PreToolUse 훅 Read .env 읽기 차단](../assets/drafts/claude-code-hook-sdk/sample-hook-02.png)
+![PreToolUse 훅 Read .env 읽기 차단](../assets/posts/2025-09-01-claude-code-hook-sdk/sample-hook-02.png)
 _PreToolUse 훅 Read .env 읽기 차단_
 
 마찬가지로 Grep도 Claude에서 프롬프트를 입력하여 실행합니다.
@@ -273,7 +273,7 @@ _PreToolUse 훅 Read .env 읽기 차단_
 Try the grep tool to read it
 ```
 
-![PreToolUse 훅 Grep .env 읽기 차단](../assets/drafts/claude-code-hook-sdk/sample-hook-03.png)
+![PreToolUse 훅 Grep .env 읽기 차단](../assets/posts/2025-09-01-claude-code-hook-sdk/sample-hook-03.png)
 _PreToolUse 훅 Grep .env 읽기 차단_
 
 ### 3.  3.  5   훅 주요 이점
@@ -399,7 +399,7 @@ In the @src/schemats file update createSchema to take in a 'verbose' arg, boolea
 Claude가 `verbose 매개변수` 업데이트 이후, 타입 검사를 위한 `PostToolUse 훅`을 실행하고 `main.ts` 파일의 호출을 자동으로 수정합니다.
 
 
-![타입 검사를 위한 PostToolUse 훅 실행](../assets/drafts/claude-code-hook-sdk/posttooluse-hook-01.png)
+![타입 검사를 위한 PostToolUse 훅 실행](../assets/posts/2025-09-01-claude-code-hook-sdk/posttooluse-hook-01.png)
 _타입 검사를 위한 PostToolUse 훅 실행_
 
 ### 3.  5.  2   예: 쿼리 중복 방지 훅
@@ -432,7 +432,7 @@ In main.ts print out orders that have been pending longer than 3 days
 @main.ts is executed automatically once per day as a cron job. Add in a new slack integration in a separate file. Then whenever this thing runs, check for orders that have been pending too long (more than 3 days) and send an alert to the #order-alerts channel with the customer name and phone number so someone can follow up. @schema.ts contains the current db structure. Remember, all queries should be placed in the ./queries dir. Start with the slack integration.
 ```
 
-![기존 쿼리 사용 안하고 신규 쿼리 생성](../assets/drafts/claude-code-hook-sdk/posttooluse-hook-02.png)
+![기존 쿼리 사용 안하고 신규 쿼리 생성](../assets/posts/2025-09-01-claude-code-hook-sdk/posttooluse-hook-02.png)
 _기존 쿼리 사용 안하고 신규 쿼리 생성_
 
 
@@ -452,7 +452,7 @@ async function main() {
 
 그러면 아래 결과처럼 `PostToolUse 훅`을 사용하여 기존 쿼리를 수정하여 재사용합니다.
 
-![기존 쿼리 재사용](../assets/drafts/claude-code-hook-sdk/posttooluse-hook-03.png)
+![기존 쿼리 재사용](../assets/posts/2025-09-01-claude-code-hook-sdk/posttooluse-hook-03.png)
 _기존 쿼리 재사용_
 
 ### 3.  5.  3   훅 구현 시 고려 사항
@@ -590,7 +590,7 @@ SDK는 이미 익숙한 Claude Code와 같이 정확히 동일하게 실행합�
 npm run sdk
 ```
 
-![SDK Raw Data](../assets/drafts/claude-code-hook-sdk/sdk-raw.png)
+![SDK Raw Data](../assets/posts/2025-09-01-claude-code-hook-sdk/sdk-raw.png)
 _SDK Raw Data_
 
 ### 3.  7. 1    주요 기능
