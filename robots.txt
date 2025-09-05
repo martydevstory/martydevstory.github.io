@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://martydevstory.github.io/sitemap.xml
+Sitemap: https://martydevstory.github.io/sitemap_index.xml

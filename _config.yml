@@ -230,7 +230,6 @@ jekyll-archives:
     tag: /tags/:name/
     category: /categories/:name/
 
-url: "https://martydevstory.github.io"
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
