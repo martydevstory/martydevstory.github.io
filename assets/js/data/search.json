@@ -1,5 +1,13 @@
 [
   {
+    "title": "n8n 소개",
+    "url": "/posts/n8n/",
+    "categories": "",
+    "tags": "n8n, AI, Automation, llm, generative-ai, workflow",
+    "date": "2025-09-12 11:56:43 +0900",
+    "content": "최신 AI와 함께 쉽게 사용할 수 있는 자동화 워크플로 n8n 소개합니다."
+  },
+  {
     "title": "Claude Code 훅(hooks)과 SDK",
     "url": "/posts/claude-code-hook-sdk/",
     "categories": "",

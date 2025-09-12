@@ -4,7 +4,7 @@
   <id>https://martydevstory.github.io/</id>
   <title>마티데브스토리</title>
   <subtitle>AI, Cloud 기반 블로그 작성.</subtitle>
-  <updated>2025-09-12T12:13:35+09:00</updated>
+  <updated>2025-09-12T15:10:59+09:00</updated>
   <author>
     <name>마티(Marty)</name>
     <uri>https://martydevstory.github.io/</uri>
@@ -17,6 +17,28 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>n8n 소개</title>
+    <link href="https://martydevstory.github.io/posts/n8n/" rel="alternate" type="text/html" title="n8n 소개" />
+    <published>2025-09-12T11:56:43+09:00</published>
+  
+    <updated>2025-09-12T11:56:43+09:00</updated>
+  
+    <id>https://martydevstory.github.io/posts/n8n/</id>
+    <content type="text/html" src="https://martydevstory.github.io/posts/n8n/" />
+    <author>
+      <name>마티(Marty)</name>
+    </author>
+
+  
+    
+  
+
+  <summary>최신 AI와 함께 쉽게 사용할 수 있는 자동화 워크플로 n8n 소개합니다.</summary>
+
+  </entry>
 
   
   <entry>
@@ -103,32 +125,6 @@
   
 
   <summary>MCP 아키텍처 및 주요 개념에 대해서 살펴보겠습니다.</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>LangGraph 배포 및 운영</title>
-    <link href="https://martydevstory.github.io/posts/langgraph-deployment/" rel="alternate" type="text/html" title="LangGraph 배포 및 운영" />
-    <published>2025-06-22T10:56:43+09:00</published>
-  
-    <updated>2025-06-22T10:56:43+09:00</updated>
-  
-    <id>https://martydevstory.github.io/posts/langgraph-deployment/</id>
-    <content type="text/html" src="https://martydevstory.github.io/posts/langgraph-deployment/" />
-    <author>
-      <name>마티(Marty)</name>
-    </author>
-
-  
-    
-    <category term="AI" />
-    
-    <category term="LangGraph" />
-    
-  
-
-  <summary>LangGraph 애플리케이션 배포 및 운영에 도움이 되는 이중 입력과 어시스턴트에 대해서 살펴보겠습니다</summary>
 
   </entry>
 
