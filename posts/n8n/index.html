@@ -46,7 +46,7 @@
 <meta property="twitter:title" content="n8n 소개" />
 <meta name="google-site-verification" content="yVTwKzr9_2sdUNkd752ReHsuWqteISd7HQCzIYZppyY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Marty"},"dateModified":"2025-09-12T11:56:43+09:00","datePublished":"2025-09-12T11:56:43+09:00","description":"최신 AI와 함께 쉽게 사용할 수 있는 자동화 워크플로 n8n 소개합니다.","headline":"n8n 소개","image":{"alt":null,"url":"https://martydevstory.github.io/assets/posts/2025-09-12-n8n/logo.png","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://martydevstory.github.io/posts/n8n/"},"url":"https://martydevstory.github.io/posts/n8n/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Marty"},"dateModified":"2025-09-12T15:14:13+09:00","datePublished":"2025-09-12T11:56:43+09:00","description":"최신 AI와 함께 쉽게 사용할 수 있는 자동화 워크플로 n8n 소개합니다.","headline":"n8n 소개","image":{"alt":null,"url":"https://martydevstory.github.io/assets/posts/2025-09-12-n8n/logo.png","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://martydevstory.github.io/posts/n8n/"},"url":"https://martydevstory.github.io/posts/n8n/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -1149,6 +1149,29 @@
 
       <!-- lastmod date -->
       
+        <span>
+          업데이트
+          <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1757657653"
+  data-df="YYYY/MM/DD"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  2025/09/12
+</time>
+
+        </span>
+      
 
       
         
@@ -1347,7 +1370,7 @@
   <span class="nt">-e</span> <span class="nv">DB_POSTGRESDB_DATABASE</span><span class="o">=</span>n8n_db <span class="se">\</span>
   <span class="nt">-e</span> <span class="nv">DB_POSTGRESDB_HOST</span><span class="o">=</span>postgres <span class="se">\</span>
   <span class="nt">-e</span> <span class="nv">DB_POSTGRESDB_PORT</span><span class="o">=</span>5432 <span class="se">\</span>
-  <span class="nt">-e</span> <span class="nv">DB_POSTGRESDB_USER</span><span class="o">=</span>n8n <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">DB_POSTGRESDB_USER</span><span class="o">=</span>n8nuser <span class="se">\</span>
   <span class="nt">-e</span> <span class="nv">DB_POSTGRESDB_SCHEMA</span><span class="o">=</span>public <span class="se">\</span>
   <span class="nt">-e</span> <span class="nv">DB_POSTGRESDB_PASSWORD</span><span class="o">=</span>&lt;POSTGRES_PASSWORD&gt; <span class="se">\ </span>
   <span class="nt">-v</span> n8n_data:/home/node/.n8n <span class="se">\</span>
@@ -1373,7 +1396,7 @@
 7
 </pre></td><td class="rouge-code"><pre>POSTGRES_USER=postgres
 POSTGRES_PASSWORD=&lt;POSTGRES_PASSWORD&gt;
-POSTGRES_DB=n8ndb
+POSTGRES_DB=n8n_db
 
 POSTGRES_NON_ROOT_USER=n8nuser
 POSTGRES_NON_ROOT_PASSWORD=&lt;POSTGRES_PASSWORD&gt;
