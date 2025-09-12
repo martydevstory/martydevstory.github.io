@@ -2,41 +2,41 @@
   {
     "title": "n8n 소개",
     "url": "/posts/n8n/",
-    "categories": "",
+    "categories": "AI, Automation",
     "tags": "n8n, AI, Automation, llm, generative-ai, workflow",
-    "date": "2025-09-12 11:56:43 +0900",
+    "date": "2025-09-12 20:56:43 +0900",
     "content": "최신 AI와 함께 쉽게 사용할 수 있는 자동화 워크플로 n8n 소개합니다."
   },
   {
     "title": "Claude Code 훅(hooks)과 SDK",
     "url": "/posts/claude-code-hook-sdk/",
-    "categories": "",
+    "categories": "AI, Vibe-Coding",
     "tags": "claude-code, llm, generative-ai, claude, vibe-coding",
-    "date": "2025-09-01 10:56:43 +0900",
+    "date": "2025-09-01 19:56:43 +0900",
     "content": "Claude Code에서 도구 호출이 실행되기 전, 후에 가로채어 제어하는 훅과, 프로그래밍 방식으로 실행 가능한 SDK를 알아보겠습니다."
   },
   {
     "title": "Claude Code 프로젝트 설정 및 기능들",
     "url": "/posts/claude-code-hands-on/",
-    "categories": "",
+    "categories": "AI, Vibe-Coding",
     "tags": "claude-code, llm, generative-ai, claude, vibe-coding",
-    "date": "2025-08-25 11:56:43 +0900",
+    "date": "2025-08-25 20:56:43 +0900",
     "content": "Claude Code 프로젝트 설정과 변경 사항, 컨텍스트 제어, 사용자 정의 명령어, MCP 구성 및 Github 통합에 대해서 자세히 알아보겠습니다."
   },
   {
     "title": "Claude Code 소개",
     "url": "/posts/claude-code-introduce/",
-    "categories": "",
+    "categories": "AI, Vibe-Coding",
     "tags": "claude-code, llm, generative-ai, claude, vibe-coding",
-    "date": "2025-08-18 11:56:43 +0900",
-    "content": "앤트로픽에서 발표한 Claude Code가 무엇인지 또 어떻게 사용하고 최대한 활용할 수 있는지 알아보겠습니다"
+    "date": "2025-08-18 20:56:43 +0900",
+    "content": "앤트로픽에서 발표한 Claude Code가 무엇인지 또 어떻게 사용하고 최대한 활용할 수 있는지 알아보겠습니다."
   },
   {
     "title": "MCP (Model Context Protocol) 소개",
     "url": "/posts/mcp/",
-    "categories": "",
+    "categories": "AI, MCP",
     "tags": "mcp, python, llm, generative-ai",
-    "date": "2025-06-27 11:56:43 +0900",
+    "date": "2025-06-27 20:56:43 +0900",
     "content": "MCP 아키텍처 및 주요 개념에 대해서 살펴보겠습니다."
   },
   {
@@ -44,7 +44,7 @@
     "url": "/posts/langgraph-deployment/",
     "categories": "AI, LangGraph",
     "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
-    "date": "2025-06-22 10:56:43 +0900",
+    "date": "2025-06-22 19:56:43 +0900",
     "content": "LangGraph 애플리케이션 배포 및 운영에 도움이 되는 이중 입력과 어시스턴트에 대해서 살펴보겠습니다"
   },
   {
@@ -52,7 +52,7 @@
     "url": "/posts/langgraph-long-term-memory-2nd/",
     "categories": "AI, LangGraph",
     "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
-    "date": "2025-06-17 10:15:43 +0900",
+    "date": "2025-06-17 19:15:43 +0900",
     "content": "LangGraph 메모리 컬렉션에 대해서 더 자세히 알아보고 시맨틱 메모리 기반 에이전트을 구축해 보겠습니다."
   },
   {
@@ -60,7 +60,7 @@
     "url": "/posts/langgraph-long-term-memory-1st/",
     "categories": "AI, LangGraph",
     "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
-    "date": "2025-06-12 11:15:43 +0900",
+    "date": "2025-06-12 20:15:43 +0900",
     "content": "장기 메모리와 일반적인 사실과 개념을 저장하는 인간의 장기 기억 중 하나인 시맨틱 메모리를 살펴보겠습니다."
   },
   {
@@ -68,7 +68,7 @@
     "url": "/posts/langgraph-building-assistant-2nd/",
     "categories": "AI, LangGraph",
     "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
-    "date": "2025-06-07 12:15:43 +0900",
+    "date": "2025-06-07 21:15:43 +0900",
     "content": "LangGraph 채팅 모델 기반 경량 멀티 에이전트 시스템을 구성하고 리서치 및 보고서 생성 자동화 워크플로를 구축하겠습니다."
   },
   {
@@ -76,7 +76,7 @@
     "url": "/posts/langgraph-building-assistant-1st/",
     "categories": "AI, LangGraph",
     "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
-    "date": "2025-06-02 11:15:43 +0900",
+    "date": "2025-06-02 20:15:43 +0900",
     "content": "LangGraph 메모리 개념과 휴먼-인-더-루프 기반 멀티 에이전트 워크플로를 살펴보겠습니다."
   },
   {
@@ -84,7 +84,7 @@
     "url": "/posts/langgraph-ux-and-human-in-the-loop/",
     "categories": "AI, LangGraph",
     "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
-    "date": "2025-05-28 12:15:43 +0900",
+    "date": "2025-05-28 21:15:43 +0900",
     "content": "LangGraph에서 스트리밍, 브레이크포인트, 타임트래블 등 다양한 방식으로 직접 상호작용을 할 수 있는 사용자 경험과 휴먼-인-더-루프를 살펴보겠습니다."
   },
   {
@@ -92,7 +92,7 @@
     "url": "/posts/langgraph-state-and-memory-2nd/",
     "categories": "AI, LangGraph",
     "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
-    "date": "2025-05-23 11:15:43 +0900",
+    "date": "2025-05-23 20:15:43 +0900",
     "content": "LangGraph에서 입력과 출력에서 상태 스키마를 위한 다중 스키마, 그리고 요약 기능과 외부메모리 기능을 가진 챗봇에 대해서 알아보겠습니다."
   },
   {
@@ -100,7 +100,7 @@
     "url": "/posts/langgraph-state-and-memory-1st/",
     "categories": "AI, LangGraph",
     "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
-    "date": "2025-05-17 11:15:43 +0900",
+    "date": "2025-05-17 20:15:43 +0900",
     "content": "LangGraph에서 노드간의 통신을 위한 상태 스키마와 상태 업데이트의 수행 방식을 지정하는 리듀서에 대해서 살펴보겠습니다."
   },
   {
@@ -108,7 +108,7 @@
     "url": "/posts/langgraph-component/",
     "categories": "AI, LangGraph",
     "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
-    "date": "2025-05-12 11:15:43 +0900",
+    "date": "2025-05-12 20:15:43 +0900",
     "content": "LangGraph 핵심 구성과 워크플로 요소 및 에이전트 요소에 대해서 알아보겠습니다."
   },
   {
@@ -116,7 +116,7 @@
     "url": "/posts/langgraph-introduce/",
     "categories": "AI, LangGraph",
     "tags": "langgraph, langchain, langsmith, python, llm, generative-ai",
-    "date": "2025-05-06 10:15:43 +0900",
+    "date": "2025-05-06 19:15:43 +0900",
     "content": "LangGraph는 LangChain의 추론(Reasoning) 흐름을 제어할 수 있는 상태 머신 프레임워크로, 상태(State)를 기반으로 각 노드(Node)가 동작합니다. 환경 구성을 해보겠습니다."
   }
   

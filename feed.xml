@@ -4,7 +4,7 @@
   <id>https://martydevstory.github.io/</id>
   <title>마티데브스토리</title>
   <subtitle>AI, Cloud 기반 블로그 작성.</subtitle>
-  <updated>2025-09-12T15:15:00+09:00</updated>
+  <updated>2025-09-12T22:45:20+09:00</updated>
   <author>
     <name>마티(Marty)</name>
     <uri>https://martydevstory.github.io/</uri>
@@ -22,9 +22,9 @@
   <entry>
     <title>n8n 소개</title>
     <link href="https://martydevstory.github.io/posts/n8n/" rel="alternate" type="text/html" title="n8n 소개" />
-    <published>2025-09-12T11:56:43+09:00</published>
+    <published>2025-09-12T20:56:43+09:00</published>
   
-    <updated>2025-09-12T15:14:13+09:00</updated>
+    <updated>2025-09-12T20:56:43+09:00</updated>
   
     <id>https://martydevstory.github.io/posts/n8n/</id>
     <content type="text/html" src="https://martydevstory.github.io/posts/n8n/" />
@@ -33,6 +33,10 @@
     </author>
 
   
+    
+    <category term="AI" />
+    
+    <category term="Automation" />
     
   
 
@@ -44,9 +48,9 @@
   <entry>
     <title>Claude Code 훅(hooks)과 SDK</title>
     <link href="https://martydevstory.github.io/posts/claude-code-hook-sdk/" rel="alternate" type="text/html" title="Claude Code 훅(hooks)과 SDK" />
-    <published>2025-09-01T10:56:43+09:00</published>
+    <published>2025-09-01T19:56:43+09:00</published>
   
-    <updated>2025-09-01T10:56:43+09:00</updated>
+    <updated>2025-09-01T19:56:43+09:00</updated>
   
     <id>https://martydevstory.github.io/posts/claude-code-hook-sdk/</id>
     <content type="text/html" src="https://martydevstory.github.io/posts/claude-code-hook-sdk/" />
@@ -55,6 +59,10 @@
     </author>
 
   
+    
+    <category term="AI" />
+    
+    <category term="Vibe-Coding" />
     
   
 
@@ -66,9 +74,9 @@
   <entry>
     <title>Claude Code 프로젝트 설정 및 기능들</title>
     <link href="https://martydevstory.github.io/posts/claude-code-hands-on/" rel="alternate" type="text/html" title="Claude Code 프로젝트 설정 및 기능들" />
-    <published>2025-08-25T11:56:43+09:00</published>
+    <published>2025-08-25T20:56:43+09:00</published>
   
-    <updated>2025-08-26T11:24:19+09:00</updated>
+    <updated>2025-08-25T20:56:43+09:00</updated>
   
     <id>https://martydevstory.github.io/posts/claude-code-hands-on/</id>
     <content type="text/html" src="https://martydevstory.github.io/posts/claude-code-hands-on/" />
@@ -77,6 +85,10 @@
     </author>
 
   
+    
+    <category term="AI" />
+    
+    <category term="Vibe-Coding" />
     
   
 
@@ -88,9 +100,9 @@
   <entry>
     <title>Claude Code 소개</title>
     <link href="https://martydevstory.github.io/posts/claude-code-introduce/" rel="alternate" type="text/html" title="Claude Code 소개" />
-    <published>2025-08-18T11:56:43+09:00</published>
+    <published>2025-08-18T20:56:43+09:00</published>
   
-    <updated>2025-08-24T21:25:41+09:00</updated>
+    <updated>2025-08-18T20:56:43+09:00</updated>
   
     <id>https://martydevstory.github.io/posts/claude-code-introduce/</id>
     <content type="text/html" src="https://martydevstory.github.io/posts/claude-code-introduce/" />
@@ -100,9 +112,13 @@
 
   
     
+    <category term="AI" />
+    
+    <category term="Vibe-Coding" />
+    
   
 
-  <summary>앤트로픽에서 발표한 Claude Code가 무엇인지 또 어떻게 사용하고 최대한 활용할 수 있는지 알아보겠습니다</summary>
+  <summary>앤트로픽에서 발표한 Claude Code가 무엇인지 또 어떻게 사용하고 최대한 활용할 수 있는지 알아보겠습니다.</summary>
 
   </entry>
 
@@ -110,9 +126,9 @@
   <entry>
     <title>MCP (Model Context Protocol) 소개</title>
     <link href="https://martydevstory.github.io/posts/mcp/" rel="alternate" type="text/html" title="MCP (Model Context Protocol) 소개" />
-    <published>2025-06-27T11:56:43+09:00</published>
+    <published>2025-06-27T20:56:43+09:00</published>
   
-    <updated>2025-08-24T21:25:41+09:00</updated>
+    <updated>2025-06-27T20:56:43+09:00</updated>
   
     <id>https://martydevstory.github.io/posts/mcp/</id>
     <content type="text/html" src="https://martydevstory.github.io/posts/mcp/" />
@@ -121,6 +137,10 @@
     </author>
 
   
+    
+    <category term="AI" />
+    
+    <category term="MCP" />
     
   
 
