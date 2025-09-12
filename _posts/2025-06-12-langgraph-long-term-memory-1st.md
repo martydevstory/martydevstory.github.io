@@ -1,6 +1,7 @@
 ---
 title: LangGraph 장기 메모리 (1)
-date: 2025-06-12 11:15:43 +/-TTTT
+date: 2025-06-12 11:15:43
+last_modified_at: 2025-06-12 11:15:43
 description : 장기 메모리와 일반적인 사실과 개념을 저장하는 인간의 장기 기억 중 하나인 시맨틱 메모리를 살펴보겠습니다.
 categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
@@ -10,6 +11,9 @@ pin: false
 image:
     path: assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png
     alt:
+sitemap:
+  changefreq: weekly
+  priority: 0.5
 is_series: true
 series_title: "LangGraph"
 series_order: 8

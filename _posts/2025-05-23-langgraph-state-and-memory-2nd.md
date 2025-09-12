@@ -1,6 +1,7 @@
 ---
 title: LangGraph 상태와 메모리 (2)
-date: 2025-05-23 11:15:43 +/-TTTT
+date: 2025-05-23 11:15:43
+last_modified_at: 2025-05-23 11:15:43
 description : LangGraph에서 입력과 출력에서 상태 스키마를 위한 다중 스키마, 그리고 요약 기능과 외부메모리 기능을 가진 챗봇에 대해서 알아보겠습니다. 
 categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
@@ -10,6 +11,9 @@ pin: false
 image:
     path: assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png
     alt:
+sitemap:
+  changefreq: weekly
+  priority: 0.5
 is_series: true
 series_title: "LangGraph"
 series_order: 4

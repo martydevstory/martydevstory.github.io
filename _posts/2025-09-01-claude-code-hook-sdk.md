@@ -1,7 +1,9 @@
 ---
 title: Claude Code 훅(hooks)과 SDK
-date: 2025-09-01 10:56:43 +/-TTTT
+date: 2025-09-01 10:56:43
+last_modified_at: 2025-09-01 10:56:43
 description : Claude Code에서 도구 호출이 실행되기 전, 후에 가로채어 제어하는 훅과, 프로그래밍 방식으로 실행 가능한 SDK를 알아보겠습니다.
+categories: [AI, Vibe-Coding]
 tags: [claude-code, llm, generative-ai, claude, vibe-coding]
 math: true
 toc: true
@@ -9,6 +11,9 @@ pin: false
 image:
     path: assets/posts/2025-08-18-claude-code-introduce/claude-code-logo.png
     alt:
+sitemap:
+  changefreq: weekly
+  priority: 0.5
 is_series: true
 series_title: "Claude Code"
 series_order: 3

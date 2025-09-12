@@ -1,6 +1,7 @@
 ---
 title: LangGraph 어시스턴트 구축하기 (1)
-date: 2025-06-02 11:15:43 +/-TTTT
+date: 2025-06-02 11:15:43
+last_modified_at: 2025-06-02 11:15:43
 description : LangGraph 메모리 개념과 휴먼-인-더-루프 기반 멀티 에이전트 워크플로를 살펴보겠습니다.
 categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
@@ -10,6 +11,9 @@ pin: false
 image:
     path: assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png
     alt:
+sitemap:
+  changefreq: weekly
+  priority: 0.5
 is_series: true
 series_title: "LangGraph"
 series_order: 6

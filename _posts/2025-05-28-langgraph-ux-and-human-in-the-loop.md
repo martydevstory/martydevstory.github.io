@@ -1,6 +1,7 @@
 ---
 title: LangGraph 사용자 경험(UX)과 휴먼-인-더-루프
-date: 2025-05-28 12:15:43 +/-TTTT
+date: 2025-05-28 12:15:43
+last_modified_at: 2025-05-28 12:15:43
 description : LangGraph에서 스트리밍, 브레이크포인트, 타임트래블 등 다양한 방식으로 직접 상호작용을 할 수 있는 사용자 경험과 휴먼-인-더-루프를 살펴보겠습니다.
 categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
@@ -10,6 +11,9 @@ pin: false
 image:
     path: assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png
     alt:
+sitemap:
+  changefreq: weekly
+  priority: 0.5
 is_series: true
 series_title: "LangGraph"
 series_order: 5

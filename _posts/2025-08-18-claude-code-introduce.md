@@ -1,7 +1,9 @@
 ---
 title: Claude Code 소개
-date: 2025-08-18 11:56:43 +/-TTTT
-description : 앤트로픽에서 발표한 Claude Code가 무엇인지 또 어떻게 사용하고 최대한 활용할 수 있는지 알아보겠습니다
+date: 2025-08-18 11:56:43
+last_modified_at: 2025-08-18 11:56:43
+description : 앤트로픽에서 발표한 Claude Code가 무엇인지 또 어떻게 사용하고 최대한 활용할 수 있는지 알아보겠습니다.
+categories: [AI, Vibe-Coding]
 tags: [claude-code, llm, generative-ai, claude, vibe-coding]
 math: true
 toc: true
@@ -9,6 +11,10 @@ pin: false
 image:
     path: assets/posts/2025-08-18-claude-code-introduce/claude-code-logo.png
     alt:
+catagories: blog
+sitemap:
+  changefreq: weekly
+  priority: 0.5
 is_series: true
 series_title: "Claude Code"
 series_order: 1

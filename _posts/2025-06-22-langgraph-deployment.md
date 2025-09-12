@@ -1,6 +1,7 @@
 ---
 title: LangGraph 배포 및 운영
-date: 2025-06-22 10:56:43 +/-TTTT
+date: 2025-06-22 10:56:43
+last_modified_at: 2025-06-22 10:56:43
 description : LangGraph 애플리케이션 배포 및 운영에 도움이 되는 이중 입력과 어시스턴트에 대해서 살펴보겠습니다
 categories: [AI, LangGraph]
 tags: [langgraph, langchain, langsmith, python, llm, generative-ai]
@@ -10,6 +11,9 @@ pin: false
 image:
     path: assets/posts/2025-05-06-langgraph-introduce/langgraph_logo.png
     alt:
+sitemap:
+  changefreq: weekly
+  priority: 0.5
 is_series: true
 series_title: "LangGraph"
 series_order: 10
