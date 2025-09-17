@@ -4,7 +4,7 @@
   <id>https://martydevstory.github.io/</id>
   <title>마티데브스토리</title>
   <subtitle>AI, Cloud 기반 블로그 작성.</subtitle>
-  <updated>2025-09-12T22:45:20+09:00</updated>
+  <updated>2025-09-17T15:02:43+09:00</updated>
   <author>
     <name>마티(Marty)</name>
     <uri>https://martydevstory.github.io/</uri>
@@ -17,6 +17,32 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>n8n 간단한 워크플로 구축하기</title>
+    <link href="https://martydevstory.github.io/posts/n8n-workflow-1st/" rel="alternate" type="text/html" title="n8n 간단한 워크플로 구축하기" />
+    <published>2025-09-17T09:00:00+09:00</published>
+  
+    <updated>2025-09-17T09:00:00+09:00</updated>
+  
+    <id>https://martydevstory.github.io/posts/n8n-workflow-1st/</id>
+    <content type="text/html" src="https://martydevstory.github.io/posts/n8n-workflow-1st/" />
+    <author>
+      <name>마티(Marty)</name>
+    </author>
+
+  
+    
+    <category term="AI" />
+    
+    <category term="Automation" />
+    
+  
+
+  <summary>n8n을 사용하여 간단한 워크플로를 구축합니다.</summary>
+
+  </entry>
 
   
   <entry>
@@ -119,32 +145,6 @@
   
 
   <summary>앤트로픽에서 발표한 Claude Code가 무엇인지 또 어떻게 사용하고 최대한 활용할 수 있는지 알아보겠습니다.</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>MCP (Model Context Protocol) 소개</title>
-    <link href="https://martydevstory.github.io/posts/mcp/" rel="alternate" type="text/html" title="MCP (Model Context Protocol) 소개" />
-    <published>2025-06-27T20:56:43+09:00</published>
-  
-    <updated>2025-06-27T20:56:43+09:00</updated>
-  
-    <id>https://martydevstory.github.io/posts/mcp/</id>
-    <content type="text/html" src="https://martydevstory.github.io/posts/mcp/" />
-    <author>
-      <name>마티(Marty)</name>
-    </author>
-
-  
-    
-    <category term="AI" />
-    
-    <category term="MCP" />
-    
-  
-
-  <summary>MCP 아키텍처 및 주요 개념에 대해서 살펴보겠습니다.</summary>
 
   </entry>
 
