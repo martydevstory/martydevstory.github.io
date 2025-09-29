@@ -4,7 +4,7 @@
   <id>https://martydevstory.github.io/</id>
   <title>마티데브스토리</title>
   <subtitle>AI, Cloud 기반 블로그 작성.</subtitle>
-  <updated>2025-09-17T15:02:43+09:00</updated>
+  <updated>2025-09-29T11:39:48+09:00</updated>
   <author>
     <name>마티(Marty)</name>
     <uri>https://martydevstory.github.io/</uri>
@@ -17,6 +17,32 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>n8n 상품 주문 분석 워크플로 구축하기</title>
+    <link href="https://martydevstory.github.io/posts/n8n-workflow-2nd/" rel="alternate" type="text/html" title="n8n 상품 주문 분석 워크플로 구축하기" />
+    <published>2025-09-29T09:00:00+09:00</published>
+  
+    <updated>2025-09-29T09:00:00+09:00</updated>
+  
+    <id>https://martydevstory.github.io/posts/n8n-workflow-2nd/</id>
+    <content type="text/html" src="https://martydevstory.github.io/posts/n8n-workflow-2nd/" />
+    <author>
+      <name>마티(Marty)</name>
+    </author>
+
+  
+    
+    <category term="AI" />
+    
+    <category term="Automation" />
+    
+  
+
+  <summary>n8n을 사용하여 실제 환경과 유사한 워크플로 구축합니다.</summary>
+
+  </entry>
 
   
   <entry>
@@ -119,32 +145,6 @@
   
 
   <summary>Claude Code 프로젝트 설정과 변경 사항, 컨텍스트 제어, 사용자 정의 명령어, MCP 구성 및 Github 통합에 대해서 자세히 알아보겠습니다.</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Claude Code 소개</title>
-    <link href="https://martydevstory.github.io/posts/claude-code-introduce/" rel="alternate" type="text/html" title="Claude Code 소개" />
-    <published>2025-08-18T20:56:43+09:00</published>
-  
-    <updated>2025-08-18T20:56:43+09:00</updated>
-  
-    <id>https://martydevstory.github.io/posts/claude-code-introduce/</id>
-    <content type="text/html" src="https://martydevstory.github.io/posts/claude-code-introduce/" />
-    <author>
-      <name>마티(Marty)</name>
-    </author>
-
-  
-    
-    <category term="AI" />
-    
-    <category term="Vibe-Coding" />
-    
-  
-
-  <summary>앤트로픽에서 발표한 Claude Code가 무엇인지 또 어떻게 사용하고 최대한 활용할 수 있는지 알아보겠습니다.</summary>
 
   </entry>
 

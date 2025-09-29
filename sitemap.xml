@@ -4,6 +4,22 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
     <url>
+      <loc>https://martydevstory.github.io/posts/n8n-workflow-2nd/</loc>
+      
+        <lastmod>2025-09-29T09:00:00+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+        <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
       <loc>https://martydevstory.github.io/posts/n8n-workflow-1st/</loc>
       
         <lastmod>2025-09-17T09:00:00+09:00</lastmod>

@@ -1,5 +1,13 @@
 [
   {
+    "title": "n8n 상품 주문 분석 워크플로 구축하기",
+    "url": "/posts/n8n-workflow-2nd/",
+    "categories": "AI, Automation",
+    "tags": "n8n, AI, Automation, llm, generative-ai, workflow",
+    "date": "2025-09-29 09:00:00 +0900",
+    "content": "n8n을 사용하여 실제 환경과 유사한 워크플로 구축합니다."
+  },
+  {
     "title": "n8n 간단한 워크플로 구축하기",
     "url": "/posts/n8n-workflow-1st/",
     "categories": "AI, Automation",
