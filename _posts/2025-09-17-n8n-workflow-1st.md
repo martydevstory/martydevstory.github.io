@@ -43,7 +43,7 @@ series_order: 2
 
 완성된 `워크플로`는 다음과 같습니다.
 
-![노드 추가 및 워크플로 완성 화면](../assets/posts/n8n-workflow-1st/workflow-preview.png)
+![노드 추가 및 워크플로 완성 화면](../assets/posts/2025-09-17-n8n-workflow-1st/workflow-preview.png)
 _노드 추가 및 워크플로 완성 화면_
 
 ## 2.   Hacker News 노드 추가
@@ -76,7 +76,7 @@ _노드 추가 및 워크플로 완성 화면_
 
 `Hacker News 노드`의 `Parameters` 구성은 이제 다음과 같습니다.
 
-![Hacker News 노드 Parameters 구성하기](../assets/posts/n8n-workflow-1st/hackers-node-param.png)
+![Hacker News 노드 Parameters 구성하기](../assets/posts/2025-09-17-n8n-workflow-1st/hackers-node-param.png)
 _Hacker News 노드 Parameters 구성하기_
 
 ### 3.  2   Setting 구성하기
@@ -91,7 +91,7 @@ _Hacker News 노드 Parameters 구성하기_
 
 `Hacker News 노드`의 `Setting` 구성은 다음과 같습니다.
 
-![Hacker News 노드 Setting 구성](../assets/posts/n8n-workflow-1st/hackers-node-setting.png)
+![Hacker News 노드 Setting 구성](../assets/posts/2025-09-17-n8n-workflow-1st/hackers-node-setting.png)
 _Hacker News 노드 Setting 구성_
 
 ## 4.   Execute step(노드 실행)
@@ -102,7 +102,7 @@ _Hacker News 노드 Setting 구성_
 
 `JSON` 뷰로 표현한 `Hacker News` 출력은 다음과 같습니다.
 
-![Hacker News 출력의 JSON 뷰](../assets/posts/n8n-workflow-1st/hackers-node-output.png)
+![Hacker News 출력의 JSON 뷰](../assets/posts/2025-09-17-n8n-workflow-1st/hackers-node-output.png)
 _Hacker News 출력의 JSON 뷰_
 
 노드 창에는 `Execute step`에 대한 자세한 정보가 표시됩니다.
@@ -112,7 +112,7 @@ _Hacker News 출력의 JSON 뷰_
     - `Execution Time(실행 시간)` : 노드가 실행을 시작한 순간부터 결과를 반환하는 데 걸린 시간입니다.
 - `Output` 제목 바로 아래에 또 다른 정보인 10개 항목이 있습니다. 이 필드는 노드 요청에서 반환된 항목(레코드) 수를 표시합니다. Limit에서 10을 설정한 제한값으로 출력됩니다. 제한값을 설정하지 않은 경우, 실제로 반환되는 레코드 수는 별도의 확인이 필요합니다.
 
-![출력의 시작과 실행 시간](../assets/posts/n8n-workflow-1st/hackers-node-start-execute.png)
+![출력의 시작과 실행 시간](../assets/posts/2025-09-17-n8n-workflow-1st/hackers-node-start-execute.png)
 _출력의 시작과 실행 시간_
 
 ## 5.   워크플로 저장
@@ -131,7 +131,7 @@ _출력의 시작과 실행 시간_
 
 `Save` 버튼 대신 회색의 저장됨 텍스트가 표시되면 워크플로가 저장이 완료됩니다.
 
-![워크플로 저장](../assets/posts/n8n-workflow-1st/hackers-node-save.png)
+![워크플로 저장](../assets/posts/2025-09-17-n8n-workflow-1st/hackers-node-save.png)
 _워크플로 저장_
 
 ## 정리
